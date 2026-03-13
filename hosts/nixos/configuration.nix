@@ -9,6 +9,10 @@
     ../../modules/nixos/tools/volta.nix
   ];
 
+  myModules.desktop.plasma.enable = true;
+  myModules.tools.base.enable = true;
+  myModules.tools.volta.enable = true;
+
   boot.loader.grub.extraEntries = ''
     menuentry "Windows 11" {
       insmod part_gpt

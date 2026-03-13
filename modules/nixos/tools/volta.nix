@@ -1,18 +1,22 @@
-{ pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
 {
-  programs.nix-ld.enable = true;
+  options.myModules.tools.volta.enable = lib.mkEnableOption "Volta runtime tooling";
 
-  environment.systemPackages = with pkgs; [
-    volta
-    codex
-  ];
+  config = lib.mkIf config.myModules.tools.volta.enable {
+    programs.nix-ld.enable = true;
 
-  environment.sessionVariables = {
-    VOLTA_HOME = "/home/giks/.volta";
+    environment.systemPackages = with pkgs; [
+      volta
+      codex
+    ];
+
+    environment.sessionVariables = {
+      VOLTA_HOME = "/home/giks/.volta";
+    };
+
+    environment.shellInit = ''
+      export PATH="$HOME/.volta/bin:$PATH"
+    '';
   };
-
-  environment.shellInit = ''
-    export PATH="$HOME/.volta/bin:$PATH"
-  '';
 }

@@ -1,10 +1,24 @@
-{ ... }:
+{ config, pkgs, ... }:
 
+let
+  homeDir = config.home.homeDirectory;
+in
 {
   home.stateVersion = "25.11";
 
   imports = [
     ../../modules/home/git.nix
+  ];
+
+  home.packages = with pkgs; [
+    vscode
+    alacritty
+    cava
+    cmatrix
+    discord
+    fastfetch
+    spotify
+    typora
   ];
 
   home.file.".gitignore_global".text = ''

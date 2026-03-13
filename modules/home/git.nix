@@ -1,11 +1,14 @@
-{ ... }:
+{ config, ... }:
 
+let
+  homeDir = config.home.homeDirectory;
+in
 {
   programs.git = {
     enable = true;
 
     signing = {
-      key = "/home/giks/.ssh/id_ed25519.pub";
+      key = "${homeDir}/.ssh/id_ed25519.pub";
       signByDefault = true;
     };
 
@@ -15,7 +18,7 @@
       init.defaultBranch = "main";
       pull.rebase = true;
       core.editor = "nano";
-      core.excludesfile = "/home/giks/.gitignore_global";
+      core.excludesfile = "${homeDir}/.gitignore_global";
       commit.gpgsign = true;
       gpg.format = "ssh";
       credential."https://dev.azure.com".useHttpPath = true;
