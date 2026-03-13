@@ -6,7 +6,6 @@
   config = lib.mkIf config.myModules.profiles.dev.enable {
     environment.systemPackages = with pkgs; [
       bash-language-server
-      copilot-cli
       docker
       docker-buildx
       docker-compose
