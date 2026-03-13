@@ -1,0 +1,3 @@
+{
+  gramnyx = import ./gramnyx;
+}

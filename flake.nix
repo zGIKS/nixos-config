@@ -9,20 +9,29 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }:
+  outputs = { nixpkgs, home-manager, ... }:
     let
       system = "x86_64-linux";
+      username = "giks";
+      hostName = "gramnyx";
+      roles = [ "desktop" "dev" ];
+      hosts = import ./hosts;
+      homeLib = import ./modules/home/lib.nix { };
+      specialArgs = {
+        inherit username hostName roles homeLib;
+      };
     in {
-      nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
-        inherit system;
+      nixosConfigurations.${hostName} = nixpkgs.lib.nixosSystem {
+        inherit system specialArgs;
         modules = [
-          ./hosts/nixos/configuration.nix
+          hosts.${hostName}
           home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.backupFileExtension = "backup";
-            home-manager.users.giks = import ./users/giks/home.nix;
+            home-manager.extraSpecialArgs = specialArgs;
+            home-manager.users.${username} = import ./users/${username}/home.nix;
           }
         ];
       };

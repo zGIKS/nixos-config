@@ -1,17 +1,24 @@
-{ pkgs, ... }:
+{ pkgs, lib, username, hostName, roles, ... }:
 
 {
   imports = [
     ../../modules/nixos/boot/grub-uefi.nix
     ./hardware-configuration.nix
     ../../modules/nixos/desktop/plasma.nix
-    ../../modules/nixos/tools/packages.nix
+    ../../modules/nixos/profiles/core.nix
+    ../../modules/nixos/profiles/desktop.nix
+    ../../modules/nixos/profiles/dev.nix
     ../../modules/nixos/tools/volta.nix
   ];
 
-  myModules.desktop.plasma.enable = true;
-  myModules.tools.base.enable = true;
-  myModules.tools.volta.enable = true;
+  myModules.desktop.plasma.enable = lib.elem "desktop" roles;
+  myModules.profiles.core.enable = true;
+  myModules.profiles.desktop.enable = lib.elem "desktop" roles;
+  myModules.profiles.dev.enable = lib.elem "dev" roles;
+  myModules.tools.volta = {
+    enable = lib.elem "dev" roles;
+    user = username;
+  };
 
   boot.loader.grub.extraEntries = ''
     menuentry "Windows 11" {
@@ -22,7 +29,7 @@
     }
   '';
 
-  networking.hostName = "nixos";
+  networking.hostName = hostName;
   networking.networkmanager.enable = true;
 
   time.timeZone = "America/Lima";
@@ -46,7 +53,7 @@
     pulse.enable = true;
   };
 
-  users.users.giks = {
+  users.users.${username} = {
     isNormalUser = true;
     description = "Matteo Aleman";
     extraGroups = [ "networkmanager" "wheel" ];

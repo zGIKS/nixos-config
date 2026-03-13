@@ -1,0 +1,28 @@
+{ config, lib, pkgs, ... }:
+
+{
+  options.myModules.profiles.dev.enable = lib.mkEnableOption "developer profile";
+
+  config = lib.mkIf config.myModules.profiles.dev.enable {
+    environment.systemPackages = with pkgs; [
+      bash-language-server
+      copilot-cli
+      docker
+      docker-buildx
+      docker-compose
+      eslint
+      go
+      go-swag
+      jdk
+      prettier
+      pyright
+      rustup
+      svelte-language-server
+      tailwindcss
+      texliveFull
+      typescript
+      typescript-language-server
+      vscode-langservers-extracted
+    ];
+  };
+}
