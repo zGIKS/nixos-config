@@ -1,0 +1,17 @@
+{
+  "logo": {
+    "type": "small"
+  },
+  "modules": [
+    "host",
+    "os",
+    "kernel",
+    "uptime",
+    "shell",
+    "de",
+    "wm",
+    "cpu",
+    "gpu",
+    "memory"
+  ]
+}

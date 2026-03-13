@@ -20,5 +20,6 @@
     nano
     os-prober
     efibootmgr
+    spotify
   ];
 }

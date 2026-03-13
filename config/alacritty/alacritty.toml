@@ -1,0 +1,94 @@
+# ─────────────────────────────────────────────────────────────────────────
+#  Glass macOS Theme
+#  Transparent blur effect with modern aesthetics
+#  vers. 4.0.0
+# ─────────────────────────────────────────────────────────────────────────
+
+[window]
+opacity = 0.94
+blur = false
+padding = { x = 16, y = 16 }
+decorations = "Full"
+dynamic_padding = true
+
+[colors]
+transparent_background_colors = true
+
+[env]
+TERM = "xterm-256color"
+
+[terminal.shell]
+program = "/run/current-system/sw/bin/fish"
+args = ["-l"]
+
+[font]
+size = 12.0
+builtin_box_drawing = true
+
+[cursor]
+style = { shape = "Beam", blinking = "On" }
+blink_interval = 750
+
+[cursor.vi_mode_style]
+shape = "Block"
+
+[colors.primary]
+background = "#000000"
+foreground = "#ffffff"
+
+[colors.cursor]
+cursor = "#007aff"
+text = "#1c1c1e"
+
+[colors.selection]
+text = "#1c1c1e"
+background = "#0a84ff"
+
+[colors.normal]
+black = "#2c2c2e"
+red = "#ff453a"
+green = "#32d74b"
+yellow = "#ffd60a"
+blue = "#0a84ff"
+magenta = "#bf5af2"
+cyan = "#64d2ff"
+white = "#f5f5f7"
+
+[colors.bright]
+black = "#3a3a3c"
+red = "#ff6961"
+green = "#4cd964"
+yellow = "#ffcc00"
+blue = "#5ac8fa"
+magenta = "#da8fff"
+cyan = "#70d7ff"
+white = "#ffffff"
+
+[colors.dim]
+black = "#1c1c1e"
+red = "#cc3a30"
+green = "#28a83d"
+yellow = "#ccab08"
+blue = "#086acc"
+magenta = "#9948c2"
+cyan = "#50a8cc"
+white = "#c7c7cc"
+
+[hints]
+alphabet = "jfkdls;ahgurieowpq"
+
+[[hints.enabled]]
+command = "xdg-open"
+hyperlinks = true
+post_processing = true
+persist = false
+mouse = { enabled = true, mods = "None" }
+binding = { key = "U", mods = "Control|Shift" }
+regex = "(ipfs:|ipns:|magnet:|mailto:|gemini://|gopher://|https://|http://|news:|file:|git://|ssh:|ftp://)[^\\u0000-\\u001F\\u007F-\\u009F<>\"\\s{-}\\^⟨⟩`]+"
+
+[scrolling]
+history = 10000
+multiplier = 3
+
+[bell]
+duration = 0
