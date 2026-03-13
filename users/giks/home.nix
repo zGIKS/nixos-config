@@ -4,7 +4,7 @@
   home.stateVersion = "25.11";
 
   imports = [
-    ./git.nix
+    ../../modules/home/git.nix
   ];
 
   home.file.".gitignore_global".text = ''

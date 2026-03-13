@@ -2,14 +2,21 @@
 
 {
   imports = [
+    ../../modules/nixos/boot/grub-uefi.nix
     ./hardware-configuration.nix
-    ./modules/system/desktop.nix
-    ./modules/system/packages.nix
-    ./modules/system/volta.nix
+    ../../modules/nixos/desktop/plasma.nix
+    ../../modules/nixos/tools/packages.nix
+    ../../modules/nixos/tools/volta.nix
   ];
 
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader.grub.extraEntries = ''
+    menuentry "Windows 11" {
+      insmod part_gpt
+      insmod fat
+      search --no-floppy --file --set=root /EFI/Microsoft/Boot/bootmgfw.efi
+      chainloader /EFI/Microsoft/Boot/bootmgfw.efi
+    }
+  '';
 
   networking.hostName = "nixos";
   networking.networkmanager.enable = true;

@@ -21,7 +21,7 @@
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.users.giks = import ./home/giks/home.nix;
+            home-manager.users.giks = import ./users/giks/home.nix;
           }
         ];
       };

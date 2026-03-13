@@ -18,5 +18,7 @@
     fastfetch
     gh
     nano
+    os-prober
+    efibootmgr
   ];
 }
