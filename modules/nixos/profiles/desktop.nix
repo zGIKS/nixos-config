@@ -5,7 +5,13 @@
 
   config = lib.mkIf config.myModules.profiles.desktop.enable {
     environment.systemPackages = with pkgs; [
+      bluez
+      brightnessctl
+      eww
       google-java-format
+      networkmanager
+      wireplumber
+      wofi
     ];
   };
 }

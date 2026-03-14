@@ -5,6 +5,7 @@
     ../../modules/nixos/boot/grub-uefi.nix
     ./hardware-configuration.nix
     ../../modules/nixos/desktop/plasma.nix
+    ../../modules/nixos/desktop/sway.nix
     ../../modules/nixos/profiles/core.nix
     ../../modules/nixos/profiles/desktop.nix
     ../../modules/nixos/profiles/dev.nix
@@ -12,6 +13,7 @@
   ];
 
   myModules.desktop.plasma.enable = lib.elem "desktop" roles;
+  myModules.desktop.sway.enable = lib.elem "desktop" roles;
   myModules.profiles.core.enable = true;
   myModules.profiles.desktop.enable = lib.elem "desktop" roles;
   myModules.profiles.dev.enable = lib.elem "dev" roles;
