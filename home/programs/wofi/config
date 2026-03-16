@@ -1,0 +1,7 @@
+width=480
+lines=8
+show=drun
+prompt=run
+matching=multi-contains
+insensitive=true
+allow_images=true

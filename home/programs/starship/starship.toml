@@ -1,4 +1,4 @@
-palette = "glass_shadcn"
+palette = "obsidian"
 add_newline = true
 
 format = """
@@ -6,15 +6,15 @@ $username$hostname$directory$git_branch$git_status$cmd_duration
 $character
 """
 
-[palettes.glass_shadcn]
-red = "#fb7185"
-green = "#34d399"
-yellow = "#facc15"
-blue = "#60a5fa"
-magenta = "#c084fc"
-cyan = "#22d3ee"
-white = "#fafafa"
-gray = "#a1a1aa"
+[palettes.obsidian]
+red = "#ff5d6c"
+green = "#62c370"
+yellow = "#f2c94c"
+blue = "#4aa3ff"
+magenta = "#c792ea"
+cyan = "#5ad4e6"
+white = "#e6e6e6"
+gray = "#b7bcc6"
 
 [username]
 show_always = true

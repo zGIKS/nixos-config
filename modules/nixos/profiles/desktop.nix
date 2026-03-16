@@ -6,14 +6,8 @@
   config = lib.mkIf config.myModules.profiles.desktop.enable {
     environment.systemPackages = with pkgs; [
       bluez
-      brightnessctl
-      eww
-      gsimplecal
-      google-java-format
       networkmanager
-      waybar
       wireplumber
-      wofi
     ];
 
     xdg.portal = {

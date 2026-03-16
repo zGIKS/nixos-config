@@ -7,12 +7,24 @@ let
       source = ../../../home/programs/sway/config;
     }
     {
-      target = "sway/config.d/waybar.conf";
-      source = ../../../home/programs/sway/config.d/waybar.conf;
+      target = "sway/config.d/autostart.conf";
+      source = ../../../home/programs/sway/config.d/autostart.conf;
     }
     {
-      target = "sway/config.d/portal.conf";
-      source = ../../../home/programs/sway/config.d/portal.conf;
+      target = "sway/config.d/bar.conf";
+      source = ../../../home/programs/sway/config.d/bar.conf;
+    }
+    {
+      target = "sway/config.d/binds.conf";
+      source = ../../../home/programs/sway/config.d/binds.conf;
+    }
+    {
+      target = "sway/config.d/inputs.conf";
+      source = ../../../home/programs/sway/config.d/inputs.conf;
+    }
+    {
+      target = "sway/config.d/outputs.conf";
+      source = ../../../home/programs/sway/config.d/outputs.conf;
     }
   ];
 in

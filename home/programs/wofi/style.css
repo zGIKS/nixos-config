@@ -1,0 +1,35 @@
+* {
+  font-family: monospace;
+  font-size: 12px;
+}
+
+window {
+  background-color: #0f1115;
+  color: #e6e6e6;
+  border: 1px solid #2a2f3a;
+  border-radius: 10px;
+}
+
+#input {
+  margin: 12px;
+  padding: 10px 12px;
+  background-color: #151a21;
+  color: #e6e6e6;
+  border: 1px solid #2a2f3a;
+  border-radius: 8px;
+}
+
+#outer-box {
+  margin: 10px;
+  padding: 6px;
+}
+
+#entry {
+  padding: 8px 10px;
+  border-radius: 8px;
+}
+
+#entry:selected {
+  background-color: #4aa3ff;
+  color: #0f1115;
+}
