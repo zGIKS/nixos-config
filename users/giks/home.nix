@@ -8,6 +8,7 @@
     ../../modules/home/programs/shell.nix
     ../../modules/home/programs/apps.nix
     ../../modules/home/programs/sway.nix
+    ../../modules/home/programs/waybar.nix
   ];
 
   myHome.git = {

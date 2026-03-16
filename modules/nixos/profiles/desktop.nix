@@ -8,10 +8,20 @@
       bluez
       brightnessctl
       eww
+      gsimplecal
       google-java-format
       networkmanager
+      waybar
       wireplumber
       wofi
     ];
+
+    xdg.portal = {
+      enable = true;
+      extraPortals = with pkgs; [
+        xdg-desktop-portal-wlr
+        xdg-desktop-portal-gtk
+      ];
+    };
   };
 }

@@ -6,6 +6,14 @@ let
       target = "sway/config";
       source = ../../../home/programs/sway/config;
     }
+    {
+      target = "sway/config.d/waybar.conf";
+      source = ../../../home/programs/sway/config.d/waybar.conf;
+    }
+    {
+      target = "sway/config.d/portal.conf";
+      source = ../../../home/programs/sway/config.d/portal.conf;
+    }
   ];
 in
 {

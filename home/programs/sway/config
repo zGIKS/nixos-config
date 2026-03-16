@@ -40,3 +40,7 @@ bindsym $mod+Shift+5 move container to workspace 5
 input * {
   xkb_layout "latam"
 }
+
+# Modular config fragments
+include ~/.config/sway/config.d/*
+include /etc/sway/config.d/*

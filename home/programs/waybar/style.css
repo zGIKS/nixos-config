@@ -1,0 +1,27 @@
+* {
+  border: none;
+  border-radius: 0;
+  min-height: 0;
+  font-family: monospace;
+  font-size: 11px;
+}
+
+window#waybar {
+  background: #111418;
+  color: #e6e6e6;
+}
+
+#workspaces button {
+  padding: 0 8px;
+  color: #c9c9c9;
+  background: transparent;
+}
+
+#workspaces button.focused {
+  color: #111418;
+  background: #e6e6e6;
+}
+
+#mode, #clock {
+  padding: 0 10px;
+}
