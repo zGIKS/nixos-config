@@ -34,36 +34,36 @@ blink_interval = 750
 shape = "Block"
 
 [colors.primary]
-background = "#000000"
-foreground = "#ffffff"
+background = "#0F1117"
+foreground = "#E6EDF3"
 
 [colors.cursor]
-cursor = "#ffffff"
-text = "#000000"
+cursor = "#7AA2F7"
+text = "#0F1117"
 
 [colors.selection]
-text = "#000000"
-background = "#ffffff"
+text = "#E6EDF3"
+background = "#2F3342"
 
 [colors.normal]
-black = "#000000"
-red = "#ffffff"
-green = "#ffffff"
-yellow = "#ffffff"
-blue = "#ffffff"
-magenta = "#ffffff"
-cyan = "#ffffff"
-white = "#ffffff"
+black = "#1D212B"
+red = "#F47067"
+green = "#4FD1A5"
+yellow = "#F6C177"
+blue = "#58A6FF"
+magenta = "#C678DD"
+cyan = "#56D4DD"
+white = "#E6EDF3"
 
 [colors.bright]
-black = "#4d4d4d"
-red = "#ffffff"
-green = "#ffffff"
-yellow = "#ffffff"
-blue = "#ffffff"
-magenta = "#ffffff"
-cyan = "#ffffff"
-white = "#ffffff"
+black = "#2A2E3A"
+red = "#FF7B72"
+green = "#7EE787"
+yellow = "#F2CC60"
+blue = "#79C0FF"
+magenta = "#D2A8FF"
+cyan = "#76E3EA"
+white = "#FFFFFF"
 
 [colors.dim]
 black = "#1a1a1a"

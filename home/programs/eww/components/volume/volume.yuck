@@ -1,0 +1,24 @@
+(defvar volume 50)
+(defvar volume_text "50%")
+(defvar volume_icon "󰖀")
+
+(defwindow volume-osd
+  :monitor 0
+  :stacking "overlay"
+  :focusable false
+  :exclusive false
+  :geometry (geometry
+    :x "50%"
+    :y "50%"
+    :anchor "center"
+    :width "360px"
+    :height "84px")
+  (volume-osd-widget))
+
+(defwidget volume-osd-widget []
+  (box :class "osd-card volume-osd"
+    :orientation "v"
+    :space-evenly false
+    :spacing 10
+    (label :class "osd-label volume-label" :text "${volume_icon} ${volume_text}")
+    (progress :class "osd-progress volume-progress" :value volume :min 0 :max 100)))

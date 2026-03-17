@@ -228,17 +228,17 @@ show_idle_bar_heads = 0
 
 [color]
 
-# Monochrome Full Dark & White Glass Gradient
+# Warp Dark Gradient
 background = default
 gradient = 1
-gradient_color_1 = '#1a1a1a'
-gradient_color_2 = '#333333'
-gradient_color_3 = '#4d4d4d'
-gradient_color_4 = '#666666'
-gradient_color_5 = '#808080'
-gradient_color_6 = '#999999'
-gradient_color_7 = '#b3b3b3'
-gradient_color_8 = '#ffffff'
+gradient_color_1 = '#58A6FF'
+gradient_color_2 = '#79C0FF'
+gradient_color_3 = '#56D4DD'
+gradient_color_4 = '#76E3EA'
+gradient_color_5 = '#4FD1A5'
+gradient_color_6 = '#7EE787'
+gradient_color_7 = '#79C0FF'
+gradient_color_8 = '#E6EDF3'
 
 
 

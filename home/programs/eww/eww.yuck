@@ -1,0 +1,2 @@
+(include "./components/volume/volume.yuck")
+(include "./components/brightness/brightness.yuck")
