@@ -4,7 +4,6 @@
   imports = [
     ../../modules/nixos/boot/grub-uefi.nix
     ./hardware-configuration.nix
-    ../../modules/nixos/desktop/plasma.nix
     ../../modules/nixos/desktop/sway.nix
     ../../modules/nixos/profiles/core.nix
     ../../modules/nixos/profiles/desktop.nix
@@ -12,7 +11,6 @@
     ../../modules/nixos/tools/volta.nix
   ];
 
-  myModules.desktop.plasma.enable = lib.elem "desktop" roles;
   myModules.desktop.sway.enable = lib.elem "desktop" roles;
   myModules.profiles.core.enable = true;
   myModules.profiles.desktop.enable = lib.elem "desktop" roles;
@@ -43,6 +41,17 @@
     variant = "";
   };
 
+  services.displayManager.sddm.enable = false;
+  services.greetd = {
+    enable = true;
+    settings = {
+      default_session = {
+        command = "${pkgs.tuigreet}/bin/tuigreet --time --cmd sway";
+        user = "greeter";
+      };
+    };
+  };
+
   console.keyMap = "la-latin1";
   services.printing.enable = true;
 
@@ -61,7 +70,6 @@
     description = "Matteo Aleman";
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
-      kdePackages.kate
     ];
   };
 
