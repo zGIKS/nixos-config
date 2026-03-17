@@ -16,34 +16,45 @@
   ],
   "sway/workspaces": {
     "disable-scroll": true,
-    "all-outputs": true
+    "all-outputs": true,
+    "sort-by-number": true,
+    "persistent-workspaces": {
+      "1": [],
+      "2": [],
+      "3": [],
+      "4": [],
+      "5": [],
+      "6": []
+    }
   },
   "network": {
-    "format-wifi": "NET {essid} {signalStrength}%",
-    "format-ethernet": "NET {ifname}",
-    "format-disconnected": "NET down"
+    "format-wifi": "󰤨 {essid}",
+    "format-ethernet": "󰈀 {ifname}",
+    "format-disconnected": "󰤭"
   },
   "backlight": {
-    "format": "BRI {percent}%"
+    "format": "󰃠 {percent}%"
   },
   "pulseaudio": {
-    "format": "VOL {volume}%",
-    "format-muted": "VOL muted"
+    "format": "{icon} {volume}%",
+    "format-icons": [ "󰕿", "󰖀", "󰕾" ],
+    "format-muted": "󰖁"
   },
   "battery": {
-    "format": "BAT {capacity}%",
-    "format-charging": "BAT {capacity}%+",
-    "format-plugged": "BAT {capacity}%"
+    "format": "{icon} {capacity}%",
+    "format-charging": "󰂄 {capacity}%",
+    "format-plugged": "󰂄 {capacity}%",
+    "format-icons": [ "󰁺", "󰁼", "󰁾", "󰂀", "󰂂" ]
   },
   "clock": {
     "format": "{:%a %d %b %H:%M}"
   },
   "custom/notifications": {
-    "exec": "printf 'NOTI'",
+    "exec": "printf '󰍡'",
     "interval": 3600
   },
   "custom/power": {
-    "exec": "printf 'PWR'",
+    "exec": "printf '⏻'",
     "interval": 3600
   }
 }
