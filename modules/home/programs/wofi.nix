@@ -10,6 +10,10 @@ let
       target = "wofi/style.css";
       source = ../../../home/programs/wofi/style.css;
     }
+    {
+      target = "wofi/launcher.sh";
+      source = ../../../home/programs/wofi/launcher.sh;
+    }
   ];
 in
 {
