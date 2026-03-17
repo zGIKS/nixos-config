@@ -5,12 +5,45 @@
   "spacing": 8,
   "modules-left": ["sway/workspaces", "sway/mode"],
   "modules-center": [],
-  "modules-right": ["clock"],
+  "modules-right": [
+    "network",
+    "backlight",
+    "pulseaudio",
+    "battery",
+    "clock",
+    "custom/notifications",
+    "custom/power"
+  ],
   "sway/workspaces": {
     "disable-scroll": true,
     "all-outputs": true
   },
+  "network": {
+    "format-wifi": "NET {essid} {signalStrength}%",
+    "format-ethernet": "NET {ifname}",
+    "format-disconnected": "NET down"
+  },
+  "backlight": {
+    "format": "BRI {percent}%"
+  },
+  "pulseaudio": {
+    "format": "VOL {volume}%",
+    "format-muted": "VOL muted"
+  },
+  "battery": {
+    "format": "BAT {capacity}%",
+    "format-charging": "BAT {capacity}%+",
+    "format-plugged": "BAT {capacity}%"
+  },
   "clock": {
     "format": "{:%a %d %b %H:%M}"
+  },
+  "custom/notifications": {
+    "exec": "printf 'NOTI'",
+    "interval": 3600
+  },
+  "custom/power": {
+    "exec": "printf 'PWR'",
+    "interval": 3600
   }
 }
