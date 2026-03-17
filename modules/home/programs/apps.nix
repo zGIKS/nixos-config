@@ -8,10 +8,12 @@
       eww
       gsimplecal
       spotify
+      yazi
       typora
       wofi
     ]
     ++ lib.optionals (lib.elem "dev" roles) [
+      zellij
       vscode
     ];
 }
