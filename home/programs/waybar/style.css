@@ -33,7 +33,7 @@ window#waybar {
   background: #4aa3ff; /* Alacritty selection/accent */
 }
 
-#mode, #clock, #battery, #pulseaudio, #network, #tray, #backlight, #custom-notifications, #custom-power {
+#mode, #clock, #battery, #pulseaudio, #bluetooth, #network, #tray, #backlight, #custom-notifications, #custom-power {
   padding: 0 10px;
   margin: 2px;
   border-radius: 4px;
