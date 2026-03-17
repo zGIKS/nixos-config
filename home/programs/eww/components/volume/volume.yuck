@@ -8,8 +8,8 @@
   :focusable false
   :exclusive false
   :geometry (geometry
-    :x "50%"
-    :y "50%"
+    :x "0px"
+    :y "0px"
     :anchor "center"
     :width "360px"
     :height "84px")
@@ -19,6 +19,7 @@
   (box :class "osd-card volume-osd"
     :orientation "v"
     :space-evenly false
+    :valign "center"
     :spacing 10
-    (label :class "osd-label volume-label" :text "${volume_icon} ${volume_text}")
+    (label :class "osd-label volume-label" :halign "center" :text "${volume_icon} ${volume_text}")
     (progress :class "osd-progress volume-progress" :value volume :min 0 :max 100)))

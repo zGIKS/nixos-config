@@ -1,0 +1,107 @@
+.bt-panel {
+  background: rgba(0, 0, 0, 0.9);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  min-width: 420px;
+  padding: 14px;
+}
+
+.bt-header {
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.bt-header-icon {
+  font-size: 24px;
+  min-width: 28px;
+}
+
+.bt-title {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.bt-subtitle {
+  color: rgba(255, 255, 255, 0.68);
+  font-size: 12px;
+}
+
+.bt-close {
+  background: transparent;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 15px;
+  padding: 4px 6px;
+}
+
+.bt-toolbar {
+  padding-top: 12px;
+}
+
+.bt-button {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  padding: 8px 12px;
+  color: #ffffff;
+}
+
+.bt-button:hover {
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.bt-button-primary {
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.bt-device-list {
+  padding-top: 12px;
+}
+
+.bt-device-empty {
+  color: rgba(255, 255, 255, 0.64);
+  padding: 10px 4px 2px;
+}
+
+.bt-device {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 10px 12px;
+}
+
+.bt-device-icon {
+  font-size: 18px;
+  min-width: 26px;
+}
+
+.bt-device-name {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.bt-device-meta {
+  color: rgba(255, 255, 255, 0.66);
+  font-size: 11px;
+}
+
+.bt-device-status {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 11px;
+}
+
+.bt-device-action {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  color: #ffffff;
+  padding: 7px 10px;
+}
+
+.bt-device-action:hover {
+  background: rgba(255, 255, 255, 0.16);
+}
+
+.bt-device-action-connect {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.bt-device-action-disconnect {
+  background: rgba(255, 255, 255, 0.08);
+}
