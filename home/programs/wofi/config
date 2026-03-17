@@ -1,7 +1,13 @@
-width=480
-lines=8
+width=400
+lines=10
 show=drun
-prompt=run
+prompt=Search
 matching=multi-contains
 insensitive=true
 allow_images=true
+hide_scroll=true
+no_actions=true
+halign=fill
+orientation=vertical
+content_halign=fill
+cache_file=/dev/null

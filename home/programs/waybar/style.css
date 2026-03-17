@@ -3,44 +3,64 @@
   border-radius: 0;
   min-height: 0;
   font-family: "JetBrainsMono Nerd Font", "Inter", sans-serif;
-  font-size: 12px;
+  font-size: 13px;
 }
 
 window#waybar {
-  /* Glass macOS Theme from Alacritty - #0f1115 opacity 0.94 */
-  background: rgba(15, 17, 21, 0.94);
-  color: #e6e6e6;
-  border-bottom: 1px solid rgba(42, 47, 58, 0.8);
-  padding: 0 4px;
+  /* Full Dark Glass - Pure Monochrome */
+  background: rgba(0, 0, 0, 0.85);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 0;
 }
 
 #workspaces button {
   padding: 0 10px;
-  color: #e6e6e6;
+  color: #ffffff;
   background: transparent;
-  border-radius: 4px; /* Slight rounding for hover states */
-  margin: 4px 2px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  margin: 4px 4px;
+  transition: all 0.2s ease;
 }
 
 #workspaces button:hover {
-  background: rgba(42, 47, 58, 0.8);
-  box-shadow: inherit;
-  text-shadow: inherit;
+  background: rgba(255, 255, 255, 0.1);
+  border-color: #ffffff;
 }
 
 #workspaces button.focused, #workspaces button.active {
-  color: #0f1115;
-  background: #4aa3ff; /* Alacritty selection/accent */
+  color: #000000;
+  background: #ffffff;
+  border-color: #ffffff;
 }
 
+#workspaces button.urgent {
+  background-color: #ffffff;
+  color: #000000;
+  font-weight: bold;
+}
+
+/* Modular Boxed Style - White Borders */
 #mode, #clock, #battery, #pulseaudio, #bluetooth, #network, #tray, #backlight, #custom-notifications, #custom-power {
-  padding: 0 10px;
-  margin: 2px;
-  border-radius: 4px;
-  background: rgba(21, 26, 33, 0.8); /* Alacritty normal.black fallback #151a21*/
+  padding: 0 12px;
+  margin: 4px 6px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #ffffff;
+  transition: all 0.2s ease;
+}
+
+/* All modules use white accents */
+#battery, #battery.charging, #battery.plugged, #pulseaudio, #network, #clock, #custom-power, #backlight, #bluetooth {
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+#mode:hover, #clock:hover, #battery:hover, #pulseaudio:hover, #bluetooth:hover, #network:hover, #backlight:hover, #custom-notifications:hover, #custom-power:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: #ffffff;
 }
 
 #custom-power {
-  margin-left: 4px;
-  margin-right: 4px;
+  margin-right: 8px;
 }

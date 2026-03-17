@@ -1,32 +1,31 @@
 * {
-  font-family: sans-serif;
-  font-size: 12px;
+  font-family: "JetBrainsMono Nerd Font", "Inter", sans-serif;
+  font-size: 13px;
+  border-radius: 0 !important;
 }
 
 window {
-  /* Glass macOS Theme from Alacritty - #0f1115 opacity 0.94 */
-  background-color: rgba(15, 17, 21, 0.94);
-  color: #e6e6e6;
-  border: 1px solid rgba(42, 47, 58, 0.8); /* bright.black styling */
-  border-radius: 12px;
+  /* Matching Waybar 0.85 opacity */
+  background-color: rgba(0, 0, 0, 0.85);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 #input {
-  margin: 16px; /* Similar to Alacritty 16x16 padding */
-  padding: 12px 14px;
-  background-color: rgba(21, 26, 33, 0.8); /* normal.black */
-  color: #e6e6e6;
-  border: 1px solid rgba(42, 47, 58, 0.8);
-  border-radius: 8px;
-  caret-color: #4aa3ff; /* Alacritty cursor */
+  margin: 10px;
+  padding: 8px 12px;
+  background-color: rgba(255, 255, 255, 0.05);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  caret-color: #ffffff;
 }
 
 #input:focus {
-  border-color: #4aa3ff; /* Alacritty selection/cursor blue */
+  border-color: #ffffff;
 }
 
 #inner-box {
-  margin: 0px 16px 16px 16px;
+  margin: 10px;
 }
 
 #outer-box {
@@ -36,16 +35,17 @@ window {
 
 #entry {
   padding: 8px 12px;
-  border-radius: 8px;
-  margin-bottom: 2px;
+  border: 1px solid transparent;
+  margin-bottom: 4px;
 }
 
 #entry:selected {
-  background-color: #4aa3ff; /* Alacritty selection background */
-  color: #0f1115; /* Alacritty selection text */
+  background-color: #ffffff;
+  color: #000000;
+  border: 1px solid #ffffff;
   outline: none;
 }
 
 #entry:selected * {
-  color: #0f1115; /* Force text to match selection color */
+  color: #000000;
 }

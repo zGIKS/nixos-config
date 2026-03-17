@@ -32,21 +32,21 @@ alias texw 'latexmk -pdf -pvc -interaction=nonstopmode -synctex=1'
 alias texc 'latexmk -c'
 
 if status is-interactive
-    # Fish colors aligned with glass + shadcn palette
-    set -g fish_color_normal fafafa
-    set -g fish_color_command 60a5fa
-    set -g fish_color_param fafafa
-    set -g fish_color_keyword c084fc
-    set -g fish_color_quote 34d399
-    set -g fish_color_redirection 22d3ee
-    set -g fish_color_end facc15
-    set -g fish_color_error fb7185
-    set -g fish_color_comment a1a1aa
-    set -g fish_color_operator 22d3ee
-    set -g fish_color_escape facc15
-    set -g fish_color_autosuggestion a1a1aa
-    set -g fish_color_search_match --background=18181b
-    set -g fish_color_selection --background=60a5fa
+    # Monochrome Glass Palette (White & Dark)
+    set -g fish_color_normal ffffff
+    set -g fish_color_command ffffff --bold
+    set -g fish_color_param d1d1d1
+    set -g fish_color_keyword ffffff --bold
+    set -g fish_color_quote a1a1aa
+    set -g fish_color_redirection ffffff
+    set -g fish_color_end ffffff
+    set -g fish_color_error fca5a5
+    set -g fish_color_comment 71717a
+    set -g fish_color_operator ffffff
+    set -g fish_color_escape ffffff
+    set -g fish_color_autosuggestion 52525b
+    set -g fish_color_search_match --background=3f3f46
+    set -g fish_color_selection --background=ffffff --bold --italics
 
     # Starship prompt for fish
     if command -v starship >/dev/null 2>&1

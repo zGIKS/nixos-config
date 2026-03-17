@@ -1,14 +1,14 @@
 # ─────────────────────────────────────────────────────────────────────────
-#  Glass macOS Theme
-#  Transparent blur effect with modern aesthetics
-#  vers. 4.0.0
+#  Full Dark & White Glass Theme
+#  Monochrome aesthetics with high contrast
+#  vers. 5.0.0
 # ─────────────────────────────────────────────────────────────────────────
 
 [window]
-opacity = 0.94
-blur = false
+opacity = 0.85
+blur = true
 padding = { x = 16, y = 16 }
-decorations = "Full"
+decorations = "None"
 dynamic_padding = true
 
 [colors]
@@ -24,7 +24,7 @@ args = ["-l"]
 [font]
 size = 12.0
 builtin_box_drawing = true
-normal = { family = "monospace" }
+normal = { family = "JetBrainsMono Nerd Font" }
 
 [cursor]
 style = { shape = "Beam", blinking = "On" }
@@ -34,46 +34,46 @@ blink_interval = 750
 shape = "Block"
 
 [colors.primary]
-background = "#0f1115"
-foreground = "#e6e6e6"
+background = "#000000"
+foreground = "#ffffff"
 
 [colors.cursor]
-cursor = "#4aa3ff"
-text = "#0f1115"
+cursor = "#ffffff"
+text = "#000000"
 
 [colors.selection]
-text = "#0f1115"
-background = "#4aa3ff"
+text = "#000000"
+background = "#ffffff"
 
 [colors.normal]
-black = "#151a21"
-red = "#ff5d6c"
-green = "#62c370"
-yellow = "#f2c94c"
-blue = "#4aa3ff"
-magenta = "#c792ea"
-cyan = "#5ad4e6"
-white = "#e6e6e6"
+black = "#000000"
+red = "#ffffff"
+green = "#ffffff"
+yellow = "#ffffff"
+blue = "#ffffff"
+magenta = "#ffffff"
+cyan = "#ffffff"
+white = "#ffffff"
 
 [colors.bright]
-black = "#2a2f3a"
-red = "#ff7a87"
-green = "#7adf8a"
-yellow = "#f5d66b"
-blue = "#6bb5ff"
-magenta = "#d4a8f5"
-cyan = "#7be0ef"
+black = "#4d4d4d"
+red = "#ffffff"
+green = "#ffffff"
+yellow = "#ffffff"
+blue = "#ffffff"
+magenta = "#ffffff"
+cyan = "#ffffff"
 white = "#ffffff"
 
 [colors.dim]
-black = "#0b0d11"
-red = "#cc4b58"
-green = "#4ea45a"
-yellow = "#c8a83f"
-blue = "#3c84cc"
-magenta = "#9f6fc2"
-cyan = "#47a9b8"
-white = "#c9c9c9"
+black = "#1a1a1a"
+red = "#cccccc"
+green = "#cccccc"
+yellow = "#cccccc"
+blue = "#cccccc"
+magenta = "#cccccc"
+cyan = "#cccccc"
+white = "#cccccc"
 
 [hints]
 alphabet = "jfkdls;ahgurieowpq"

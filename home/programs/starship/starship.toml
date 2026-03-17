@@ -1,4 +1,4 @@
-palette = "obsidian"
+# Full Dark & White Glass - Monochrome Theme
 add_newline = true
 
 format = """
@@ -6,42 +6,32 @@ $username$hostname$directory$git_branch$git_status$cmd_duration
 $character
 """
 
-[palettes.obsidian]
-red = "#ff5d6c"
-green = "#62c370"
-yellow = "#f2c94c"
-blue = "#4aa3ff"
-magenta = "#c792ea"
-cyan = "#5ad4e6"
-white = "#e6e6e6"
-gray = "#b7bcc6"
-
 [username]
 show_always = true
 style_user = "bold fg:white"
-style_root = "bold fg:red"
-format = "[$user](fg:white)"
+style_root = "bold fg:white"
+format = "[$user]($style)"
 
 [hostname]
 ssh_only = false
-style = "fg:gray"
+style = "bold fg:white"
 format = "[@$hostname ]($style)"
 
 [directory]
-style = "bold fg:blue"
+style = "bold fg:white"
 truncation_length = 3
 truncate_to_repo = false
 read_only = " ro"
-read_only_style = "fg:red"
-format = "[in ](fg:gray)[$path]($style)[$read_only]($read_only_style) "
+read_only_style = "fg:white"
+format = "[in ](fg:white)[$path]($style)[$read_only]($read_only_style) "
 
 [git_branch]
 symbol = "git "
-style = "fg:blue"
+style = "fg:white"
 format = "[$symbol$branch]($style) "
 
 [git_status]
-style = "fg:magenta"
+style = "fg:white"
 format = "[$all_status$ahead_behind]($style) "
 
 [cmd_duration]
@@ -50,6 +40,6 @@ style = "fg:gray"
 format = "[took $duration]($style) "
 
 [character]
-success_symbol = "[>](bold fg:green)"
-error_symbol = "[>](bold fg:red)"
-vimcmd_symbol = "[<](bold fg:yellow)"
+success_symbol = "[>](bold fg:white)"
+error_symbol = "[>](bold fg:white)"
+vimcmd_symbol = "[<](bold fg:white)"
