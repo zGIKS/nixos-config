@@ -45,7 +45,7 @@
     "on-click": "bash ~/.config/eww/components/bluetooth/action.sh toggle-panel"
   },
   "backlight": {
-    "format": "󰃠 {percent}%"
+    "format": "󰌵 {percent}%"
   },
   "pulseaudio": {
     "format": "{icon} {volume}%",

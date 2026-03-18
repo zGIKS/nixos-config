@@ -6,7 +6,9 @@
       brightnessctl
       discord
       eww
+      google-chrome
       gsimplecal
+      librewolf
       spotify
       yazi
       typora
