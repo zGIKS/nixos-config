@@ -1,6 +1,6 @@
 (defvar brightness 50)
 (defvar brightness_text "50%")
-(defvar brightness_icon "󰃠")
+(defvar brightness_icon "")
 
 (defwindow brightness-osd
   :monitor 0

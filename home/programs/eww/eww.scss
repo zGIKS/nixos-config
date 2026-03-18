@@ -1,37 +1,37 @@
 * {
   all: unset;
   font-family: "JetBrainsMono Nerd Font", "Inter", sans-serif;
+  font-size: 13px;
+  border-radius: 0;
 }
 
 .osd-card {
-  background: rgba(0, 0, 0, 0.85);
+  background-color: rgba(0, 0, 0, 0.85);
   color: #ffffff;
   border: 1px solid rgba(255, 255, 255, 0.3);
-  padding: 12px 14px;
+  padding: 10px 12px;
   min-width: 330px;
+  box-shadow: none;
 }
 
 .osd-label {
-  font-size: 16px;
   color: #ffffff;
 }
 
 .osd-progress {
-  background: rgba(255, 255, 255, 0.1);
   min-height: 10px;
 }
 
 .osd-progress trough {
-  background: rgba(255, 255, 255, 0.1);
+  background-color: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.25);
   min-height: 10px;
 }
 
 .osd-progress progress {
-  background: #ffffff;
+  background-color: #ffffff;
   min-height: 10px;
 }
 
 @import "./components/volume/volume.scss";
 @import "./components/brightness/brightness.scss";
-@import "./components/bluetooth/bluetooth.scss";
