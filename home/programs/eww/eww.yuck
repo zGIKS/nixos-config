@@ -1,3 +1,2 @@
 (include "./components/volume/volume.yuck")
 (include "./components/brightness/brightness.yuck")
-(include "./components/bluetooth/bluetooth.yuck")
