@@ -1,6 +1,6 @@
 (defvar brightness 50)
 (defvar brightness_text "50%")
-(defvar brightness_icon "")
+(defvar brightness_icon "󰃠")
 
 (defwindow brightness-osd
   :monitor 0
@@ -8,8 +8,8 @@
   :focusable false
   :exclusive false
   :geometry (geometry
-    :x "0px"
-    :y "0px"
+    :x "50%"
+    :y "50%"
     :anchor "center"
     :width "360px"
     :height "84px")
@@ -19,7 +19,6 @@
   (box :class "osd-card brightness-osd"
     :orientation "v"
     :space-evenly false
-    :valign "center"
     :spacing 10
-    (label :class "osd-label brightness-label" :halign "center" :text "${brightness_icon} ${brightness_text}")
+    (label :class "osd-label brightness-label" :text "${brightness_icon} ${brightness_text}")
     (progress :class "osd-progress brightness-progress" :value brightness :min 0 :max 100)))

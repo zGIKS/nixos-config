@@ -40,14 +40,6 @@ if [ "$brightness_percent" -gt 100 ]; then
   brightness_percent=100
 fi
 
-if [ "$brightness_percent" -lt 34 ]; then
-  brightness_icon="󰌵"
-elif [ "$brightness_percent" -lt 67 ]; then
-  brightness_icon=""
-else
-  brightness_icon="󰛨"
-fi
-
-run_eww update brightness="$brightness_percent" brightness_text="${brightness_percent}%" brightness_icon="$brightness_icon" || true
+run_eww update brightness="$brightness_percent" brightness_text="${brightness_percent}%" brightness_icon="󰃠" || true
 run_eww open brightness-osd || true
 debounced_close "brightness-osd" "$hide_pid_file" 1.1
