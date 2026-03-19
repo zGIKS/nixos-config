@@ -8,7 +8,6 @@
       eww
       google-chrome
       gsimplecal
-      librewolf
       spotify
       yazi
       typora
