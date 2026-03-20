@@ -4,7 +4,7 @@
   "height": 28,
   "spacing": 8,
   "fixed-center": true,
-  "modules-left": ["custom/power"],
+  "modules-left": ["custom/power", "tray"],
   "modules-center": ["sway/workspaces"],
   "modules-right": [
     "network",
@@ -79,6 +79,11 @@
   "clock": {
     "format": "󰥔 {:%I:%M %p}",
     "tooltip-format": "{:%A, %B %d, %Y}"
+  },
+  "tray": {
+    "icon-size": 16,
+    "spacing": 8,
+    "show-passive-items": true
   },
   "custom/notifications": {
     "exec": "printf '󰍡'",

@@ -70,6 +70,16 @@ window#waybar {
   margin-left: 8px;
 }
 
+#tray {
+  padding: 0 10px;
+}
+
+#tray > .passive,
+#tray > .active,
+#tray > .needs-attention {
+  padding: 0 2px;
+}
+
 #bluetooth,
 #custom-notifications,
 #network {
