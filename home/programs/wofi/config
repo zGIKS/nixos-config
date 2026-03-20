@@ -1,13 +1,10 @@
 width=400
 lines=10
 show=drun
-prompt=Search
+prompt=Search...
 matching=multi-contains
 insensitive=true
 allow_images=true
 hide_scroll=true
 no_actions=true
-halign=fill
-orientation=vertical
-content_halign=fill
-cache_file=/dev/null
+no_cache=true

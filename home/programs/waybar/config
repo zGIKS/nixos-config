@@ -61,6 +61,7 @@
   },
   "tray": {
     "icon-size": 16,
+    "show-passive-items": true,
     "spacing": 10
   },
   "custom/notifications": {

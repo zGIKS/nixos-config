@@ -11,6 +11,10 @@ let
       source = ../../../home/programs/sway/config.d/autostart.conf;
     }
     {
+      target = "sway/config.d/appearance.conf";
+      source = ../../../home/programs/sway/config.d/appearance.conf;
+    }
+    {
       target = "sway/config.d/bar.conf";
       source = ../../../home/programs/sway/config.d/bar.conf;
     }
