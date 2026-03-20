@@ -25,7 +25,10 @@
       "3": [],
       "4": [],
       "5": [],
-      "6": []
+      "6": [],
+      "7": [],
+      "8": [],
+      "9": []
     },
     "format": "{name}"
   },
@@ -52,8 +55,22 @@
     "tooltip": false
   },
   "battery": {
+    "bat": "CMB0",
+    "adapter": "ADP1",
+    "interval": 2,
+    "states": {
+      "warning": 30,
+      "critical": 15
+    },
     "format": "{icon} {capacity}%",
-    "format-icons": [ "󰁺", "󰁼", "󰁾", "󰂀", "󰂂" ]
+    "format-charging": "󰂄 {capacity}%",
+    "format-plugged": "󰂄 {capacity}%",
+    "format-full": "󰁹 100%",
+    "format-warning": "󰁼 {capacity}%",
+    "format-critical": "󰂎 {capacity}%",
+    "format-time": "{H}h {m}m",
+    "tooltip-format": "{time}",
+    "format-icons": [ "󰂎", "󰁺", "󰁼", "󰁾", "󰂀", "󰂂", "󰁹" ]
   },
   "clock": {
     "format": "󰥔 {:%I:%M %p}",

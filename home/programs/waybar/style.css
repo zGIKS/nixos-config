@@ -80,6 +80,22 @@ window#waybar {
   border-color: #3f3f46;
 }
 
+#battery.charging,
+#battery.plugged {
+  color: #86efac;
+  border-color: rgba(134, 239, 172, 0.35);
+}
+
+#battery.warning {
+  color: #facc15;
+  border-color: rgba(250, 204, 21, 0.35);
+}
+
+#battery.critical {
+  color: #f87171;
+  border-color: rgba(248, 113, 113, 0.4);
+}
+
 /* Ajustes específicos */
 #clock {
   font-weight: 600;
