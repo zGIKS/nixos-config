@@ -1,3 +1,8 @@
+/* 
+  Shadcn / Zinc Style for Waybar 
+  Docked at top, full width, professional UI
+*/
+
 * {
   border: none;
   border-radius: 0;
@@ -7,82 +12,93 @@
 }
 
 window#waybar {
-  /* Full Dark Glass - Pure Monochrome */
-  background: rgba(0, 0, 0, 0.85);
-  color: #ffffff;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  padding: 0;
+  background: #0a0a0c; /* Mismo negro que tu terminal */
+  color: #fafafa;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
 }
 
+/* Contenedor de Workspaces */
 #workspaces {
-  margin: 0 6px;
+  margin: 0 8px;
 }
 
 #workspaces button {
-  min-width: 28px;
-  padding: 0 8px;
-  color: #ffffff;
+  padding: 0 10px;
+  color: #71717a; /* Zinc 400 */
   background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  margin: 4px 3px;
+  margin: 4px 2px;
+  border-radius: 6px;
   transition: all 0.2s ease;
 }
 
 #workspaces button:hover {
-  background: rgba(255, 255, 255, 0.1);
-  border-color: #ffffff;
+  background: rgba(255, 255, 255, 0.05);
+  color: #fafafa;
 }
 
-#workspaces button.focused, #workspaces button.active {
-  color: #000000;
-  background: #ffffff;
-  border-color: #ffffff;
-}
-
-#workspaces button.urgent {
-  background-color: #ffffff;
-  color: #000000;
+#workspaces button.focused, 
+#workspaces button.active {
+  color: #0a0a0c;
+  background: #fafafa; /* Efecto shadcn: fondo blanco para el activo */
   font-weight: bold;
 }
 
-/* Modular Boxed Style - White Borders */
-#battery, #clock, #pulseaudio, #bluetooth, #network, #tray, #backlight, #custom-notifications, #custom-power {
+#workspaces button.urgent {
+  background-color: #ef4444;
+  color: #ffffff;
+}
+
+/* Estilo para los módulos de la derecha y el de power */
+#battery, 
+#clock, 
+#pulseaudio, 
+#bluetooth, 
+#network, 
+#tray, 
+#backlight, 
+#custom-notifications, 
+#custom-power {
   padding: 0 12px;
-  margin: 4px 4px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  color: #ffffff;
-  transition: all 0.2s ease;
+  margin: 4px 2px;
+  background: #18181b; /* Zinc 900 */
+  border: 1px solid #27272a; /* Zinc 800 */
+  color: #fafafa;
+  border-radius: 6px;
 }
 
-/* All modules use white accents */
-#battery, #battery.charging, #battery.plugged, #clock, #pulseaudio, #network, #custom-power, #backlight, #bluetooth {
-  color: #ffffff;
-  border-color: rgba(255, 255, 255, 0.3);
+/* Hover sutil para los módulos */
+#battery:hover, 
+#clock:hover, 
+#pulseaudio:hover, 
+#bluetooth:hover, 
+#network:hover, 
+#backlight:hover, 
+#custom-notifications:hover, 
+#custom-power:hover {
+  background: #27272a;
+  border-color: #3f3f46;
 }
 
-#battery:hover, #clock:hover, #pulseaudio:hover, #bluetooth:hover, #network:hover, #backlight:hover, #custom-notifications:hover, #custom-power:hover {
-  background: rgba(255, 255, 255, 0.15);
-  border-color: #ffffff;
+/* Ajustes específicos */
+#clock {
+  font-weight: 600;
+  color: #ffffff;
 }
 
 #custom-power {
-  margin-left: 8px;
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  color: #ef4444;
+  padding: 0 14px;
+}
+
+#custom-power:hover {
+  background: #ef4444;
+  color: #ffffff;
 }
 
 #tray {
-  padding: 0 10px;
-}
-
-#tray > .passive,
-#tray > .active,
-#tray > .needs-attention {
-  padding: 0 2px;
-}
-
-#bluetooth,
-#custom-notifications,
-#network {
-  min-width: 18px;
-  padding: 0 10px;
+  background: transparent;
+  border: none;
 }

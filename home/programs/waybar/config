@@ -1,8 +1,8 @@
 {
   "layer": "top",
   "position": "top",
-  "height": 28,
-  "spacing": 8,
+  "height": 32,
+  "spacing": 4,
   "fixed-center": true,
   "modules-left": ["custom/power", "tray"],
   "modules-center": ["sway/workspaces"],
@@ -30,50 +30,29 @@
     "format": "{name}"
   },
   "network": {
-    "format-wifi": "{icon}",
+    "format-wifi": "󰤨",
     "format-ethernet": "󰈀",
-    "format-linked": "󰈀",
     "format-disconnected": "󰤭",
-    "format-disabled": "󰤮",
-    "format-icons": ["󰤟", "󰤢", "󰤥", "󰤨"],
-    "tooltip-format-wifi": "Wi-Fi: {essid} ({signalStrength}%)",
-    "tooltip-format-ethernet": "Ethernet: {ipaddr}",
-    "tooltip-format-linked": "Ethernet: {ifname} (no IP)",
-    "tooltip-format-disconnected": "Disconnected",
-    "tooltip-format-disabled": "Wi-Fi disabled"
+    "tooltip-format-wifi": "{essid} ({signalStrength}%)"
   },
   "bluetooth": {
     "format": "󰂯",
-    "format-disabled": "",
-    "format-off": "",
-    "format-on": "󰂯",
     "format-connected": "󰂱",
-    "format-connected-battery": "󰂱",
-    "tooltip-format": "Bluetooth enabled",
-    "tooltip-format-disabled": "Bluetooth disabled",
-    "tooltip-format-off": "Bluetooth off",
-    "tooltip-format-on": "Bluetooth enabled\nNo connected devices",
-    "tooltip-format-connected": "{device_enumerate}",
-    "tooltip-format-connected-battery": "{device_enumerate}",
-    "tooltip-format-enumerate-connected": "{device_alias}",
-    "tooltip-format-enumerate-connected-battery": "{device_alias} {device_battery_percentage}%"
+    "tooltip-format": "{device_alias}"
   },
   "backlight": {
     "format": "{icon} {percent}%",
-    "format-icons": [ "", "󰌵", "󰛨" ],
+    "format-icons": [ "󰃞", "󰃟", "󰃠" ],
     "tooltip": false
   },
   "pulseaudio": {
     "format": "{icon} {volume}%",
-    "format-bluetooth": "{icon} {volume}%",
     "format-icons": [ "󰕿", "󰖀", "󰕾" ],
     "format-muted": "󰖁",
     "tooltip": false
   },
   "battery": {
     "format": "{icon} {capacity}%",
-    "format-charging": "󰂄 {capacity}%",
-    "format-plugged": "󰂄 {capacity}%",
     "format-icons": [ "󰁺", "󰁼", "󰁾", "󰂀", "󰂂" ]
   },
   "clock": {
@@ -82,15 +61,15 @@
   },
   "tray": {
     "icon-size": 16,
-    "spacing": 8,
-    "show-passive-items": true
+    "spacing": 10
   },
   "custom/notifications": {
-    "exec": "printf '󰍡'",
-    "interval": 3600
+    "format": "󰍡",
+    "tooltip": false
   },
   "custom/power": {
-    "exec": "printf '⏻'",
-    "interval": 3600
+    "format": "⏻",
+    "on-click": "wlogout",
+    "tooltip": false
   }
 }
