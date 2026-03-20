@@ -46,7 +46,7 @@ window#waybar {
 }
 
 /* Modular Boxed Style - White Borders */
-#battery, #pulseaudio, #bluetooth, #network, #tray, #backlight, #custom-notifications, #custom-power {
+#battery, #clock, #pulseaudio, #bluetooth, #network, #tray, #backlight, #custom-notifications, #custom-power {
   padding: 0 12px;
   margin: 4px 4px;
   background: rgba(255, 255, 255, 0.05);
@@ -56,12 +56,12 @@ window#waybar {
 }
 
 /* All modules use white accents */
-#battery, #battery.charging, #battery.plugged, #pulseaudio, #network, #custom-power, #backlight, #bluetooth {
+#battery, #battery.charging, #battery.plugged, #clock, #pulseaudio, #network, #custom-power, #backlight, #bluetooth {
   color: #ffffff;
   border-color: rgba(255, 255, 255, 0.3);
 }
 
-#battery:hover, #pulseaudio:hover, #bluetooth:hover, #network:hover, #backlight:hover, #custom-notifications:hover, #custom-power:hover {
+#battery:hover, #clock:hover, #pulseaudio:hover, #bluetooth:hover, #network:hover, #backlight:hover, #custom-notifications:hover, #custom-power:hover {
   background: rgba(255, 255, 255, 0.15);
   border-color: #ffffff;
 }
