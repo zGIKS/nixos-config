@@ -5,7 +5,6 @@
     lib.optionals (lib.elem "desktop" roles) [
       brightnessctl
       discord
-      eww
       google-chrome
       gsimplecal
       spotify

@@ -8,7 +8,6 @@
     ../../modules/home/programs/shell.nix
     ../../modules/home/programs/apps.nix
     ../../modules/home/programs/librewolf.nix
-    ../../modules/home/programs/eww.nix
     ../../modules/home/programs/sway.nix
     ../../modules/home/programs/waybar.nix
     ../../modules/home/programs/wofi.nix
