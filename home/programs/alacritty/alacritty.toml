@@ -1,13 +1,12 @@
 # ─────────────────────────────────────────────────────────────────────────
-#  Full Dark & White Glass Theme
-#  Monochrome aesthetics with high contrast
-#  vers. 5.0.0
+#  Shadcn Dark Theme (Zinc)
+#  Pure monochrome dark aesthetics - Re-implemented
 # ─────────────────────────────────────────────────────────────────────────
 
 [window]
 opacity = 0.85
 blur = true
-padding = { x = 16, y = 16 }
+padding = { x = 24, y = 24 }
 decorations = "None"
 dynamic_padding = true
 
@@ -34,46 +33,46 @@ blink_interval = 750
 shape = "Block"
 
 [colors.primary]
-background = "#0F1117"
-foreground = "#E6EDF3"
+background = "#0a0a0c"  # El negro neutro que te gustó
+foreground = "#fafafa"
 
 [colors.cursor]
-cursor = "#7AA2F7"
-text = "#0F1117"
+cursor = "#ffffff"
+text = "#0a0a0c"
 
 [colors.selection]
-text = "#E6EDF3"
-background = "#2F3342"
+text = "#fafafa"
+background = "#27272a"
 
 [colors.normal]
-black = "#1D212B"
-red = "#F47067"
-green = "#4FD1A5"
-yellow = "#F6C177"
-blue = "#58A6FF"
-magenta = "#C678DD"
-cyan = "#56D4DD"
-white = "#E6EDF3"
+black = "#18181b"
+red = "#ef4444"
+green = "#22c55e"
+yellow = "#eab308"
+blue = "#3b82f6"
+magenta = "#a855f7"
+cyan = "#06b6d4"
+white = "#f4f4f5"
 
 [colors.bright]
-black = "#2A2E3A"
-red = "#FF7B72"
-green = "#7EE787"
-yellow = "#F2CC60"
-blue = "#79C0FF"
-magenta = "#D2A8FF"
-cyan = "#76E3EA"
-white = "#FFFFFF"
+black = "#3f3f46"
+red = "#f87171"
+green = "#4ade80"
+yellow = "#facc15"
+blue = "#60a5fa"
+magenta = "#c084fc"
+cyan = "#22d3ee"
+white = "#ffffff"
 
 [colors.dim]
-black = "#1a1a1a"
-red = "#cccccc"
-green = "#cccccc"
-yellow = "#cccccc"
-blue = "#cccccc"
-magenta = "#cccccc"
-cyan = "#cccccc"
-white = "#cccccc"
+black = "#18181b"
+red = "#7f1d1d"
+green = "#14532d"
+yellow = "#713f12"
+blue = "#1e3a8a"
+magenta = "#581c87"
+cyan = "#164e63"
+white = "#a1a1aa"
 
 [hints]
 alphabet = "jfkdls;ahgurieowpq"
