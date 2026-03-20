@@ -3,17 +3,15 @@
   "position": "top",
   "height": 28,
   "spacing": 8,
-  "modules-left": ["sway/workspaces", "sway/mode"],
-  "modules-center": [],
+  "fixed-center": true,
+  "modules-left": ["custom/power", "custom/notifications"],
+  "modules-center": ["sway/workspaces"],
   "modules-right": [
+    "network",
     "pulseaudio",
     "bluetooth",
     "backlight",
-    "network",
-    "battery",
-    "clock",
-    "custom/notifications",
-    "custom/power"
+    "battery"
   ],
   "sway/workspaces": {
     "disable-scroll": true,
@@ -26,40 +24,55 @@
       "4": [],
       "5": [],
       "6": []
-    }
+    },
+    "format": "{name}"
   },
   "network": {
-    "format-wifi": "󰤨 {essid}",
-    "format-ethernet": "󰈀 {ifname}",
-    "format-disconnected": "󰤭"
+    "format-wifi": "{icon}",
+    "format-ethernet": "󰈀",
+    "format-linked": "󰈀",
+    "format-disconnected": "󰤭",
+    "format-disabled": "󰤮",
+    "format-icons": ["󰤟", "󰤢", "󰤥", "󰤨"],
+    "tooltip-format-wifi": "{essid}\nSignal: {signalStrength}%",
+    "tooltip-format-ethernet": "{ifname}\nIP: {ipaddr}",
+    "tooltip-format-linked": "{ifname}\nNo IP",
+    "tooltip-format-disconnected": "Disconnected",
+    "tooltip-format-disabled": "Wi-Fi disabled"
   },
   "bluetooth": {
-    "format": "",
-    "format-disabled": "󰂲",
-    "format-connected": "󰂱 {device_alias}",
-    "format-connected-battery": "󰂱 {device_alias} {device_battery_percentage}%",
-    "tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",
-    "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
-    "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
-    "tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t{device_battery_percentage}%"
+    "format": "󰂯",
+    "format-disabled": "",
+    "format-off": "",
+    "format-on": "󰂯",
+    "format-connected": "󰂱",
+    "format-connected-battery": "󰂱",
+    "tooltip-format": "Bluetooth enabled",
+    "tooltip-format-disabled": "Bluetooth disabled",
+    "tooltip-format-off": "Bluetooth off",
+    "tooltip-format-on": "Bluetooth enabled\nNo connected devices",
+    "tooltip-format-connected": "{device_enumerate}",
+    "tooltip-format-connected-battery": "{device_enumerate}",
+    "tooltip-format-enumerate-connected": "{device_alias}",
+    "tooltip-format-enumerate-connected-battery": "{device_alias} {device_battery_percentage}%"
   },
   "backlight": {
     "format": "{icon} {percent}%",
-    "format-icons": [ "", "󰌵", "󰛨" ]
+    "format-icons": [ "", "󰌵", "󰛨" ],
+    "tooltip": false
   },
   "pulseaudio": {
     "format": "{icon} {volume}%",
+    "format-bluetooth": "{icon} {volume}%",
     "format-icons": [ "󰕿", "󰖀", "󰕾" ],
-    "format-muted": "󰖁"
+    "format-muted": "󰖁",
+    "tooltip": false
   },
   "battery": {
     "format": "{icon} {capacity}%",
     "format-charging": "󰂄 {capacity}%",
     "format-plugged": "󰂄 {capacity}%",
     "format-icons": [ "󰁺", "󰁼", "󰁾", "󰂀", "󰂂" ]
-  },
-  "clock": {
-    "format": "{:%a %d %b %H:%M}"
   },
   "custom/notifications": {
     "exec": "printf '󰍡'",
