@@ -1,14 +1,14 @@
 # ─────────────────────────────────────────────────────────────────────────
-#  Glass macOS Theme
-#  Transparent blur effect with modern aesthetics
-#  vers. 4.0.0
+#  Full Dark & White Glass Theme
+#  Monochrome aesthetics with high contrast
+#  vers. 5.0.0
 # ─────────────────────────────────────────────────────────────────────────
 
 [window]
-opacity = 0.94
-blur = false
+opacity = 0.85
+blur = true
 padding = { x = 16, y = 16 }
-decorations = "Full"
+decorations = "None"
 dynamic_padding = true
 
 [colors]
@@ -24,6 +24,7 @@ args = ["-l"]
 [font]
 size = 12.0
 builtin_box_drawing = true
+normal = { family = "JetBrainsMono Nerd Font" }
 
 [cursor]
 style = { shape = "Beam", blinking = "On" }
@@ -33,46 +34,46 @@ blink_interval = 750
 shape = "Block"
 
 [colors.primary]
-background = "#000000"
-foreground = "#ffffff"
+background = "#0F1117"
+foreground = "#E6EDF3"
 
 [colors.cursor]
-cursor = "#007aff"
-text = "#1c1c1e"
+cursor = "#7AA2F7"
+text = "#0F1117"
 
 [colors.selection]
-text = "#1c1c1e"
-background = "#0a84ff"
+text = "#E6EDF3"
+background = "#2F3342"
 
 [colors.normal]
-black = "#2c2c2e"
-red = "#ff453a"
-green = "#32d74b"
-yellow = "#ffd60a"
-blue = "#0a84ff"
-magenta = "#bf5af2"
-cyan = "#64d2ff"
-white = "#f5f5f7"
+black = "#1D212B"
+red = "#F47067"
+green = "#4FD1A5"
+yellow = "#F6C177"
+blue = "#58A6FF"
+magenta = "#C678DD"
+cyan = "#56D4DD"
+white = "#E6EDF3"
 
 [colors.bright]
-black = "#3a3a3c"
-red = "#ff6961"
-green = "#4cd964"
-yellow = "#ffcc00"
-blue = "#5ac8fa"
-magenta = "#da8fff"
-cyan = "#70d7ff"
-white = "#ffffff"
+black = "#2A2E3A"
+red = "#FF7B72"
+green = "#7EE787"
+yellow = "#F2CC60"
+blue = "#79C0FF"
+magenta = "#D2A8FF"
+cyan = "#76E3EA"
+white = "#FFFFFF"
 
 [colors.dim]
-black = "#1c1c1e"
-red = "#cc3a30"
-green = "#28a83d"
-yellow = "#ccab08"
-blue = "#086acc"
-magenta = "#9948c2"
-cyan = "#50a8cc"
-white = "#c7c7cc"
+black = "#1a1a1a"
+red = "#cccccc"
+green = "#cccccc"
+yellow = "#cccccc"
+blue = "#cccccc"
+magenta = "#cccccc"
+cyan = "#cccccc"
+white = "#cccccc"
 
 [hints]
 alphabet = "jfkdls;ahgurieowpq"

@@ -213,10 +213,6 @@ channels = stereo
 # defaults to off since the behaviour in other terminal emulators is unknown
 ; synchronized_sync = 0
 
-# Shaders for sdl_glsl, located in $HOME/.config/cava/shaders
-; vertex_shader = pass_through.vert
-; fragment_shader = bar_spectrum.frag
-
 ; for glsl output mode, keep rendering even if no audio
 ; continuous_rendering = 0
 
@@ -232,30 +228,18 @@ show_idle_bar_heads = 0
 
 [color]
 
-# Colors can be one of seven predefined: black, blue, cyan, green, magenta, red, white, yellow.
-# Or defined by hex code '#xxxxxx' (hex code must be within ''). User defined colors requires
-# a terminal that can change color definitions such as Gnome-terminal or rxvt.
-# default is to keep current terminal color
+# Warp Dark Gradient
 background = default
-; foreground = cyan
-
-# SDL and sdl_glsl only support hex code colors, these are the default:
-; background = '#111111'
-; foreground = '#33ffff'
-
-
-# Gradient mode, only hex defined colors are supported,
-# background must also be defined in hex or remain commented out. 1 = on, 0 = off.
-# You can define as many as 8 different colors. They range from bottom to top of screen
 gradient = 1
-gradient_color_1 = '#05668d'
-gradient_color_2 = '#028090'
-gradient_color_3 = '#00a896'
-gradient_color_4 = '#02c39a'
-gradient_color_5 = '#f0f3bd'
-gradient_color_6 = '#ffb4a2'
-gradient_color_7 = '#e5989b'
-gradient_color_8 = '#b5838d'
+gradient_color_1 = '#58A6FF'
+gradient_color_2 = '#79C0FF'
+gradient_color_3 = '#56D4DD'
+gradient_color_4 = '#76E3EA'
+gradient_color_5 = '#4FD1A5'
+gradient_color_6 = '#7EE787'
+gradient_color_7 = '#79C0FF'
+gradient_color_8 = '#E6EDF3'
+
 
 
 # Horizontal is only supported on noncurses output.
@@ -276,11 +260,6 @@ gradient_color_8 = '#b5838d'
 # bottom to top. I.e. the bottom will be only the horizontal
 # and top will be only the color of the vertical gradient.
 ; blend_direction = 'up'
-
-# use theme file instead of defining colors in this file
-# themes are located in $HOME/.config/cava/themes
-; theme = 'none'
-
 
 [smoothing]
 

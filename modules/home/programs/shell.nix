@@ -25,38 +25,6 @@ let
       target = "cava/config";
       source = ../../../home/programs/cava/config;
     }
-    {
-      target = "cava/themes/solarized_dark";
-      source = ../../../home/programs/cava/themes/solarized_dark;
-    }
-    {
-      target = "cava/themes/tricolor";
-      source = ../../../home/programs/cava/themes/tricolor;
-    }
-    {
-      target = "cava/shaders/bar_spectrum.frag";
-      source = ../../../home/programs/cava/shaders/bar_spectrum.frag;
-    }
-    {
-      target = "cava/shaders/eye_of_phi.frag";
-      source = ../../../home/programs/cava/shaders/eye_of_phi.frag;
-    }
-    {
-      target = "cava/shaders/northern_lights.frag";
-      source = ../../../home/programs/cava/shaders/northern_lights.frag;
-    }
-    {
-      target = "cava/shaders/pass_through.vert";
-      source = ../../../home/programs/cava/shaders/pass_through.vert;
-    }
-    {
-      target = "cava/shaders/spectrogram.frag";
-      source = ../../../home/programs/cava/shaders/spectrogram.frag;
-    }
-    {
-      target = "cava/shaders/winamp_line_style_spectrum.frag";
-      source = ../../../home/programs/cava/shaders/winamp_line_style_spectrum.frag;
-    }
   ];
 in
 {

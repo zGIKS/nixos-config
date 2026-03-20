@@ -2,6 +2,12 @@
   "logo": {
     "type": "small"
   },
+  "display": {
+    "color": {
+      "keys": "blue",
+      "title": "white"
+    }
+  },
   "modules": [
     "host",
     "os",
@@ -12,6 +18,6 @@
     "wm",
     "cpu",
     "gpu",
-    "memory"
-  ]
+    "memory",
+  ],
 }

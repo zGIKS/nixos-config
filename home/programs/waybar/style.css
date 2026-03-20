@@ -1,0 +1,78 @@
+* {
+  border: none;
+  border-radius: 0;
+  min-height: 0;
+  font-family: "JetBrainsMono Nerd Font", "Inter", sans-serif;
+  font-size: 13px;
+}
+
+window#waybar {
+  /* Full Dark Glass - Pure Monochrome */
+  background: rgba(0, 0, 0, 0.85);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 0;
+}
+
+#workspaces {
+  margin: 0 6px;
+}
+
+#workspaces button {
+  min-width: 28px;
+  padding: 0 8px;
+  color: #ffffff;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  margin: 4px 3px;
+  transition: all 0.2s ease;
+}
+
+#workspaces button:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: #ffffff;
+}
+
+#workspaces button.focused, #workspaces button.active {
+  color: #000000;
+  background: #ffffff;
+  border-color: #ffffff;
+}
+
+#workspaces button.urgent {
+  background-color: #ffffff;
+  color: #000000;
+  font-weight: bold;
+}
+
+/* Modular Boxed Style - White Borders */
+#battery, #pulseaudio, #bluetooth, #network, #tray, #backlight, #custom-notifications, #custom-power {
+  padding: 0 12px;
+  margin: 4px 4px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #ffffff;
+  transition: all 0.2s ease;
+}
+
+/* All modules use white accents */
+#battery, #battery.charging, #battery.plugged, #pulseaudio, #network, #custom-power, #backlight, #bluetooth {
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+#battery:hover, #pulseaudio:hover, #bluetooth:hover, #network:hover, #backlight:hover, #custom-notifications:hover, #custom-power:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: #ffffff;
+}
+
+#custom-power {
+  margin-left: 8px;
+}
+
+#bluetooth,
+#custom-notifications,
+#network {
+  min-width: 18px;
+  padding: 0 10px;
+}

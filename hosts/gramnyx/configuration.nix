@@ -4,14 +4,14 @@
   imports = [
     ../../modules/nixos/boot/grub-uefi.nix
     ./hardware-configuration.nix
-    ../../modules/nixos/desktop/plasma.nix
+    ../../modules/nixos/desktop/sway.nix
     ../../modules/nixos/profiles/core.nix
     ../../modules/nixos/profiles/desktop.nix
     ../../modules/nixos/profiles/dev.nix
     ../../modules/nixos/tools/volta.nix
   ];
 
-  myModules.desktop.plasma.enable = lib.elem "desktop" roles;
+  myModules.desktop.sway.enable = lib.elem "desktop" roles;
   myModules.profiles.core.enable = true;
   myModules.profiles.desktop.enable = lib.elem "desktop" roles;
   myModules.profiles.dev.enable = lib.elem "dev" roles;
@@ -32,6 +32,12 @@
   networking.hostName = hostName;
   networking.networkmanager.enable = true;
 
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = true;
+  };
+  services.blueman.enable = true;
+
   time.timeZone = "America/Lima";
   i18n.defaultLocale = "en_US.UTF-8";
 
@@ -39,6 +45,17 @@
   services.xserver.xkb = {
     layout = "latam";
     variant = "";
+  };
+
+  services.displayManager.sddm.enable = false;
+  services.greetd = {
+    enable = true;
+    settings = {
+      default_session = {
+        command = "${pkgs.tuigreet}/bin/tuigreet --time --cmd sway";
+        user = "greeter";
+      };
+    };
   };
 
   console.keyMap = "la-latin1";
@@ -51,6 +68,7 @@
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
+    wireplumber.enable = true;
   };
 
   users.users.${username} = {
@@ -58,12 +76,11 @@
     description = "Matteo Aleman";
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
-      kdePackages.kate
     ];
   };
 
-  programs.firefox.enable = true;
   nixpkgs.config.allowUnfree = true;
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   system.stateVersion = "25.11";
 }
