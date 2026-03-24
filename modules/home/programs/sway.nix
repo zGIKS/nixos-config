@@ -33,7 +33,21 @@ let
   ];
 in
 {
-  xdg.configFile = homeLib.mkConfigLinks (
+  xdg.configFile = (homeLib.mkConfigLinks (
     lib.optionals (lib.elem "desktop" roles) swayConfigFiles
-  );
+  )) // lib.optionalAttrs (lib.elem "desktop" roles) {
+    "swappy/config".text = ''
+      [Default]
+      save_dir=$HOME/Pictures/Screenshots
+      save_filename_format=swappy-%Y%m%d-%H%M%S.png
+      show_panel=true
+      line_size=5
+      text_size=20
+      text_font=sans-serif
+      paint_mode=brush
+      early_exit=false
+      fill_shape=false
+      auto_save=false
+    '';
+  };
 }

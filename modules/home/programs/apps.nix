@@ -6,10 +6,15 @@
       brightnessctl
       discord
       google-chrome
+      grim
       gsimplecal
+      slurp
       spotify
+      sway-contrib.grimshot
+      swappy
       yazi
       typora
+      wl-clipboard
       wofi
     ]
     ++ lib.optionals (lib.elem "dev" roles) [
