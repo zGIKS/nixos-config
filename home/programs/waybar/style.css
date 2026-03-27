@@ -58,7 +58,7 @@ window#waybar {
 #tray, 
 #backlight, 
 #custom-notifications, 
-#custom-power {
+#custom-launcher-settings {
   padding: 0 12px;
   margin: 4px 2px;
   background: #18181b; /* Zinc 900 */
@@ -75,7 +75,7 @@ window#waybar {
 #network:hover, 
 #backlight:hover, 
 #custom-notifications:hover, 
-#custom-power:hover {
+#custom-launcher-settings:hover {
   background: #27272a;
   border-color: #3f3f46;
 }
@@ -102,15 +102,17 @@ window#waybar {
   color: #ffffff;
 }
 
-#custom-power {
-  background: rgba(239, 68, 68, 0.1);
-  border: 1px solid rgba(239, 68, 68, 0.2);
-  color: #ef4444;
+#custom-launcher-settings {
+  background: #18181b;
+  border: 1px solid #27272a;
+  color: #7cc7ff;
+  font-size: 15px;
   padding: 0 14px;
 }
 
-#custom-power:hover {
-  background: #ef4444;
+#custom-launcher-settings:hover {
+  background: #27272a;
+  border-color: #3f3f46;
   color: #ffffff;
 }
 
