@@ -11,10 +11,12 @@
     ];
 
     fonts.fontconfig.defaultFonts = {
-      sansSerif = [ "Inter" "DejaVu Sans" "Noto Sans" ];
-      serif = [ "DejaVu Serif" "Noto Serif" ];
+      sansSerif = [ "JetBrainsMono Nerd Font" "Inter" "DejaVu Sans" "Noto Sans" ];
+      serif = [ "JetBrainsMono Nerd Font" "DejaVu Serif" "Noto Serif" ];
       monospace = [ "JetBrainsMono Nerd Font" "DejaVu Sans Mono" "Monospace" ];
     };
+
+    programs.dconf.enable = true;
 
     environment.systemPackages = with pkgs; [
       bluez
@@ -24,8 +26,8 @@
 
     xdg.portal = {
       enable = true;
+      wlr.enable = true;
       extraPortals = with pkgs; [
-        xdg-desktop-portal-wlr
         xdg-desktop-portal-gtk
       ];
     };

@@ -11,6 +11,7 @@
     ../../modules/home/programs/sway.nix
     ../../modules/home/programs/waybar.nix
     ../../modules/home/programs/wofi.nix
+    ../../modules/home/programs/theme.nix
   ];
 
   myHome.git = {

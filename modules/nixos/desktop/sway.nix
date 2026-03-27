@@ -6,6 +6,7 @@
   config = lib.mkIf config.myModules.desktop.sway.enable {
     programs.sway = {
       enable = true;
+      wrapperFeatures.gtk = true;
       xwayland.enable = true;
     };
   };
