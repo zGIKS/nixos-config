@@ -4,7 +4,7 @@
   "height": 32,
   "spacing": 4,
   "fixed-center": true,
-  "modules-left": ["custom/launcher-settings", "tray"],
+  "modules-left": ["custom/settings", "tray"],
   "modules-center": ["sway/workspaces"],
   "modules-right": [
     "network",
@@ -96,9 +96,9 @@
     "format": "󰍡",
     "tooltip": false
   },
-  "custom/launcher-settings": {
+  "custom/settings": {
     "format": "",
-    "on-click": "sh ~/.config/wofi/launcher.sh",
+    "on-click": "sh ~/.config/eww/components/settings/toggle.sh",
     "tooltip": false
   }
 }

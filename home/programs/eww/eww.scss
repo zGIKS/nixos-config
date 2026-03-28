@@ -1,0 +1,42 @@
+* {
+  all: unset;
+}
+
+.settings-backdrop {
+  background: rgba(0, 0, 0, 0.001);
+}
+
+.settings {
+  background: rgba(10, 10, 12, 0.96);
+  border: 1px solid #27272a;
+  border-radius: 12px;
+  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.38);
+  color: #fafafa;
+  font-family: "Inter", "JetBrainsMono Nerd Font", sans-serif;
+  min-width: 196px;
+  padding: 6px;
+}
+
+.settings-button {
+  background: #18181b;
+  border: 1px solid #27272a;
+  border-radius: 8px;
+  min-height: 38px;
+  min-width: 0;
+  padding: 6px;
+}
+
+.settings-button:hover {
+  background: #232329;
+  border-color: #3f3f46;
+}
+
+.settings-button:focus {
+  background: #232329;
+  border-color: #3f3f46;
+}
+
+.settings-button-icon {
+  color: #fafafa;
+  font-size: 16px;
+}
