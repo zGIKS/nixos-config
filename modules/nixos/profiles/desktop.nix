@@ -8,12 +8,37 @@
       inter
       material-design-icons
       nerd-fonts.jetbrains-mono
+      noto-fonts
+      noto-fonts-cjk-sans
+      noto-fonts-color-emoji
+      unifont
     ];
 
     fonts.fontconfig.defaultFonts = {
-      sansSerif = [ "JetBrainsMono Nerd Font" "Inter" "DejaVu Sans" "Noto Sans" ];
-      serif = [ "JetBrainsMono Nerd Font" "DejaVu Serif" "Noto Serif" ];
-      monospace = [ "JetBrainsMono Nerd Font" "DejaVu Sans Mono" "Monospace" ];
+      sansSerif = [
+        "JetBrainsMono Nerd Font"
+        "Inter"
+        "Noto Sans"
+        "Noto Sans CJK SC"
+        "Noto Color Emoji"
+        "DejaVu Sans"
+        "Unifont"
+      ];
+      serif = [
+        "JetBrainsMono Nerd Font"
+        "Noto Serif"
+        "Noto Serif CJK SC"
+        "DejaVu Serif"
+        "Unifont"
+      ];
+      monospace = [
+        "JetBrainsMono Nerd Font"
+        "Noto Sans Mono"
+        "DejaVu Sans Mono"
+        "Noto Color Emoji"
+        "Unifont"
+        "Monospace"
+      ];
     };
 
     programs.dconf.enable = true;

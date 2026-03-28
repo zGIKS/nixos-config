@@ -1,6 +1,7 @@
 {
   "logo": {
-    "type": "small"
+    "type": "auto",
+    "source": "nixos_old_small"
   },
   "display": {
     "color": {
@@ -18,6 +19,6 @@
     "wm",
     "cpu",
     "gpu",
-    "memory",
-  ],
+    "memory"
+  ]
 }
