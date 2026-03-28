@@ -40,6 +40,9 @@
       @define-color theme_selected_fg_color #0a0a0c;
       @define-color borders #27272a;
     '';
+    gtk3.extraConfig = {
+      gtk-application-prefer-dark-theme = 1;
+    };
     
     gtk4.extraCss = ''
       @define-color theme_bg_color #0a0a0c;
@@ -50,6 +53,16 @@
       @define-color theme_selected_fg_color #0a0a0c;
       @define-color borders #27272a;
     '';
+    gtk4.extraConfig = {
+      gtk-application-prefer-dark-theme = 1;
+    };
+  };
+
+  # Forzar el esquema de color oscuro a nivel de dconf (necesario para apps modernas y portales)
+  dconf.settings = {
+    "org/gnome/desktop/interface" = {
+      color-scheme = "prefer-dark";
+    };
   };
 
   # 2. Aplicar el tema a las aplicaciones Qt (KDE, VLC, etc.)

@@ -17,6 +17,9 @@
       "network.cookie.lifetimePolicy" = 0;
       # Habilitar WebGL y asegurar compatibilidad
       "webgl.disabled" = false;
+      # Forzar modo oscuro y sincronizar con el sistema
+      "ui.systemUsesDarkTheme" = 1;
+      "layout.css.prefers-color-scheme.content-override" = 2; # 2 = Seguir el esquema de color del sistema
       "privacy.resistFingerprinting" = false; # Necesario para WebGL completo y detección de Dark Mode del sistema
       # Opcional: Recordar contraseñas si lo prefieres
       "signon.rememberSignons" = true;
