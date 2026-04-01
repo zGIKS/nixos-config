@@ -4,6 +4,7 @@
   home.packages = with pkgs;
     lib.optionals (lib.elem "desktop" roles) [
       brightnessctl
+      brave
       discord
       google-chrome
       grim
