@@ -1,4 +1,4 @@
-{ pkgs, lib, username, hostName, roles, keyboardLayout, consoleKeyMap, ... }:
+{ pkgs, lib, username, hostName, roles, keyboardLayout, ... }:
 
 {
   imports = [
@@ -57,7 +57,7 @@
     };
   };
 
-  console.keyMap = consoleKeyMap;
+  console.useXkbConfig = true;
   services.printing.enable = true;
 
   services.pulseaudio.enable = false;

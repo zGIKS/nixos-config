@@ -4,6 +4,10 @@
   options.myModules.profiles.dev.enable = lib.mkEnableOption "developer profile";
 
   config = lib.mkIf config.myModules.profiles.dev.enable {
+    virtualisation.docker.enable = true;
+
+    users.extraGroups.docker.members = [ "giks" ];
+
     environment.systemPackages = with pkgs; [
       bash-language-server
       docker
