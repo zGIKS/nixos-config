@@ -14,6 +14,7 @@
       docker-buildx
       docker-compose
       eslint
+      gcc
       go
       go-swag
       jdk

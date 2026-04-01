@@ -13,8 +13,8 @@
     programs.nix-ld.enable = true;
 
     environment.systemPackages = with pkgs; [
+      bubblewrap
       volta
-      codex
     ];
 
     environment.sessionVariables = {
