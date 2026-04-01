@@ -26,6 +26,7 @@
       typescript
       typescript-language-server
       vscode-langservers-extracted
+      wpsoffice
     ];
   };
 }
