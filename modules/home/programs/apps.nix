@@ -16,6 +16,7 @@
       typora
       wl-clipboard
       wofi
+      kdePackages.dolphin
     ]
     ++ lib.optionals (lib.elem "dev" roles) [
       zellij

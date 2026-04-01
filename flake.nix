@@ -13,27 +13,39 @@
     let
       system = "x86_64-linux";
       username = "giks";
-      hostName = "gramnyx";
-      roles = [ "desktop" "dev" ];
       hosts = import ./hosts;
       homeLib = import ./modules/home/lib.nix { };
-      specialArgs = {
-        inherit username hostName roles homeLib;
+      hostConfigs = {
+        gramnyx = {
+          roles = [ "desktop" "dev" ];
+        };
+        mai = {
+          roles = [ "desktop" "dev" ];
+        };
       };
     in {
-      nixosConfigurations.${hostName} = nixpkgs.lib.nixosSystem {
-        inherit system specialArgs;
-        modules = [
-          hosts.${hostName}
-          home-manager.nixosModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.backupFileExtension = "backup";
-            home-manager.extraSpecialArgs = specialArgs;
-            home-manager.users.${username} = import ./users/${username}/home.nix;
-          }
-        ];
-      };
+      nixosConfigurations = nixpkgs.lib.mapAttrs
+        (hostName: hostConfig:
+          let
+            specialArgs = {
+              inherit username hostName homeLib;
+              inherit (hostConfig) roles;
+            };
+          in
+          nixpkgs.lib.nixosSystem {
+            inherit system specialArgs;
+            modules = [
+              hosts.${hostName}
+              home-manager.nixosModules.home-manager
+              {
+                home-manager.useGlobalPkgs = true;
+                home-manager.useUserPackages = true;
+                home-manager.backupFileExtension = "backup";
+                home-manager.extraSpecialArgs = specialArgs;
+                home-manager.users.${username} = import ./users/${username}/home.nix;
+              }
+            ];
+          })
+        hostConfigs;
     };
 }
