@@ -8,11 +8,13 @@
       google-chrome
       grim
       gsimplecal
+      jetbrains.datagrip
       slurp
       spotify
       sway-contrib.grimshot
       swappy
       yazi
+      android-studio
       typora
       wl-clipboard
       wofi
