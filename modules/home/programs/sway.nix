@@ -1,4 +1,4 @@
-{ lib, homeLib, roles, ... }:
+{ lib, homeLib, roles, keyboardLayout, ... }:
 
 let
   swayConfigFiles = [
@@ -23,19 +23,23 @@ let
       source = ../../../home/programs/sway/config.d/binds.conf;
     }
     {
-      target = "sway/config.d/inputs.conf";
-      source = ../../../home/programs/sway/config.d/inputs.conf;
-    }
-    {
       target = "sway/config.d/outputs.conf";
       source = ../../../home/programs/sway/config.d/outputs.conf;
     }
   ];
+
 in
 {
   xdg.configFile = (homeLib.mkConfigLinks (
     lib.optionals (lib.elem "desktop" roles) swayConfigFiles
   )) // lib.optionalAttrs (lib.elem "desktop" roles) {
+    "sway/config.d/inputs.conf".text = ''
+      # Keyboard layout (host specific)
+      input * {
+        xkb_layout "${keyboardLayout}"
+      }
+    '';
+
     "swappy/config".text = ''
       [Default]
       save_dir=$HOME/Pictures/Screenshots

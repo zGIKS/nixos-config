@@ -18,9 +18,13 @@
       hostConfigs = {
         gramnyx = {
           roles = [ "desktop" "dev" ];
+          keyboardLayout = "latam";
+          consoleKeyMap = "la-latin1";
         };
         mai = {
           roles = [ "desktop" "dev" ];
+          keyboardLayout = "us";
+          consoleKeyMap = "us";
         };
       };
     in {
@@ -29,7 +33,7 @@
           let
             specialArgs = {
               inherit username hostName homeLib;
-              inherit (hostConfig) roles;
+              inherit (hostConfig) roles keyboardLayout consoleKeyMap;
             };
           in
           nixpkgs.lib.nixosSystem {
