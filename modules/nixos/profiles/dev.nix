@@ -17,7 +17,8 @@
       gcc
       go
       go-swag
-      jdk
+      jdk21
+      jdk25
       prettier
       pyright
       rustup
