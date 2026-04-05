@@ -16,13 +16,5 @@
       bubblewrap
       volta
     ];
-
-    environment.sessionVariables = {
-      VOLTA_HOME = "/home/${config.myModules.tools.volta.user}/.volta";
-    };
-
-    environment.shellInit = ''
-      export PATH="$HOME/.volta/bin:$PATH"
-    '';
   };
 }

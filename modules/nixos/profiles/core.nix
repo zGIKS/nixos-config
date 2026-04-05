@@ -11,6 +11,7 @@
       fish
       gh
       git
+      neovim
       nano
       os-prober
       pipes

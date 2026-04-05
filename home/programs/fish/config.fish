@@ -1,5 +1,5 @@
-set -gx EDITOR fresh
-set -gx VISUAL fresh
+set -gx EDITOR nvim
+set -gx VISUAL nvim
 set -gx VOLTA_HOME $HOME/.volta
 set -gx BUN_INSTALL $HOME/.bun
 if test -z "$LIBCLANG_PATH"; and test -e /usr/lib/libclang.so

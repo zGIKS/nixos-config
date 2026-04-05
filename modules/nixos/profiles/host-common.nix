@@ -13,7 +13,13 @@
   myModules.desktop.sway.enable = lib.elem "desktop" roles;
   myModules.profiles.core.enable = true;
   myModules.profiles.desktop.enable = lib.elem "desktop" roles;
-  myModules.profiles.dev.enable = lib.elem "dev" roles;
+  myModules.profiles.dev = {
+    enable = lib.elem "dev" roles;
+    docker.enable = lib.elem "dev" roles;
+    latex.enable = lib.elem "dev" roles;
+    java.enable = lib.elem "dev" roles;
+    lsp.enable = lib.elem "dev" roles;
+  };
   myModules.tools.volta = {
     enable = lib.elem "dev" roles;
     user = username;
@@ -78,7 +84,25 @@
     ];
   };
 
-  nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.allowUnfreePredicate = pkg: 
+    let 
+      name = lib.getName pkg;
+    in 
+    builtins.elem name [
+      "google-chrome"
+      "discord"
+      "spotify"
+      "datagrip"
+      "android-studio"
+      "typora"
+      "vscode"
+      "wpsoffice"
+      "nvidia-x11"
+      "nvidia-settings"
+      "nvidia-persistenced"
+      "nvidia-persistenced-1.0"
+      "brave"
+    ];
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   system.stateVersion = "25.11";

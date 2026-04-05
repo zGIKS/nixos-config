@@ -10,6 +10,7 @@
       grim
       gsimplecal
       jetbrains.datagrip
+      nautilus
       pavucontrol
       slurp
       spotify
@@ -21,7 +22,6 @@
       wl-clipboard
       wofi
       kdePackages.ark
-      kdePackages.dolphin
       kdePackages.okular
     ]
     ++ lib.optionals (lib.elem "dev" roles) [
