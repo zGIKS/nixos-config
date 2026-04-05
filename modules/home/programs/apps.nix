@@ -10,6 +10,7 @@
       grim
       gsimplecal
       jetbrains.datagrip
+      pavucontrol
       slurp
       spotify
       sway-contrib.grimshot
@@ -19,7 +20,9 @@
       typora
       wl-clipboard
       wofi
+      kdePackages.ark
       kdePackages.dolphin
+      kdePackages.okular
     ]
     ++ lib.optionals (lib.elem "dev" roles) [
       zellij
