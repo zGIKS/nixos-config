@@ -12,12 +12,17 @@
     ../../modules/home/programs/waybar.nix
     ../../modules/home/programs/wofi.nix
     ../../modules/home/programs/theme.nix
+    ../../modules/home/programs/nvim.nix
   ];
 
   myHome.git = {
     enable = true;
     userName = "zGIKS";
     userEmail = "mateo@giks.net";
+  };
+
+  myHome.nvim = {
+    enable = true;
   };
 
   home.sessionVariables = {
