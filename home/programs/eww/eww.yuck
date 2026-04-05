@@ -1,34 +1,29 @@
-(defwindow settings_backdrop
-  :monitor 0
-  :stacking "fg"
-  :focusable "none"
-  :exclusive false
-  :geometry (geometry :x "0px" :y "0px" :width "100%" :height "100%" :anchor "top left")
-  (eventbox :onclick "sh ~/.config/eww/components/settings/close.sh"
-    (box :class "settings-backdrop")))
-
 (defwindow settings
   :monitor 0
-  :stacking "fg"
+  :stacking "overlay"
   :focusable "ondemand"
   :exclusive false
-  :geometry (geometry :x "10px" :y "42px" :width "196px" :anchor "top left")
-  (settings))
-
-(defwidget settings []
-  (box :class "settings" :orientation "h" :homogeneous true :spacing 8
-      (button
-        :class "settings-button"
-        :onclick "sh -lc 'sh ~/.config/eww/components/settings/close.sh; swaymsg exit'"
-        (box :orientation "v" :spacing 4 :halign "center" :valign "center" :hexpand true :vexpand true
-          (label :class "settings-button-icon" :text "󰍃")))
-      (button
-        :class "settings-button"
-        :onclick "sh -lc 'sh ~/.config/eww/components/settings/close.sh; systemctl reboot'"
-        (box :orientation "v" :spacing 4 :halign "center" :valign "center" :hexpand true :vexpand true
-          (label :class "settings-button-icon" :text "󰜉")))
-      (button
-        :class "settings-button"
-        :onclick "sh -lc 'sh ~/.config/eww/components/settings/close.sh; systemctl poweroff'"
-        (box :orientation "v" :spacing 4 :halign "center" :valign "center" :hexpand true :vexpand true
-          (label :class "settings-button-icon" :text "󰐥")))))
+  :geometry (geometry :x "0%" :y "0%" :width "100%" :height "100%" :anchor "center")
+  (eventbox :onclick "sh ~/.config/eww/components/settings/close.sh"
+    (box :class "settings-backdrop" :orientation "v" :space-evenly false :halign "center" :valign "center"
+      (eventbox :onclick "return true"
+        (box :class "settings-card" :orientation "v" :space-evenly false :spacing 24
+          (box :class "settings-container" :orientation "h" :spacing 16
+            (button
+              :class "settings-button"
+              :onclick "sh -lc 'sh ~/.config/eww/components/settings/close.sh; swaymsg exit'"
+              (box :orientation "v" :spacing 12 :halign "center" :valign "center"
+                (label :class "settings-button-icon" :text "󰍃")
+                (label :class "settings-button-label" :text "Logout")))
+            (button
+              :class "settings-button"
+              :onclick "sh -lc 'sh ~/.config/eww/components/settings/close.sh; systemctl reboot'"
+              (box :orientation "v" :spacing 12 :halign "center" :valign "center"
+                (label :class "settings-button-icon" :text "󰜉")
+                (label :class "settings-button-label" :text "Reboot")))
+            (button
+              :class "settings-button"
+              :onclick "sh -lc 'sh ~/.config/eww/components/settings/close.sh; systemctl poweroff'"
+              (box :orientation "v" :spacing 12 :halign "center" :valign "center"
+                (label :class "settings-button-icon" :text "󰐥")
+                (label :class "settings-button-label" :text "Shutdown")))))))))
