@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, username, ... }:
 
 let
   cfg = config.myModules.profiles.dev;
@@ -14,7 +14,7 @@ in
 
   config = lib.mkIf cfg.enable {
     virtualisation.docker.enable = cfg.docker.enable;
-    users.extraGroups.docker.members = lib.optional cfg.docker.enable "giks";
+    users.extraGroups.docker.members = lib.optional cfg.docker.enable username;
 
     environment.systemPackages = with pkgs; [
       gcc

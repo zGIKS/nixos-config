@@ -9,7 +9,6 @@
   "modules-right": [
     "network",
     "pulseaudio",
-    "bluetooth",
     "backlight",
     "battery",
     "custom/notifications",
@@ -48,11 +47,6 @@
     "format-ethernet": "󰈀",
     "format-disconnected": "󰤭",
     "tooltip-format-wifi": "{essid} ({signalStrength}%)"
-  },
-  "bluetooth": {
-    "format": "󰂯",
-    "format-connected": "󰂱",
-    "tooltip-format": "{device_alias}"
   },
   "backlight": {
     "format": "{icon} {percent}%",
