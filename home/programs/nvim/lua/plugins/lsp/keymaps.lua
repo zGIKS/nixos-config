@@ -70,7 +70,8 @@ function M.setup(opts)
       -- code, if the language server you are using supports them
       if client and client.server_capabilities.inlayHintProvider and vim.lsp.inlay_hint then
         map("<leader>th", function()
-          vim.lsp.inlay_hint.enable(0, not vim.lsp.inlay_hint.is_enabled())
+          local enabled = vim.lsp.inlay_hint.is_enabled({ bufnr = 0 })
+          vim.lsp.inlay_hint.enable(not enabled, { bufnr = 0 })
         end, "[T]oggle Inlay [H]ints")
       end
     end,
