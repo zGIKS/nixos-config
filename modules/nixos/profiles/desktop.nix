@@ -76,6 +76,7 @@
     environment.systemPackages = with pkgs; [
       bluez
       networkmanager
+      pkgs."protonvpn-gui"
       wireplumber
     ];
 
