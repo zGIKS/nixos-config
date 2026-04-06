@@ -42,6 +42,7 @@ in
     ]
     ++ lib.optionals cfg.browsers.enable [
       brave
+      google-chrome
     ]
     ++ lib.optionals cfg.media.enable [
       discord
