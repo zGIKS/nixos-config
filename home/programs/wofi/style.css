@@ -5,7 +5,7 @@
 
 * {
   font-family: "JetBrainsMono Nerd Font", "Inter", sans-serif;
-  font-size: 13px;
+  font-size: 15px;
   outline: none;
 }
 
@@ -28,7 +28,7 @@ window {
 /* El buscador (Input) - Estilo exacto de módulos de Waybar */
 #input {
   margin-bottom: 12px;
-  padding: 10px 14px;
+  padding: 12px 16px;
   background-color: #18181b; /* Zinc 900 */
   color: #fafafa;
   border: 1px solid #27272a; /* Zinc 800 */
@@ -48,7 +48,7 @@ window {
 
 /* Lista de aplicaciones */
 #entry {
-  padding: 10px 14px;
+  padding: 12px 16px;
   margin-bottom: 4px;
   border-radius: 6px;
   transition: all 0.2s ease;

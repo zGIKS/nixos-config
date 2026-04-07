@@ -2,7 +2,7 @@
 set $mod Mod4
 set $term alacritty
 
-font pango:sans-serif 10
+font pango:sans-serif 11
 floating_modifier $mod
 
 # Modular config fragments

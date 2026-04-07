@@ -25,7 +25,7 @@
 
     font = {
       name = "JetBrainsMono Nerd Font";
-      size = 11;
+      size = 12;
     };
 
     # Forzamos tus colores exactos de Waybar mediante CSS de GTK
