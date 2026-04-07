@@ -32,6 +32,7 @@ in
       gsimplecal
       nautilus
       pavucontrol
+      playerctl
       slurp
       sway-contrib.grimshot
       swappy
