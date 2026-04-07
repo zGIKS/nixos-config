@@ -1,3 +1,32 @@
+(defpoll jerusalem_time :interval "1s" "TZ='Asia/Jerusalem' date +'%I:%M%P'")
+(defpoll eastern_time :interval "1s" "TZ='America/New_York' date +'%I:%M%P'")
+(defpoll jerusalem_icon :interval "15m" "TZ='Asia/Jerusalem' date +%H | awk '{if ($1 >= 6 && $1 < 18) print \"☀️\"; else print \"🌙\"}'")
+(defpoll eastern_icon :interval "15m" "TZ='America/New_York' date +%H | awk '{if ($1 >= 6 && $1 < 18) print \"☀️\"; else print \"🌙\"}'")
+
+(defwindow calendar
+  :monitor 0
+  :stacking "overlay"
+  :geometry (geometry :x "12px"
+                      :y "44px"
+                      :anchor "top right")
+  (calendar_widget))
+
+(defwidget calendar_widget []
+  (box :class "calendar-card" :orientation "v" :space-evenly false
+    (box :class "calendar-container"
+      (calendar :class "calendar-inner"))
+    (box :class "calendar-divider")
+    (box :class "world-clocks" :orientation "v" :spacing 12 :space-evenly false
+      (world_clock_item :name "Jerusalem" :time jerusalem_time :icon jerusalem_icon)
+      (world_clock_item :name "Eastern Time" :time eastern_time :icon eastern_icon))))
+
+(defwidget world_clock_item [name time icon]
+  (box :class "world-clock-item" :orientation "h" :space-evenly false
+    (label :class "world-clock-name" :text name :halign "start" :hexpand true)
+    (box :class "world-clock-right" :orientation "h" :spacing 12 :space-evenly false :halign "end"
+      (label :class "world-clock-icon" :text icon)
+      (label :class "world-clock-time" :text time))))
+
 (defwindow settings
   :monitor 0
   :stacking "overlay"

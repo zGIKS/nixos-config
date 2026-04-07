@@ -51,3 +51,71 @@
   font-size: 15px;
   font-weight: 500;
 }
+
+/* Calendar Styles */
+.calendar-card {
+  background: #0a0a0c;
+  border: 1px solid #27272a;
+  border-radius: 12px;
+  color: #fafafa;
+  font-family: "Inter", "JetBrainsMono Nerd Font", sans-serif;
+  padding: 20px;
+  min-width: 320px;
+}
+
+.calendar-inner {
+  background: transparent;
+  color: #fafafa;
+}
+
+calendar {
+  padding: 4px;
+}
+
+calendar:selected {
+  background-color: #fafafa;
+  color: #0a0a0c;
+  border-radius: 4px;
+}
+
+calendar.header {
+  color: #d4d4d8;
+  font-weight: bold;
+}
+
+calendar.button {
+  color: #71717a;
+}
+
+calendar.highlight {
+  color: #7cc7ff;
+}
+
+.calendar-divider {
+  background: #27272a;
+  min-height: 1px;
+  margin: 20px 0;
+}
+
+.world-clocks {
+  padding: 0 4px;
+}
+
+.world-clock-item {
+  margin: 4px 0;
+}
+
+.world-clock-name {
+  font-size: 14px;
+  color: #a1a1aa;
+}
+
+.world-clock-time {
+  font-size: 14px;
+  font-weight: 600;
+  color: #fafafa;
+}
+
+.world-clock-icon {
+  font-size: 14px;
+}
