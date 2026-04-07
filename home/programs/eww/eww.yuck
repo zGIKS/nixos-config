@@ -1,3 +1,27 @@
+(defpoll season :interval "24h" "date +%m | awk '{if ($1 >= 3 && $1 <= 5) print \"Autumn 🍂\"; else if ($1 >= 6 && $1 <= 8) print \"Winter ❄️\"; else if ($1 >= 9 && $1 <= 11) print \"Spring 🌸\"; else print \"Summer ☀️\"}'")
+(defpoll location :interval "24h" "echo \"$(timedatectl show --property=Timezone --value | awk -F'/' '{print $2}'), PET (UTC-05)\"")
+
+(defwindow calendar
+  :monitor 0
+  :stacking "overlay"
+  :geometry (geometry :x "12px"
+                      :y "44px"
+                      :anchor "top right")
+  (calendar_widget))
+
+(defwidget calendar_widget []
+  (box :class "calendar-card" :orientation "v" :space-evenly false
+    (box :class "calendar-container"
+      (calendar :class "calendar-inner"))
+    (box :class "calendar-divider")
+    (box :class "info-section" :orientation "v" :spacing 12 :space-evenly false
+      (box :class "info-item" :orientation "h" :space-evenly false
+        (label :class "info-label" :text "Season" :halign "start" :hexpand true)
+        (label :class "info-value" :text season :halign "end"))
+      (box :class "info-item" :orientation "h" :space-evenly false
+        (label :class "info-label" :text "Location" :halign "start" :hexpand true)
+        (label :class "info-value" :text location :halign "end")))))
+
 (defwindow settings
   :monitor 0
   :stacking "overlay"

@@ -18,6 +18,14 @@ let
       target = "eww/components/settings/close.sh";
       source = ../../../home/programs/eww/components/settings/close.sh;
     }
+    {
+      target = "eww/components/calendar/toggle.sh";
+      source = ../../../home/programs/eww/components/calendar/toggle.sh;
+    }
+    {
+      target = "eww/components/calendar/close.sh";
+      source = ../../../home/programs/eww/components/calendar/close.sh;
+    }
   ];
 in
 {

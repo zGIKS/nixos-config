@@ -77,7 +77,8 @@
   },
   "clock": {
     "format": "󰥔 {:%I:%M %p}",
-    "tooltip-format": "{:%A, %B %d, %Y}"
+    "tooltip-format": "{:%A, %B %d, %Y}",
+    "on-click": "sh ~/.config/eww/components/calendar/toggle.sh"
   },
   "tray": {
     "icon-size": 16,
