@@ -7,18 +7,28 @@
   font-family: "JetBrainsMono Nerd Font", "Inter", sans-serif;
   font-size: 15px;
   outline: none;
+  box-shadow: none;
+  text-shadow: none;
+  background-image: none;
 }
 
 window {
-  background-color: #0a0a0c; /* Mismo negro que Waybar y Alacritty */
+  background-color: transparent;
   color: #fafafa;
-  border: 1px solid #27272a; /* Zinc 800 */
+  border: none;
   border-radius: 8px;
+  box-shadow: none;
+  background-image: none;
 }
 
 #outer-box {
-  margin: 12px;
-  padding: 0;
+  margin: 0;
+  padding: 12px;
+  background-color: #0a0a0c; /* Mismo negro que Waybar y Alacritty */
+  border: 1px solid #27272a; /* Zinc 800 */
+  border-radius: 8px;
+  box-shadow: none;
+  background-image: none;
 }
 
 #inner-box {
@@ -31,13 +41,15 @@ window {
   padding: 12px 16px;
   background-color: #18181b; /* Zinc 900 */
   color: #fafafa;
-  border: 1px solid #27272a; /* Zinc 800 */
+  border: none;
   border-radius: 6px;
   caret-color: #fafafa;
+  box-shadow: none;
+  background-image: none;
 }
 
 #input:focus {
-  border-color: #3f3f46; /* Zinc 700 */
+  border: none;
 }
 
 /* Color del texto del prompt (Search) */
@@ -52,6 +64,8 @@ window {
   margin-bottom: 4px;
   border-radius: 6px;
   transition: all 0.2s ease;
+  box-shadow: none;
+  background-image: none;
 }
 
 /* El elemento seleccionado (Active) */
