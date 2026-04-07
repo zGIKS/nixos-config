@@ -3,14 +3,14 @@
 }
 
 .settings-backdrop {
-  background: rgba(0, 0, 0, 0.75);
+  background: transparent;
+
 }
 
 .settings-card {
   background: rgba(10, 10, 12, 0.98);
   border: 1px solid rgba(39, 39, 42, 0.8);
   border-radius: 24px;
-  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.6);
   color: #fafafa;
   font-family: "Inter", "JetBrainsMono Nerd Font", sans-serif;
   padding: 52px;
