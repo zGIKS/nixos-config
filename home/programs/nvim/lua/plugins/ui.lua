@@ -1,4 +1,41 @@
 -- UI Components - Dark Glass/Zinc Theme (Minimal)
+local function pretty_filetype()
+  local ft = vim.bo.filetype
+  if ft == "" then
+    return ""
+  end
+
+  local labels = {
+    javascript = "JavaScript",
+    javascriptreact = "React",
+    typescript = "TypeScript",
+    typescriptreact = "React TS",
+    markdown = "Markdown",
+    sh = "Shell",
+    zsh = "Zsh",
+    lua = "Lua",
+    nix = "Nix",
+    rust = "Rust",
+    go = "Go",
+    astro = "Astro",
+    html = "HTML",
+    css = "CSS",
+    scss = "SCSS",
+    json = "JSON",
+    yaml = "YAML",
+    toml = "TOML",
+  }
+
+  local icon = ""
+  local ok_devicons, devicons = pcall(require, "nvim-web-devicons")
+  if ok_devicons then
+    icon = devicons.get_icon_by_filetype(ft, { default = true }) or ""
+  end
+
+  local label = labels[ft] or ft:gsub("^%l", string.upper)
+  return (icon ~= "" and (icon .. " ") or "") .. label
+end
+
 return {
   -- Dark Glass Theme (coherent with Waybar/Alacritty)
   {
@@ -99,7 +136,11 @@ return {
           {
             "branch",
             icon = "",
-          }
+          },
+          {
+            pretty_filetype,
+            color = { gui = "bold" },
+          },
         },
         lualine_z = { "location" },
       },
