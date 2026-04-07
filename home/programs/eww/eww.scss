@@ -4,7 +4,6 @@
 
 .settings-backdrop {
   background: transparent;
-
 }
 
 .settings-card {
@@ -97,25 +96,21 @@ calendar.highlight {
   margin: 20px 0;
 }
 
-.world-clocks {
+.info-section {
   padding: 0 4px;
 }
 
-.world-clock-item {
+.info-item {
   margin: 4px 0;
 }
 
-.world-clock-name {
+.info-label {
   font-size: 14px;
   color: #a1a1aa;
 }
 
-.world-clock-time {
+.info-value {
   font-size: 14px;
   font-weight: 600;
   color: #fafafa;
-}
-
-.world-clock-icon {
-  font-size: 14px;
 }

@@ -1,7 +1,5 @@
-(defpoll jerusalem_time :interval "1s" "TZ='Asia/Jerusalem' date +'%I:%M%P'")
-(defpoll eastern_time :interval "1s" "TZ='America/New_York' date +'%I:%M%P'")
-(defpoll jerusalem_icon :interval "15m" "TZ='Asia/Jerusalem' date +%H | awk '{if ($1 >= 6 && $1 < 18) print \"☀️\"; else print \"🌙\"}'")
-(defpoll eastern_icon :interval "15m" "TZ='America/New_York' date +%H | awk '{if ($1 >= 6 && $1 < 18) print \"☀️\"; else print \"🌙\"}'")
+(defpoll season :interval "24h" "date +%m | awk '{if ($1 >= 3 && $1 <= 5) print \"Autumn 🍂\"; else if ($1 >= 6 && $1 <= 8) print \"Winter ❄️\"; else if ($1 >= 9 && $1 <= 11) print \"Spring 🌸\"; else print \"Summer ☀️\"}'")
+(defpoll location :interval "24h" "echo \"$(timedatectl show --property=Timezone --value | awk -F'/' '{print $2}'), PET (UTC-05)\"")
 
 (defwindow calendar
   :monitor 0
@@ -16,16 +14,13 @@
     (box :class "calendar-container"
       (calendar :class "calendar-inner"))
     (box :class "calendar-divider")
-    (box :class "world-clocks" :orientation "v" :spacing 12 :space-evenly false
-      (world_clock_item :name "Jerusalem" :time jerusalem_time :icon jerusalem_icon)
-      (world_clock_item :name "Eastern Time" :time eastern_time :icon eastern_icon))))
-
-(defwidget world_clock_item [name time icon]
-  (box :class "world-clock-item" :orientation "h" :space-evenly false
-    (label :class "world-clock-name" :text name :halign "start" :hexpand true)
-    (box :class "world-clock-right" :orientation "h" :spacing 12 :space-evenly false :halign "end"
-      (label :class "world-clock-icon" :text icon)
-      (label :class "world-clock-time" :text time))))
+    (box :class "info-section" :orientation "v" :spacing 12 :space-evenly false
+      (box :class "info-item" :orientation "h" :space-evenly false
+        (label :class "info-label" :text "Season" :halign "start" :hexpand true)
+        (label :class "info-value" :text season :halign "end"))
+      (box :class "info-item" :orientation "h" :space-evenly false
+        (label :class "info-label" :text "Location" :halign "start" :hexpand true)
+        (label :class "info-value" :text location :halign "end")))))
 
 (defwindow settings
   :monitor 0
