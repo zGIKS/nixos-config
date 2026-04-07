@@ -1,4 +1,4 @@
-{ config, lib, pkgs, username, ... }:
+{ config, lib, pkgs, username, nit, ... }:
 
 let
   cfg = config.myModules.profiles.dev;
@@ -20,6 +20,7 @@ in
       gcc
       go
       go-swag
+      nit.packages.${pkgs.system}.nit
       rustup
       typescript
       wpsoffice

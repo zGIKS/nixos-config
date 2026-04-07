@@ -21,6 +21,26 @@
         "type": "github"
       }
     },
+    "nit": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1775593523,
+        "narHash": "sha256-6Mc/DW/c8rwsXcvlHEVcA82WurA8WofvYWhfq/jxbzE=",
+        "owner": "zGIKS",
+        "repo": "nit",
+        "rev": "b91dee8373927a76d6a5d1a0992f21dfa3a916dd",
+        "type": "github"
+      },
+      "original": {
+        "owner": "zGIKS",
+        "repo": "nit",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1775002709,
@@ -40,6 +60,7 @@
     "root": {
       "inputs": {
         "home-manager": "home-manager",
+        "nit": "nit",
         "nixpkgs": "nixpkgs"
       }
     }

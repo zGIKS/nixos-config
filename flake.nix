@@ -7,9 +7,13 @@
       url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nit = {
+      url = "github:zGIKS/nit";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { nixpkgs, home-manager, ... }:
+  outputs = { nixpkgs, home-manager, nit, ... }:
     let
       system = "x86_64-linux";
       username = "giks";
@@ -31,6 +35,7 @@
           let
             specialArgs = {
               inherit username hostName homeLib;
+              inherit nit;
               inherit (hostConfig) roles keyboardLayout;
             };
           in
