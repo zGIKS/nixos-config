@@ -58,6 +58,7 @@ in
     ]
     ++ lib.optionals cfg.devTools.enable [
       vscode
+      zed-editor
       zellij
     ];
 }
