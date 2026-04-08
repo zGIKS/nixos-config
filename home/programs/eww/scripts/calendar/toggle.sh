@@ -6,7 +6,7 @@ if ! pgrep -x eww >/dev/null 2>&1; then
 fi
 
 if eww active-windows 2>/dev/null | grep -Eq '^calendar:'; then
-  sh ~/.config/eww/components/calendar/close.sh
+  sh ~/.config/eww/scripts/calendar/close.sh
 else
   eww open calendar >/dev/null 2>&1
 fi

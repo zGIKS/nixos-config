@@ -1,0 +1,15 @@
+* {
+  all: unset;
+}
+
+.panel-card {
+  background: $surface-raised;
+  border: 1px solid rgba($border-base, 0.8);
+  color: $text-primary;
+  font-family: $font-sans;
+}
+
+.panel-divider {
+  background: $border-base;
+  min-height: 1px;
+}

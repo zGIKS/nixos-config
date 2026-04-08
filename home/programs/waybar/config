@@ -4,7 +4,7 @@
   "height": 32,
   "spacing": 4,
   "fixed-center": true,
-  "modules-left": ["custom/settings", "tray"],
+  "modules-left": ["custom/power-menu", "tray"],
   "modules-center": ["sway/workspaces"],
   "modules-right": [
     "network",
@@ -91,7 +91,7 @@
   "clock": {
     "format": "󰥔 {:%I:%M %p}",
     "tooltip-format": "{:%A, %B %d, %Y}",
-    "on-click": "sh ~/.config/eww/components/calendar/toggle.sh"
+    "on-click": "sh ~/.config/eww/scripts/calendar/toggle.sh"
   },
   "tray": {
     "icon-size": 16,
@@ -102,9 +102,9 @@
     "format": "󰍡",
     "tooltip": false
   },
-  "custom/settings": {
+  "custom/power-menu": {
     "format": "",
-    "on-click": "sh ~/.config/eww/components/settings/toggle.sh",
+    "on-click": "sh ~/.config/eww/scripts/power-menu/toggle.sh",
     "tooltip": false
   }
 }

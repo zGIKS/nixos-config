@@ -1,0 +1,57 @@
+.calendar-card {
+  background: $surface-base;
+  border-radius: $radius-md;
+  min-width: 320px;
+  padding: $space-md;
+}
+
+.calendar-inner {
+  background: transparent;
+  color: $text-primary;
+}
+
+calendar {
+  padding: $space-xs;
+}
+
+calendar:selected {
+  background-color: $text-primary;
+  color: $surface-base;
+  border-radius: $space-xs;
+}
+
+calendar.header {
+  color: $text-secondary;
+  font-weight: bold;
+}
+
+calendar.button {
+  color: $text-subtle;
+}
+
+calendar.highlight {
+  color: $accent;
+}
+
+.info-section {
+  padding: 0 $space-xs;
+}
+
+.info-item {
+  margin: $space-xs 0;
+}
+
+.info-label {
+  color: $text-muted;
+  font-size: 14px;
+}
+
+.info-value {
+  color: $text-primary;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.calendar-card .panel-divider {
+  margin: $space-md 0;
+}
