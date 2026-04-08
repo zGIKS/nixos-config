@@ -9,5 +9,4 @@ if eww active-windows 2>/dev/null | grep -Eq '^settings:'; then
   sh ~/.config/eww/components/settings/close.sh
 else
   eww open settings >/dev/null 2>&1
-  swaymsg mode settings >/dev/null 2>&1 || true
 fi
