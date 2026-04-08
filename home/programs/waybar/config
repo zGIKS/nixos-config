@@ -9,6 +9,7 @@
   "modules-right": [
     "network",
     "pulseaudio",
+    "pulseaudio#microphone",
     "backlight",
     "battery",
     "custom/notifications",
@@ -46,7 +47,9 @@
     "format-wifi": "󰤨",
     "format-ethernet": "󰈀",
     "format-disconnected": "󰤭",
-    "tooltip-format-wifi": "{essid} ({signalStrength}%)"
+    "tooltip-format-wifi": "{essid} ({signalStrength}%)",
+    "tooltip-format-ethernet": "{ifname}",
+    "tooltip-format-disconnected": "Sin conexion"
   },
   "backlight": {
     "format": "{icon} {percent}%",
@@ -57,6 +60,16 @@
     "format": "{icon} {volume}%",
     "format-icons": [ "󰕿", "󰖀", "󰕾" ],
     "format-muted": "󰖁",
+    "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+    "tooltip": false
+  },
+  "pulseaudio#microphone": {
+    "format": "{format_source}",
+    "format-source": "󰍬",
+    "format-source-muted": "󰍭",
+    "on-click": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle",
+    "on-scroll-up": "true",
+    "on-scroll-down": "true",
     "tooltip": false
   },
   "battery": {
