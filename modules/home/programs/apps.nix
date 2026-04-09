@@ -36,6 +36,7 @@ in
       slurp
       sway-contrib.grimshot
       swappy
+      wdisplays
       yazi
       wl-clipboard
       wofi
@@ -47,6 +48,8 @@ in
     ]
     ++ lib.optionals cfg.media.enable [
       discord
+      mpv
+      obs-studio
       spotify
     ]
     ++ lib.optionals cfg.documents.enable [
