@@ -36,6 +36,11 @@
 
   networking.hostName = hostName;
   networking.networkmanager.enable = true;
+  services.resolved.enable = true;
+  services.mullvad-vpn = {
+    enable = true;
+    package = pkgs.mullvad-vpn;
+  };
 
   hardware.bluetooth = {
     enable = true;
