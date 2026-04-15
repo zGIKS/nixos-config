@@ -1,4 +1,4 @@
-{ config, lib, pkgs, roles, ... }:
+{ config, lib, pkgs, pomodog, roles, ... }:
 
 let
   cfg = config.myHome.apps;
@@ -26,7 +26,10 @@ in
   };
 
   config.home.packages = with pkgs;
-    lib.optionals cfg.base.enable [
+    [
+      pomodog.packages.${pkgs.system}.default
+    ]
+    ++ lib.optionals cfg.base.enable [
       brightnessctl
       grim
       gsimplecal
@@ -50,6 +53,7 @@ in
       discord
       mpv
       obs-studio
+      rustdesk
       spotify
     ]
     ++ lib.optionals cfg.documents.enable [

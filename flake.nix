@@ -11,9 +11,13 @@
       url = "github:zGIKS/nit";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    pomodog = {
+      url = "github:zGIKS/pomodog";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { nixpkgs, home-manager, nit, ... }:
+  outputs = { nixpkgs, home-manager, nit, pomodog, ... }:
     let
       system = "x86_64-linux";
       username = "giks";
@@ -35,7 +39,7 @@
           let
             specialArgs = {
               inherit username hostName homeLib;
-              inherit nit;
+              inherit nit pomodog;
               inherit (hostConfig) roles keyboardLayout;
             };
           in

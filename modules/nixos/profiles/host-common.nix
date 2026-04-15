@@ -115,6 +115,8 @@
       "nvidia-persistenced"
       "nvidia-persistenced-1.0"
       "brave"
+      "libsciter"
+      "rustdesk"
     ];
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
