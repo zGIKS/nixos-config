@@ -1,0 +1,20 @@
+(defwindow calendar
+  :monitor 0
+  :stacking "overlay"
+  :geometry (geometry :x "12px"
+                      :y "44px"
+                      :anchor "top right")
+  (calendar_widget))
+
+(defwidget calendar_widget []
+  (box :class "calendar-card panel-card" :orientation "v" :space-evenly false
+    (box :class "calendar-container"
+      (calendar :class "calendar-inner"))
+    (box :class "panel-divider")
+    (box :class "info-section" :orientation "v" :spacing 12 :space-evenly false
+      (box :class "info-item" :orientation "h" :space-evenly false
+        (label :class "info-label" :text "Season" :halign "start" :hexpand true)
+        (label :class "info-value" :text season :halign "end"))
+      (box :class "info-item" :orientation "h" :space-evenly false
+        (label :class "info-label" :text "Location" :halign "start" :hexpand true)
+        (label :class "info-value" :text location :halign "end")))))

@@ -1,4 +1,4 @@
-{ config, lib, pkgs, roles, ... }:
+{ config, lib, pkgs, pomodog, roles, ... }:
 
 let
   cfg = config.myHome.apps;
@@ -26,16 +26,20 @@ in
   };
 
   config.home.packages = with pkgs;
-    lib.optionals cfg.base.enable [
+    [
+      pomodog.packages.${pkgs.system}.default
+    ]
+    ++ lib.optionals cfg.base.enable [
       brightnessctl
       grim
       gsimplecal
-      nautilus
+      xfce.thunar
       pavucontrol
       playerctl
       slurp
       sway-contrib.grimshot
       swappy
+      wdisplays
       yazi
       wl-clipboard
       wofi
@@ -47,6 +51,9 @@ in
     ]
     ++ lib.optionals cfg.media.enable [
       discord
+      mpv
+      obs-studio
+      rustdesk
       spotify
     ]
     ++ lib.optionals cfg.documents.enable [

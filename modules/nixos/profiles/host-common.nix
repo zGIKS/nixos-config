@@ -36,6 +36,11 @@
 
   networking.hostName = hostName;
   networking.networkmanager.enable = true;
+  services.resolved.enable = true;
+  services.mullvad-vpn = {
+    enable = true;
+    package = pkgs.mullvad-vpn;
+  };
 
   hardware.bluetooth = {
     enable = true;
@@ -110,6 +115,8 @@
       "nvidia-persistenced"
       "nvidia-persistenced-1.0"
       "brave"
+      "libsciter"
+      "rustdesk"
     ];
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 

@@ -1,0 +1,44 @@
+.power-menu-backdrop {
+  background: transparent;
+}
+
+.power-menu-card {
+  border-radius: $radius-xl;
+  padding: $space-2xl;
+}
+
+.power-menu-container {
+  min-width: 520px;
+}
+
+.power-menu-button {
+  background: $surface-muted;
+  border: 1px solid $border-base;
+  border-radius: $radius-lg;
+  min-height: 176px;
+  min-width: 156px;
+  padding: $space-xl;
+  transition: all 0.2s ease;
+}
+
+.power-menu-button:hover {
+  background: $surface-hover;
+  border-color: $border-strong;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
+}
+
+.power-menu-button:focus {
+  background: $surface-hover;
+  border-color: $border-strong;
+}
+
+.power-menu-button-icon {
+  color: $text-primary;
+  font-size: 52px;
+}
+
+.power-menu-button-label {
+  color: $text-secondary;
+  font-size: 15px;
+  font-weight: 500;
+}
