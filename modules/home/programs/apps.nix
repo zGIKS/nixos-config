@@ -33,7 +33,7 @@ in
       brightnessctl
       grim
       gsimplecal
-      nautilus
+      xfce.thunar
       pavucontrol
       playerctl
       slurp
