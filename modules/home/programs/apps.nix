@@ -53,7 +53,7 @@ in
       discord
       mpv
       obs-studio
-      rustdesk
+      rustdesk-flutter
       spotify
     ]
     ++ lib.optionals cfg.documents.enable [
