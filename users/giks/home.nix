@@ -25,6 +25,8 @@
     enable = true;
   };
 
+  myHome.apps.devGui.enable = true;
+
   home.sessionVariables = {
     BROWSER = "brave";
   };
