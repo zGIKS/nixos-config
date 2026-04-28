@@ -6,6 +6,10 @@
     ../../modules/nixos/profiles/host-common.nix
   ];
 
+  nixpkgs.config.permittedInsecurePackages = [
+    "beekeeper-studio-5.3.4"
+  ];
+
   services.asusd = {
     enable = true;
     enableUserService = true;
@@ -48,5 +52,6 @@
 
   environment.systemPackages = with pkgs; [
     supergfxctl
+    beekeeper-studio
   ];
 }

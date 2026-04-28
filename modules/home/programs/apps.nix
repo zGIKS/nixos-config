@@ -58,7 +58,6 @@ in
     ]
     ++ lib.optionals cfg.documents.enable [
       typora
-      kdePackages.okular
     ]
     ++ lib.optionals cfg.devGui.enable [
       jetbrains.idea
