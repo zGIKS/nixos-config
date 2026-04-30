@@ -60,7 +60,6 @@ in
       typora
     ]
     ++ lib.optionals cfg.devGui.enable [
-      jetbrains.idea
       jetbrains.datagrip
       android-studio
     ]

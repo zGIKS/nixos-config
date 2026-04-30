@@ -102,7 +102,6 @@
       "google-chrome"
       "discord"
       "spotify"
-      "idea"
       "datagrip"
       "android-studio-stable"
       "typora"
