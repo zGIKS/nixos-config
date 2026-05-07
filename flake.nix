@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     home-manager = {
       url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -17,12 +18,16 @@
     };
   };
 
-  outputs = { nixpkgs, home-manager, nit, pomodog, ... }:
+  outputs = { nixpkgs, nixpkgs-unstable, home-manager, nit, pomodog, ... }:
     let
       system = "x86_64-linux";
       username = "giks";
       hosts = import ./hosts;
       homeLib = import ./modules/home/lib.nix { };
+      pkgsUnstable = import nixpkgs-unstable {
+        inherit system;
+        config.allowUnfree = true;
+      };
       hostConfigs = {
         gramnyx = {
           roles = [ "desktop" "dev" ];
@@ -47,6 +52,14 @@
             inherit system specialArgs;
             modules = [
               hosts.${hostName}
+              {
+                nixpkgs.overlays = [
+                  (final: prev: {
+                    vscode = pkgsUnstable.vscode;
+                    vscode-fhs = pkgsUnstable.vscode-fhs;
+                  })
+                ];
+              }
               home-manager.nixosModules.home-manager
               {
                 home-manager.useGlobalPkgs = true;
