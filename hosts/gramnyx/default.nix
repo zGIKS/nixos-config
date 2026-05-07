@@ -29,6 +29,7 @@
 
   myModules.profiles.core.enable = true;
   myModules.desktop.sway.enable = lib.elem "desktop" roles;
+  platform.services.docker.enable = lib.elem "dev" roles;
 
   myModules.profiles.dev = {
     enable = lib.elem "dev" roles;
