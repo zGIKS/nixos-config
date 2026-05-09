@@ -93,9 +93,12 @@
     supergfxctl
     beekeeper-studio
     gnome-software
+    R
+    rstudio
   ];
 
   nixpkgs.config.permittedInsecurePackages = [
     "beekeeper-studio-5.3.4"
+    "electron-38.8.4"
   ];
 }
