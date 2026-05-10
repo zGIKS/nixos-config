@@ -1,4 +1,4 @@
-{ lib, username, roles, keyboardLayout, ... }:
+{ config, lib, username, roles, keyboardLayout, ... }:
 
 {
   imports = [
@@ -9,6 +9,8 @@
     ../../modules/hardware/bluetooth.nix
     ../../modules/networking/base.nix
     ../../modules/networking/vpn.nix
+    ../../modules/networking/cloudflare-tunnel.nix
+    ../../modules/networking/tailscale.nix
     ../../modules/services/pipewire.nix
     ../../modules/services/printing.nix
     ../../modules/services/keyring.nix
@@ -40,4 +42,13 @@
 
   networking.hostName = "gramnyx";
   services.xserver.xkb.layout = keyboardLayout;
+
+  boot.loader.grub.extraEntries = ''
+    menuentry "Windows 11" {
+      insmod part_gpt
+      insmod fat
+      search --no-floppy --file --set=root /EFI/Microsoft/Boot/bootmgfw.efi
+      chainloader /EFI/Microsoft/Boot/bootmgfw.efi
+    }
+  '';
 }
