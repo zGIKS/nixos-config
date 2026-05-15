@@ -93,8 +93,6 @@
     supergfxctl
     beekeeper-studio
     gnome-software
-    R
-    rstudio
   ];
 
   nixpkgs.config.permittedInsecurePackages = [
