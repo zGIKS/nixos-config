@@ -2,5 +2,5 @@
 
 {
   services.flatpak.enable = true;
-  services.packagekit.enable = true;
+  services.packagekit.enable = false;
 }

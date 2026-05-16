@@ -65,7 +65,7 @@ in
       google-chrome
     ]
     ++ lib.optionals cfg.media.enable [
-      discord
+      discord-ptb
       mpv
       obs-studio
       rustdesk-flutter

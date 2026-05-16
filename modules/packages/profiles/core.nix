@@ -11,6 +11,7 @@
       fish
       gh
       git
+      htop
       neovim
       nano
       os-prober
