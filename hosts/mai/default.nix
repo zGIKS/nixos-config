@@ -9,6 +9,7 @@
     ../../modules/hardware/bluetooth.nix
     ../../modules/networking/base.nix
     ../../modules/networking/vpn.nix
+    ../../modules/networking/tailscale.nix
     ../../modules/services/pipewire.nix
     ../../modules/services/printing.nix
     ../../modules/services/keyring.nix
