@@ -51,4 +51,7 @@
       chainloader /EFI/Microsoft/Boot/bootmgfw.efi
     }
   '';
+
+  # Install heavier GUI dev apps via Home Manager on this host.
+  home-manager.users.${username}.myHome.apps.devGui.enable = true;
 }
