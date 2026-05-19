@@ -76,6 +76,7 @@ in
     ]
     ++ lib.optionals cfg.devGui.enable [
       jetbrains.datagrip
+      jetbrains.idea
       android-studio
     ]
     ++ lib.optionals cfg.devTools.enable [

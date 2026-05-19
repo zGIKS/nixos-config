@@ -91,12 +91,9 @@
   # Host-specific packages
   environment.systemPackages = with pkgs; [
     supergfxctl
-    beekeeper-studio
     gnome-software
   ];
 
-  nixpkgs.config.permittedInsecurePackages = [
-    "beekeeper-studio-5.3.4"
-    "electron-38.8.4"
-  ];
+  # Install heavier GUI dev apps via Home Manager on this host.
+  home-manager.users.${username}.myHome.apps.devGui.enable = true;
 }

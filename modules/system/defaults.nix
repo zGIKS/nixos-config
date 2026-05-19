@@ -9,16 +9,17 @@
     let 
       name = lib.getName pkg;
     in 
-    builtins.elem name [
-      "google-chrome"
-      "discord"
-      "spotify"
-      "datagrip"
-      "android-studio-stable"
-      "typora"
-      "vscode"
-      "wpsoffice"
-      "corefonts"
+      builtins.elem name [
+        "google-chrome"
+        "discord"
+        "spotify"
+        "datagrip"
+        "idea"
+        "android-studio-stable"
+        "typora"
+        "vscode"
+        "wpsoffice"
+        "corefonts"
       "vista-fonts"
       "symbola"
       "nvidia-x11"
