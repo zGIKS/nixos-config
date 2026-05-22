@@ -91,11 +91,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1775593523,
-        "narHash": "sha256-6Mc/DW/c8rwsXcvlHEVcA82WurA8WofvYWhfq/jxbzE=",
+        "lastModified": 1779475997,
+        "narHash": "sha256-JzcAjUchl9M8yjpVLrgjIg1ReSNGa1sfNYHEywl8+Js=",
         "owner": "zGIKS",
         "repo": "nit",
-        "rev": "b91dee8373927a76d6a5d1a0992f21dfa3a916dd",
+        "rev": "ce7da0dd0b3e69d3675b4f5ac79a2157a4d85a75",
         "type": "github"
       },
       "original": {

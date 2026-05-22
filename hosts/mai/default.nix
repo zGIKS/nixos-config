@@ -15,6 +15,8 @@
     ../../modules/services/keyring.nix
     ../../modules/services/flatpak.nix
     ../../modules/services/asus.nix
+    ../../modules/hardware/nvidia.nix
+    ../../modules/kernel/memory.nix
     ../../modules/packages/profiles/core.nix
     ../../modules/packages/profiles/desktop.nix
     ../../modules/packages/profiles/fonts.nix
@@ -45,29 +47,14 @@
   networking.hostName = "mai";
   services.xserver.xkb.layout = keyboardLayout;
 
-  # ASUS / NVIDIA session workarounds
-  programs.sway.extraOptions = [ "--unsupported-gpu" ];
-  environment.sessionVariables.WLR_NO_HARDWARE_CURSORS = "1";
+  # Hardware layer activation
+  myModules.hardware.nvidia.enable = true;
+  myModules.kernel.memory.enable = true;
 
-  hardware.graphics = {
+  # Services layer activation
+  myModules.services.asus = {
     enable = true;
-    enable32Bit = true;
-  };
-
-  services.xserver.videoDrivers = [ "nvidia" ];
-
-  hardware.nvidia = {
-    modesetting.enable = true;
-    open = false;
-    nvidiaSettings = true;
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
-
-    prime = {
-      offload.enable = true;
-      offload.enableOffloadCmd = true;
-      intelBusId = "PCI:0:2:0";
-      nvidiaBusId = "PCI:1:0:0";
-    };
+    rogControlCenter.enable = true;
   };
 
   # Dual-boot Windows (host-specific)
@@ -91,7 +78,6 @@
 
   # Host-specific packages
   environment.systemPackages = with pkgs; [
-    supergfxctl
   ];
 
   # Install heavier GUI dev apps via Home Manager on this host.
