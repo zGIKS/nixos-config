@@ -92,7 +92,6 @@
   # Host-specific packages
   environment.systemPackages = with pkgs; [
     supergfxctl
-    gnome-software
   ];
 
   # Install heavier GUI dev apps via Home Manager on this host.
