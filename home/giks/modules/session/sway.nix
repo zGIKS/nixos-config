@@ -30,6 +30,10 @@ let
 
 in
 {
+  imports = [
+    ./sway/workspace-layout.nix
+  ];
+
   xdg.configFile = (platformLib.mkConfigLinks (
     lib.optionals (lib.elem "desktop" roles) swayConfigFiles
   )) // lib.optionalAttrs (lib.elem "desktop" roles) {
