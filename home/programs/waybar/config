@@ -90,7 +90,7 @@
   },
   "clock": {
     "format": "󰥔 {:%I:%M %p}",
-    "tooltip-format": "{:%A, %B %d, %Y}",
+    "tooltip": false,
     "on-click": "sh ~/.config/eww/scripts/calendar/toggle.sh"
   },
   "tray": {
