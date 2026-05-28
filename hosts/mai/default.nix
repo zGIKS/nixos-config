@@ -28,12 +28,14 @@
   ]
   ++ lib.optionals (lib.elem "dev" roles) [
     ../../modules/packages/profiles/dev.nix
+    ../../modules/services/android-debugging.nix
     ../../modules/services/docker.nix
   ];
 
   # Shared module activations
   myModules.profiles.core.enable = true;
   myModules.desktop.sway.enable = lib.elem "desktop" roles;
+  platform.services.androidDebugging.enable = lib.elem "dev" roles;
   platform.services.docker.enable = lib.elem "dev" roles;
 
   myModules.profiles.dev = {
