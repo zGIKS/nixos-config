@@ -36,7 +36,6 @@
   myModules.profiles.dev = {
     enable = lib.elem "dev" roles;
     latex.enable = lib.elem "dev" roles;
-    java.enable = lib.elem "dev" roles;
     lsp.enable = lib.elem "dev" roles;
   };
 
