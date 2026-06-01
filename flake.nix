@@ -54,11 +54,11 @@
         };
     in {
       nixosConfigurations = {
-        gramnyx = mkHost "gramnyx" {
+        gaia = mkHost "gaia" {
           roles = [ "desktop" "dev" ];
           keyboardLayout = "latam";
         };
-        mai = mkHost "mai" {
+        aurora = mkHost "aurora" {
           roles = [ "desktop" "dev" ];
           keyboardLayout = "us";
         };

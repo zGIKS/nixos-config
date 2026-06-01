@@ -40,7 +40,7 @@
     lsp.enable = lib.elem "dev" roles;
   };
 
-  networking.hostName = "gramnyx";
+  networking.hostName = "gaia";
   services.xserver.xkb.layout = keyboardLayout;
 
   boot.loader.grub.extraEntries = ''

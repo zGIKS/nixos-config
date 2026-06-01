@@ -46,7 +46,7 @@
   };
 
   # Host-specific facts
-  networking.hostName = "mai";
+  networking.hostName = "aurora";
   services.xserver.xkb.layout = keyboardLayout;
 
   # Hardware layer activation
