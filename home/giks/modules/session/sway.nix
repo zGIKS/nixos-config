@@ -26,6 +26,10 @@ let
       target = "sway/config.d/outputs.conf";
       source = ../../../../home/programs/sway/config.d/outputs.conf;
     }
+    {
+      target = "sway/config.d/gestures.conf";
+      source = ../../../../home/programs/sway/config.d/gestures.conf;
+    }
   ];
 
 in
