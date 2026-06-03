@@ -153,10 +153,38 @@ let
       esac
     '';
   };
+
+  swayWorkspaceCycle = pkgs.writeShellApplication {
+    name = "sway-workspace-cycle";
+    runtimeInputs = with pkgs; [ jq sway ];
+    text = ''
+      set -euo pipefail
+
+      direction="''${1:-}"
+      if [[ "$direction" != "next" && "$direction" != "prev" ]]; then
+        printf 'usage: %s {next|prev}\n' "$(basename "$0")" >&2
+        exit 2
+      fi
+
+      current=$(swaymsg -t get_workspaces --raw | jq '.[] | select(.focused) | .num // empty')
+      if [[ -z "$current" ]]; then
+        current=1
+      fi
+
+      if [[ "$direction" == "next" ]]; then
+        target=$(( current >= 9 ? 1 : current + 1 ))
+      else
+        target=$(( current <= 1 ? 9 : current - 1 ))
+      fi
+
+      swaymsg --quiet "workspace number $target"
+    '';
+  };
 in
 {
   config.home.packages =
     lib.optionals (lib.elem "desktop" roles) [
       swayWorkspaceLayout
+      swayWorkspaceCycle
     ];
 }
