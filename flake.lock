@@ -49,11 +49,11 @@
         "sops-nix": "sops-nix"
       },
       "locked": {
-        "lastModified": 1780969688,
-        "narHash": "sha256-Y95gkgbmA4IIKjefglpf1t/mv7ufAaKADClDkWKHxvE=",
+        "lastModified": 1781029595,
+        "narHash": "sha256-aJ58EHohzzca8q1nO+up2djtQOAvQHencrcBzDxWTbU=",
         "ref": "main",
-        "rev": "7cce5e81c81fdd593379ac3ccacb74e2642efe66",
-        "revCount": 5,
+        "rev": "d1709f055803f3c83dc7168d7aef0e02a33c18eb",
+        "revCount": 9,
         "type": "git",
         "url": "ssh://git@github.com/zGIKS/flare"
       },
