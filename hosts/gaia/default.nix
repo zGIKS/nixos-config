@@ -42,6 +42,8 @@
     lsp.enable = lib.elem "dev" roles;
   };
 
+  sops.defaultSopsFile = ./secrets/secrets.yaml;
+
   networking.hostName = "gaia";
   services.xserver.xkb.layout = keyboardLayout;
 
