@@ -38,14 +38,12 @@
       mkHost = hostName: { roles, keyboardLayout }:
         let
           specialArgs = {
-            inherit username hostName platformLib nit pomodog roles keyboardLayout;
+            inherit username hostName platformLib nit pomodog roles keyboardLayout flare;
           };
         in
         nixpkgs.lib.nixosSystem {
           inherit system specialArgs;
           modules = [
-            flare.nixosModules.sops
-            flare.nixosModules.gaia
             ./hosts/${hostName}
             { nixpkgs.overlays = [ overlays.default ]; }
             home-manager.nixosModules.home-manager

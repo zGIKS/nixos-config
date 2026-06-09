@@ -1,7 +1,9 @@
-{ config, lib, username, roles, keyboardLayout, ... }:
+{ config, lib, username, roles, keyboardLayout, flare, ... }:
 
 {
   imports = [
+    flare.nixosModules.sops
+    flare.nixosModules.gaia
     ./hardware-configuration.nix
 
     ../../modules/system/defaults.nix
