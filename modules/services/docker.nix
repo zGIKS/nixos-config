@@ -8,10 +8,11 @@ in
 
   config = lib.mkIf cfg.enable {
     virtualisation.docker.enable = true;
+    virtualisation.docker.package = pkgs.docker_29;
     users.extraGroups.docker.members = [ username ];
 
     environment.systemPackages = with pkgs; [
-      docker
+      docker_29
       docker-buildx
       docker-compose
     ];

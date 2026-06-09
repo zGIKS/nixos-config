@@ -9,7 +9,6 @@
     ../../modules/hardware/bluetooth.nix
     ../../modules/networking/base.nix
     ../../modules/networking/vpn.nix
-    ../../modules/networking/cloudflare-tunnel.nix
     ../../modules/networking/tailscale.nix
     ../../modules/services/pipewire.nix
     ../../modules/services/printing.nix

@@ -4,6 +4,10 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
+    flare = {
+      url = "git+ssh://git@github.com/zGIKS/flare?ref=main";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     home-manager = {
       url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -18,7 +22,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, nit, pomodog, ... }:
+  outputs = { self, nixpkgs, nixpkgs-unstable, flare, home-manager, nit, pomodog, ... }:
     let
       system = "x86_64-linux";
       username = "giks";
@@ -40,6 +44,8 @@
         nixpkgs.lib.nixosSystem {
           inherit system specialArgs;
           modules = [
+            flare.nixosModules.sops
+            flare.nixosModules.gaia
             ./hosts/${hostName}
             { nixpkgs.overlays = [ overlays.default ]; }
             home-manager.nixosModules.home-manager
