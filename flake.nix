@@ -4,8 +4,8 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
-    flare = {
-      url = "git+ssh://git@github.com/zGIKS/flare?ref=main";
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     home-manager = {
@@ -22,7 +22,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, flare, home-manager, nit, pomodog, ... }:
+  outputs = { self, nixpkgs, nixpkgs-unstable, sops-nix, home-manager, nit, pomodog, ... }:
     let
       system = "x86_64-linux";
       username = "giks";
@@ -38,7 +38,7 @@
       mkHost = hostName: { roles, keyboardLayout }:
         let
           specialArgs = {
-            inherit username hostName platformLib nit pomodog roles keyboardLayout flare;
+            inherit username hostName platformLib nit pomodog roles keyboardLayout sops-nix;
           };
         in
         nixpkgs.lib.nixosSystem {

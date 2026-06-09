@@ -1,10 +1,12 @@
-{ config, lib, username, roles, keyboardLayout, flare, ... }:
+{ config, lib, username, roles, keyboardLayout, ... }:
 
 {
   imports = [
-    flare.nixosModules.sops
-    flare.nixosModules.gaia
+    ../../modules/system/sops.nix
+    ../../modules/services/cloudflared.nix
     ./hardware-configuration.nix
+    ./networking.nix
+    ./services
 
     ../../modules/system/defaults.nix
     ../../modules/kernel/boot.nix
