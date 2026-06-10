@@ -8,11 +8,11 @@ in
     enable = lib.mkEnableOption "git defaults";
     userName = lib.mkOption {
       type = lib.types.str;
-      default = username;
+      default = "zGIKS";
     };
     userEmail = lib.mkOption {
       type = lib.types.str;
-      default = "${username}@localhost";
+      default = "166082577+zGIKS@users.noreply.github.com";
     };
     signingKey = lib.mkOption {
       type = lib.types.str;
