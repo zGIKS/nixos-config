@@ -5,7 +5,6 @@
     ../../modules/system/sops.nix
     ../../modules/services/cloudflared.nix
     ./hardware-configuration.nix
-    ./networking.nix
     ./services
 
     ../../modules/system/defaults.nix
