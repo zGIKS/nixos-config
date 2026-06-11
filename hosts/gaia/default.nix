@@ -1,10 +1,11 @@
-{ config, lib, username, roles, keyboardLayout, flare, ... }:
+{ config, lib, username, roles, keyboardLayout, ... }:
 
 {
   imports = [
-    flare.nixosModules.sops
-    flare.nixosModules.gaia
+    ../../modules/system/sops.nix
+    ../../modules/services/cloudflared.nix
     ./hardware-configuration.nix
+    ./services
 
     ../../modules/system/defaults.nix
     ../../modules/kernel/boot.nix
@@ -39,6 +40,8 @@
     latex.enable = lib.elem "dev" roles;
     lsp.enable = lib.elem "dev" roles;
   };
+
+  sops.defaultSopsFile = ./secrets/secrets.yaml;
 
   networking.hostName = "gaia";
   services.xserver.xkb.layout = keyboardLayout;
