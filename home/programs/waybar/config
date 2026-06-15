@@ -105,7 +105,7 @@
     "tooltip": false
   },
   "custom/power-menu": {
-    "format": "",
+    "format": "" ,
     "on-click": "sh ~/.config/eww/scripts/power-menu/toggle.sh",
     "tooltip": false
   }

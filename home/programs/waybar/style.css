@@ -65,6 +65,7 @@ window#waybar {
   border: 1px solid #27272a; /* Zinc 800 */
   color: #fafafa;
   border-radius: 6px;
+  font-family: "Material Design Icons", "JetBrainsMono Nerd Font", sans-serif;
 }
 
 /* Hover sutil para los módulos */
