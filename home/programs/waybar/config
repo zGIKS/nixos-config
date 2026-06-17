@@ -96,9 +96,9 @@
     "on-click": "sh ~/.config/eww/scripts/calendar/toggle.sh"
   },
   "tray": {
-    "icon-size": 16,
+    "icon-size": 14,
     "show-passive-items": true,
-    "spacing": 10
+    "spacing": 4
   },
   "custom/notifications": {
     "format": "󰍡",
