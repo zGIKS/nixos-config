@@ -4,7 +4,7 @@
   "height": 32,
   "spacing": 4,
   "fixed-center": true,
-  "modules-left": ["custom/power-menu", "tray"],
+  "modules-left": ["image#power-menu", "tray"],
   "modules-center": ["sway/workspaces"],
   "modules-right": [
     "network",
@@ -104,8 +104,9 @@
     "format": "󰍡",
     "tooltip": false
   },
-  "custom/power-menu": {
-    "format": "" ,
+  "image#power-menu": {
+    "path": "/home/giks/.config/waybar/icons/nixos.svg",
+    "size": 18,
     "on-click": "sh ~/.config/eww/scripts/power-menu/toggle.sh",
     "tooltip": false
   }
