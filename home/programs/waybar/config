@@ -1,8 +1,8 @@
 {
   "layer": "top",
   "position": "top",
-  "height": 32,
-  "spacing": 4,
+  "height": 38,
+  "spacing": 6,
   "fixed-center": true,
   "modules-left": ["image#power-menu", "tray"],
   "modules-center": ["sway/workspaces"],
