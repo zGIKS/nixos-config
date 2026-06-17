@@ -57,12 +57,15 @@ window#waybar {
   font-family: "Material Design Icons", "JetBrainsMono Nerd Font", sans-serif;
 }
 
+#tray {
+  padding: 2px 8px;
+}
+
 #battery:hover,
 #clock:hover,
 #pulseaudio:hover,
 #network:hover,
 #backlight:hover,
-#tray:hover,
 #custom-notifications:hover,
 #image.power-menu:hover {
   background: #27272a;
