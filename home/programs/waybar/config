@@ -1,10 +1,10 @@
 {
   "layer": "top",
   "position": "top",
-  "height": 32,
-  "spacing": 4,
+  "height": 38,
+  "spacing": 6,
   "fixed-center": true,
-  "modules-left": ["custom/power-menu", "tray"],
+  "modules-left": ["image#power-menu", "tray"],
   "modules-center": ["sway/workspaces"],
   "modules-right": [
     "network",
@@ -96,16 +96,17 @@
     "on-click": "sh ~/.config/eww/scripts/calendar/toggle.sh"
   },
   "tray": {
-    "icon-size": 16,
+    "icon-size": 14,
     "show-passive-items": true,
-    "spacing": 10
+    "spacing": 8
   },
   "custom/notifications": {
     "format": "󰍡",
     "tooltip": false
   },
-  "custom/power-menu": {
-    "format": "",
+  "image#power-menu": {
+    "path": "/home/giks/.config/waybar/icons/nixos.svg",
+    "size": 18,
     "on-click": "sh ~/.config/eww/scripts/power-menu/toggle.sh",
     "tooltip": false
   }

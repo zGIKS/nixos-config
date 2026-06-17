@@ -10,6 +10,10 @@ let
       target = "waybar/style.css";
       source = ../../../../home/programs/waybar/style.css;
     }
+    {
+      target = "waybar/icons/nixos.svg";
+      source = ../../../../home/programs/waybar/icons/nixos.svg;
+    }
   ];
 in
 {
