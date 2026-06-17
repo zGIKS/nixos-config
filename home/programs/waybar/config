@@ -98,7 +98,7 @@
   "tray": {
     "icon-size": 14,
     "show-passive-items": true,
-    "spacing": 4
+    "spacing": 8
   },
   "custom/notifications": {
     "format": "󰍡",
