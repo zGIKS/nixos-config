@@ -7,5 +7,5 @@
 
 ## TODO
 
-- Arreglar el icono de NixOS porque no sale bien.
+- Arreglar el icono de NixOS porque no sale bien. (done pero tengo que arreglar el espaciado xd)
 - O cambiar de estilo de Waybar si sigue viendose mal.
