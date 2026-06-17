@@ -2,7 +2,7 @@
   border: none;
   border-radius: 0;
   min-height: 0;
-  font-family: "JetBrainsMono Nerd Font", sans-serif;
+  font-family: "JetBrainsMono Nerd Font", "Inter", sans-serif;
   font-size: 15px;
 }
 
@@ -54,6 +54,7 @@ window#waybar {
   background: #18181b;
   color: #fafafa;
   border-radius: 6px;
+  font-family: "Material Design Icons", "JetBrainsMono Nerd Font", sans-serif;
 }
 
 #battery:hover,
