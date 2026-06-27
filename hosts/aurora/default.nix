@@ -3,6 +3,7 @@
 {
   imports = [
     ./hardware-configuration.nix
+    ./services/default.nix
 
     ../../modules/system/defaults.nix
     ../../modules/kernel/boot.nix
@@ -83,9 +84,7 @@
   ];
 
   # Host-specific packages
-  environment.systemPackages = with pkgs; [
-    alsa-utils
-  ];
+  environment.systemPackages = with pkgs; [ ];
 
   # Install heavier GUI dev apps via Home Manager on this host.
   home-manager.users.${username}.myHome.apps.devGui.enable = true;
