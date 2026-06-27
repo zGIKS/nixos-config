@@ -51,6 +51,11 @@
   # Hardware layer activation
   myModules.hardware.nvidia.enable = true;
   myModules.kernel.memory.enable = true;
+  hardware.alsa.enablePersistence = true;
+  boot.extraModprobeConfig = ''
+    # ASUS ROG Strix G614JI internal speakers can fail to wake without this quirk.
+    options snd-hda-intel model=1043:1c9f
+  '';
 
   # Services layer activation
   myModules.services.asus = {
@@ -79,6 +84,7 @@
 
   # Host-specific packages
   environment.systemPackages = with pkgs; [
+    alsa-utils
   ];
 
   # Install heavier GUI dev apps via Home Manager on this host.
