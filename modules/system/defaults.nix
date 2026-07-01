@@ -23,6 +23,7 @@
       "vista-fonts"
       "symbola"
       "nvidia-x11"
+      "nvidia-kernel-modules"
       "nvidia-settings"
       "nvidia-persistenced"
       "nvidia-persistenced-1.0"
