@@ -29,7 +29,6 @@ in
 
     services.asusd = {
       enable = true;
-      enableUserService = cfg.userService.enable;
     };
 
     services.supergfxd.enable = true;
