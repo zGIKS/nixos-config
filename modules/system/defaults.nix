@@ -15,7 +15,7 @@
         "spotify"
         "datagrip"
         "idea"
-        "android-studio-stable"
+        "android-studio"
         "typora"
         "vscode"
         "wpsoffice"

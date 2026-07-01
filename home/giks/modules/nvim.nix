@@ -22,9 +22,9 @@ in
     home.packages = with pkgs; [
       lua-language-server
       nil
-      nodePackages.typescript-language-server
-      nodePackages.bash-language-server
-      nodePackages.vscode-langservers-extracted
+      typescript-language-server
+      bash-language-server
+      vscode-langservers-extracted
       yaml-language-server
       pyright
       rust-analyzer
