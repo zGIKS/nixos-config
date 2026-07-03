@@ -1,4 +1,4 @@
-{ ... }:
+{ lib, pkgs, ... }:
 
 {
   boot.loader = {
@@ -15,4 +15,7 @@
     systemd-boot.enable = false;
     timeout = 3;
   };
+
+  # Track the latest stable kernel provided by the pinned nixpkgs.
+  boot.kernelPackages = lib.mkDefault pkgs.linuxPackages_latest;
 }
