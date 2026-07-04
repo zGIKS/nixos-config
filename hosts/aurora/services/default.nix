@@ -1,5 +1,5 @@
 {
   imports = [
-    ./audio-mixer-watch.nix
+    ./audio-jack-restore.nix
   ];
 }

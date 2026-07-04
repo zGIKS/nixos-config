@@ -3,10 +3,11 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ./services/default.nix
+    ./disk.nix
+    ./services
+    ./kernel
 
     ../../modules/system/defaults.nix
-    ../../modules/kernel/boot.nix
     ../../modules/hardware/bluetooth.nix
     ../../modules/networking/base.nix
     ../../modules/networking/vpn.nix
@@ -17,7 +18,6 @@
     ../../modules/services/flatpak.nix
     ../../modules/services/asus.nix
     ../../modules/hardware/nvidia.nix
-    ../../modules/kernel/memory.nix
     ../../modules/packages/profiles/core.nix
     ../../modules/packages/profiles/desktop.nix
     ../../modules/packages/profiles/fonts.nix
@@ -51,12 +51,6 @@
 
   # Hardware layer activation
   myModules.hardware.nvidia.enable = true;
-  myModules.kernel.memory.enable = true;
-  hardware.alsa.enablePersistence = true;
-  boot.extraModprobeConfig = ''
-    # ASUS ROG Strix G614JI internal speakers can fail to wake without this quirk.
-    options snd-hda-intel model=1043:1c9f
-  '';
 
   # Services layer activation
   myModules.services.asus = {

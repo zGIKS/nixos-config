@@ -1,4 +1,4 @@
-{ ... }:
+{ lib, pkgs, ... }:
 
 {
   boot.loader = {
@@ -15,4 +15,6 @@
     systemd-boot.enable = false;
     timeout = 3;
   };
+
+  boot.kernelPackages = lib.mkDefault pkgs.linuxPackages;
 }

@@ -3,15 +3,15 @@
 {
   imports = [
     ../../modules/system/sops.nix
-    ../../modules/services/cloudflared.nix
     ./hardware-configuration.nix
+    ./disk.nix
+    ../../modules/services/cloudflared.nix
     ./services
+    ./kernel
 
     ../../modules/system/defaults.nix
-    ../../modules/kernel/boot.nix
     ../../modules/hardware/bluetooth.nix
     ../../modules/networking/base.nix
-    ../../modules/networking/vpn.nix
     ../../modules/networking/tailscale.nix
     ../../modules/services/pipewire.nix
     ../../modules/services/printing.nix
@@ -41,7 +41,7 @@
     lsp.enable = lib.elem "dev" roles;
   };
 
-  sops.defaultSopsFile = ./secrets/secrets.yaml;
+  sops.defaultSopsFile = ../../secrets/gaia/secrets.yaml;
 
   networking.hostName = "gaia";
   services.xserver.xkb.layout = keyboardLayout;
