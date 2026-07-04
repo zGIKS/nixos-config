@@ -2,33 +2,31 @@
 
 {
   imports = [
-    ../../modules/system/sops.nix
-    ../../modules/services/cloudflared.nix
+    ../../modules/gaia/system/sops.nix
     ./hardware-configuration.nix
-    ./services
+    ../../modules/gaia/services
 
-    ../../modules/system/defaults.nix
-    ../../modules/kernel/boot.nix
-    ../../modules/hardware/bluetooth.nix
-    ../../modules/networking/base.nix
-    ../../modules/networking/vpn.nix
-    ../../modules/networking/tailscale.nix
-    ../../modules/services/pipewire.nix
-    ../../modules/services/printing.nix
-    ../../modules/services/keyring.nix
-    ../../modules/services/flatpak.nix
-    ../../modules/packages/profiles/core.nix
-    ../../modules/packages/profiles/desktop.nix
-    ../../modules/packages/profiles/fonts.nix
-    ../../modules/packages/volta.nix
-    ../../modules/session/sway.nix
-    ../../modules/session/display-manager.nix
-    ../../modules/session/portals.nix
-    ../../modules/users/giks.nix
+    ../../modules/shared/system/defaults.nix
+    ../../modules/gaia/kernel/boot.nix
+    ../../modules/shared/hardware/bluetooth.nix
+    ../../modules/shared/networking/base.nix
+    ../../modules/shared/networking/tailscale.nix
+    ../../modules/shared/services/pipewire.nix
+    ../../modules/shared/services/printing.nix
+    ../../modules/shared/services/keyring.nix
+    ../../modules/shared/services/flatpak.nix
+    ../../modules/shared/packages/profiles/core.nix
+    ../../modules/shared/packages/profiles/desktop.nix
+    ../../modules/shared/packages/profiles/fonts.nix
+    ../../modules/shared/packages/volta.nix
+    ../../modules/shared/session/sway.nix
+    ../../modules/shared/session/display-manager.nix
+    ../../modules/shared/session/portals.nix
+    ../../modules/shared/users/giks.nix
   ]
   ++ lib.optionals (lib.elem "dev" roles) [
-    ../../modules/packages/profiles/dev.nix
-    ../../modules/services/docker.nix
+    ../../modules/shared/packages/profiles/dev.nix
+    ../../modules/shared/services/docker.nix
   ];
 
   myModules.profiles.core.enable = true;
@@ -41,7 +39,7 @@
     lsp.enable = lib.elem "dev" roles;
   };
 
-  sops.defaultSopsFile = ./secrets/secrets.yaml;
+  sops.defaultSopsFile = ../../secrets/gaia/secrets.yaml;
 
   networking.hostName = "gaia";
   services.xserver.xkb.layout = keyboardLayout;
