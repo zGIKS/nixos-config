@@ -2,12 +2,14 @@
 
 {
   imports = [
-    ../../modules/gaia/system/sops.nix
+    ../../modules/shared/system/sops.nix
     ./hardware-configuration.nix
-    ../../modules/gaia/services
+    ./disk.nix
+    ../../modules/shared/services/cloudflared.nix
+    ./services
+    ./kernel
 
     ../../modules/shared/system/defaults.nix
-    ../../modules/gaia/kernel/boot.nix
     ../../modules/shared/hardware/bluetooth.nix
     ../../modules/shared/networking/base.nix
     ../../modules/shared/networking/tailscale.nix

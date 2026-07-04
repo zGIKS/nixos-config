@@ -1,6 +1,6 @@
 {
   imports = [
-    ./caddy.nix
     ./cloudflared.nix
+    ./caddy.nix
   ];
 }

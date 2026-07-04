@@ -55,8 +55,6 @@ in
       credentialsFile = config.sops.secrets.cloudflaredCredentials.path;
     };
 
-    environment.systemPackages = [ pkgs.cloudflared ];
-
     environment.etc."cloudflared/config.yml".source =
       yaml.generate "cloudflared-config.yml" {
         tunnel = cfg.tunnelId;
@@ -76,7 +74,7 @@ in
       wantedBy = [ "multi-user.target" ];
 
       serviceConfig = {
-        ExecStart = "${pkgs.cloudflared}/bin/cloudflared tunnel --config /etc/cloudflared/config.yml run ${cfg.tunnelId}";
+        ExecStart = "${cfg.package}/bin/cloudflared tunnel --config /etc/cloudflared/config.yml run ${cfg.tunnelId}";
         Restart = "on-failure";
       };
     };

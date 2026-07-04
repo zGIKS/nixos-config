@@ -3,21 +3,21 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ../../modules/aurora/services/default.nix
+    ./disk.nix
+    ./services
+    ./kernel
 
     ../../modules/shared/system/defaults.nix
-    ../../modules/aurora/kernel/boot.nix
     ../../modules/shared/hardware/bluetooth.nix
     ../../modules/shared/networking/base.nix
-    ../../modules/aurora/networking/vpn.nix
+    ../../modules/shared/networking/vpn.nix
     ../../modules/shared/networking/tailscale.nix
     ../../modules/shared/services/pipewire.nix
     ../../modules/shared/services/printing.nix
     ../../modules/shared/services/keyring.nix
     ../../modules/shared/services/flatpak.nix
-    ../../modules/aurora/services/asus.nix
-    ../../modules/aurora/hardware/nvidia.nix
-    ../../modules/aurora/kernel/memory.nix
+    ../../modules/shared/services/asus.nix
+    ../../modules/shared/hardware/nvidia.nix
     ../../modules/shared/packages/profiles/core.nix
     ../../modules/shared/packages/profiles/desktop.nix
     ../../modules/shared/packages/profiles/fonts.nix
@@ -29,7 +29,7 @@
   ]
   ++ lib.optionals (lib.elem "dev" roles) [
     ../../modules/shared/packages/profiles/dev.nix
-    ../../modules/aurora/services/android-debugging.nix
+    ../../modules/shared/services/android-debugging.nix
     ../../modules/shared/services/docker.nix
   ];
 
@@ -51,12 +51,6 @@
 
   # Hardware layer activation
   myModules.hardware.nvidia.enable = true;
-  myModules.kernel.memory.enable = true;
-  hardware.alsa.enablePersistence = true;
-  boot.extraModprobeConfig = ''
-    # ASUS ROG Strix G614JI internal speakers can fail to wake without this quirk.
-    options snd-hda-intel model=1043:1c9f
-  '';
 
   # Services layer activation
   myModules.services.asus = {

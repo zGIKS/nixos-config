@@ -16,6 +16,5 @@
     timeout = 3;
   };
 
-  # Use the default kernel package from NixOS.
   boot.kernelPackages = lib.mkDefault pkgs.linuxPackages;
 }
