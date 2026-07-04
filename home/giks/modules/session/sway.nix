@@ -38,6 +38,8 @@ in
     ./sway/workspace-layout.nix
   ];
 
+  services.mako.enable = lib.elem "desktop" roles;
+
   xdg.configFile = (platformLib.mkConfigLinks (
     lib.optionals (lib.elem "desktop" roles) swayConfigFiles
   )) // lib.optionalAttrs (lib.elem "desktop" roles) {
