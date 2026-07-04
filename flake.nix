@@ -33,7 +33,7 @@
       };
 
       platformLib = import ./lib { inherit (nixpkgs) lib; };
-      overlays = import ./modules/shared/packages/overlays { inherit pkgsUnstable; };
+      overlays = import ./modules/packages/overlays { inherit pkgsUnstable; };
 
       mkHost = hostName: { roles, keyboardLayout }:
         let
