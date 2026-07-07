@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 
 {
   gtk = {
@@ -37,17 +37,20 @@
       gtk-application-prefer-dark-theme = 1;
     };
 
-    gtk4.extraCss = ''
-      @define-color theme_bg_color #0a0a0c;
-      @define-color theme_fg_color #fafafa;
-      @define-color theme_base_color #0a0a0c;
-      @define-color theme_text_color #fafafa;
-      @define-color theme_selected_bg_color #fafafa;
-      @define-color theme_selected_fg_color #0a0a0c;
-      @define-color borders #27272a;
-    '';
-    gtk4.extraConfig = {
-      gtk-application-prefer-dark-theme = 1;
+    gtk4 = {
+      theme = config.gtk.theme;
+      extraCss = ''
+        @define-color theme_bg_color #0a0a0c;
+        @define-color theme_fg_color #fafafa;
+        @define-color theme_base_color #0a0a0c;
+        @define-color theme_text_color #fafafa;
+        @define-color theme_selected_bg_color #fafafa;
+        @define-color theme_selected_fg_color #0a0a0c;
+        @define-color borders #27272a;
+      '';
+      extraConfig = {
+        gtk-application-prefer-dark-theme = 1;
+      };
     };
   };
 

@@ -17,6 +17,8 @@ in
       viAlias = true;
       vimAlias = true;
       vimdiffAlias = true;
+      withRuby = true;
+      withPython3 = true;
     };
 
     home.packages = with pkgs; [

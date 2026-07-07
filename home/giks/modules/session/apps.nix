@@ -42,13 +42,13 @@ in
 
   config.home.packages = with pkgs;
     [
-      pomodog.packages.${pkgs.system}.default
+      pomodog.packages.${pkgs.stdenv.hostPlatform.system}.default
     ]
     ++ lib.optionals cfg.base.enable [
       brightnessctl
       grim
       gsimplecal
-      xfce.thunar
+      thunar
       pavucontrol
       playerctl
       slurp

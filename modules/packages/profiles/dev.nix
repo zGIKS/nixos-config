@@ -14,7 +14,7 @@ in
     environment.systemPackages = with pkgs; [
       go
       go-swag
-      nit.packages.${pkgs.system}.nit
+      nit.packages.${pkgs.stdenv.hostPlatform.system}.nit
       rustup
       wpsoffice
     ]
