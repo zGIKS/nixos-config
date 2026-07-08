@@ -15,6 +15,7 @@
     ../../modules/services/pipewire.nix
     ../../modules/services/printing.nix
     ../../modules/services/keyring.nix
+    ../../modules/services/mounts.nix
     ../../modules/services/flatpak.nix
     ../../modules/services/asus.nix
     ../../modules/hardware/nvidia.nix

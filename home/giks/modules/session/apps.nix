@@ -48,6 +48,8 @@ in
       brightnessctl
       grim
       gsimplecal
+      gvfs
+      tumbler
       thunar
       pavucontrol
       playerctl
