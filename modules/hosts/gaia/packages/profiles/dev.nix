@@ -6,7 +6,6 @@ in
 {
   options.myModules.profiles.dev = {
     enable = lib.mkEnableOption "developer profile";
-    latex.enable = lib.mkEnableOption "LaTeX tools";
     lsp.enable = lib.mkEnableOption "Common Language Servers";
   };
 
@@ -16,10 +15,6 @@ in
       go-swag
       nit.packages.${pkgs.stdenv.hostPlatform.system}.nit
       rustup
-      wpsoffice
-    ]
-    ++ lib.optionals cfg.latex.enable [
-      texliveFull
     ]
     ++ lib.optionals cfg.lsp.enable [
       bash-language-server

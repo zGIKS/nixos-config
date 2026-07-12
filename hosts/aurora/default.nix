@@ -4,8 +4,8 @@
   imports = [
     ./hardware-configuration.nix
     ./disk.nix
-    ./services
-    ./kernel
+    ../../modules/hosts/aurora/services
+    ../../modules/hosts/aurora/system/kernel.nix
 
     ../../modules/hosts/aurora/system/defaults.nix
     ../../modules/hosts/aurora/hardware/bluetooth.nix
@@ -13,12 +13,6 @@
     ../../modules/hosts/aurora/networking/base.nix
     ../../modules/hosts/aurora/networking/vpn.nix
     ../../modules/hosts/aurora/networking/tailscale.nix
-    ../../modules/hosts/aurora/services/pipewire.nix
-    ../../modules/hosts/aurora/services/printing.nix
-    ../../modules/hosts/aurora/services/keyring.nix
-    ../../modules/hosts/aurora/services/mounts.nix
-    ../../modules/hosts/aurora/services/flatpak.nix
-    ../../modules/hosts/aurora/services/asus.nix
     ../../modules/hosts/aurora/hardware/nvidia.nix
     ../../modules/hosts/aurora/packages/profiles/core.nix
     ../../modules/hosts/aurora/packages/profiles/desktop.nix
@@ -32,8 +26,6 @@
   ]
   ++ lib.optionals (lib.elem "dev" roles) [
     ../../modules/hosts/aurora/packages/profiles/dev.nix
-    ../../modules/hosts/aurora/services/android-debugging.nix
-    ../../modules/hosts/aurora/services/docker.nix
   ];
 
   # Shared module activations

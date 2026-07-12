@@ -5,9 +5,8 @@
     ../../modules/hosts/gaia/system/sops.nix
     ./hardware-configuration.nix
     ./disk.nix
-    ./kernel
-
     ../../modules/hosts/gaia/services
+    ../../modules/hosts/gaia/system/kernel.nix
 
     ../../modules/hosts/gaia/system/defaults.nix
     ../../modules/hosts/gaia/hardware/bluetooth.nix
@@ -32,7 +31,6 @@
 
   myModules.profiles.dev = {
     enable = lib.elem "dev" roles;
-    latex.enable = lib.elem "dev" roles;
     lsp.enable = lib.elem "dev" roles;
   };
 
