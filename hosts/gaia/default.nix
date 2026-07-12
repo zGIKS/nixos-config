@@ -19,7 +19,7 @@
     ../../modules/hosts/gaia/session/sway.nix
     ../../modules/hosts/gaia/session/display-manager.nix
     ../../modules/hosts/gaia/session/portals.nix
-    ../../modules/hosts/gaia/users/giks.nix
+    ../../modules/hosts/shared/users/giks.nix
   ]
   ++ lib.optionals (lib.elem "dev" roles) [
     ../../modules/hosts/gaia/packages/profiles/dev.nix

@@ -22,7 +22,7 @@
     ../../modules/hosts/aurora/session/sway.nix
     ../../modules/hosts/aurora/session/display-manager.nix
     ../../modules/hosts/aurora/session/portals.nix
-    ../../modules/hosts/aurora/users/giks.nix
+    ../../modules/hosts/shared/users/giks.nix
   ]
   ++ lib.optionals (lib.elem "dev" roles) [
     ../../modules/hosts/aurora/packages/profiles/dev.nix
