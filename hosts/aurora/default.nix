@@ -9,6 +9,7 @@
 
     ../../modules/system/defaults.nix
     ../../modules/hardware/bluetooth.nix
+    ../../modules/hardware/steam.nix
     ../../modules/networking/base.nix
     ../../modules/networking/vpn.nix
     ../../modules/networking/tailscale.nix
@@ -21,6 +22,7 @@
     ../../modules/hardware/nvidia.nix
     ../../modules/packages/profiles/core.nix
     ../../modules/packages/profiles/desktop.nix
+    ../../modules/packages/profiles/gaming.nix
     ../../modules/packages/profiles/fonts.nix
     ../../modules/packages/volta.nix
     ../../modules/session/sway.nix
@@ -37,6 +39,8 @@
   # Shared module activations
   myModules.profiles.core.enable = true;
   myModules.desktop.sway.enable = lib.elem "desktop" roles;
+  myModules.hardware.steam.enable = true;
+  myModules.profiles.gaming.enable = true;
   platform.services.androidDebugging.enable = lib.elem "dev" roles;
   platform.services.docker.enable = lib.elem "dev" roles;
 

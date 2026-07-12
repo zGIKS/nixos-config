@@ -30,6 +30,9 @@
       "brave"
       "libsciter"
       "rustdesk"
+      "steam"
+      "steam-original"
+      "steam-unwrapped"
     ];
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
