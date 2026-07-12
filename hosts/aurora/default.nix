@@ -7,33 +7,33 @@
     ./services
     ./kernel
 
-    ../../modules/system/defaults.nix
-    ../../modules/hardware/bluetooth.nix
-    ../../modules/hardware/steam.nix
-    ../../modules/networking/base.nix
-    ../../modules/networking/vpn.nix
-    ../../modules/networking/tailscale.nix
-    ../../modules/services/pipewire.nix
-    ../../modules/services/printing.nix
-    ../../modules/services/keyring.nix
-    ../../modules/services/mounts.nix
-    ../../modules/services/flatpak.nix
-    ../../modules/services/asus.nix
-    ../../modules/hardware/nvidia.nix
-    ../../modules/packages/profiles/core.nix
-    ../../modules/packages/profiles/desktop.nix
-    ../../modules/packages/profiles/gaming.nix
-    ../../modules/packages/profiles/fonts.nix
-    ../../modules/packages/volta.nix
-    ../../modules/session/sway.nix
-    ../../modules/session/display-manager.nix
-    ../../modules/session/portals.nix
-    ../../modules/users/giks.nix
+    ../../modules/hosts/aurora/system/defaults.nix
+    ../../modules/hosts/aurora/hardware/bluetooth.nix
+    ../../modules/hosts/aurora/hardware/steam.nix
+    ../../modules/hosts/aurora/networking/base.nix
+    ../../modules/hosts/aurora/networking/vpn.nix
+    ../../modules/hosts/aurora/networking/tailscale.nix
+    ../../modules/hosts/aurora/services/pipewire.nix
+    ../../modules/hosts/aurora/services/printing.nix
+    ../../modules/hosts/aurora/services/keyring.nix
+    ../../modules/hosts/aurora/services/mounts.nix
+    ../../modules/hosts/aurora/services/flatpak.nix
+    ../../modules/hosts/aurora/services/asus.nix
+    ../../modules/hosts/aurora/hardware/nvidia.nix
+    ../../modules/hosts/aurora/packages/profiles/core.nix
+    ../../modules/hosts/aurora/packages/profiles/desktop.nix
+    ../../modules/hosts/aurora/packages/profiles/gaming.nix
+    ../../modules/hosts/aurora/packages/profiles/fonts.nix
+    ../../modules/hosts/aurora/packages/volta.nix
+    ../../modules/hosts/aurora/session/sway.nix
+    ../../modules/hosts/aurora/session/display-manager.nix
+    ../../modules/hosts/aurora/session/portals.nix
+    ../../modules/hosts/aurora/users/giks.nix
   ]
   ++ lib.optionals (lib.elem "dev" roles) [
-    ../../modules/packages/profiles/dev.nix
-    ../../modules/services/android-debugging.nix
-    ../../modules/services/docker.nix
+    ../../modules/hosts/aurora/packages/profiles/dev.nix
+    ../../modules/hosts/aurora/services/android-debugging.nix
+    ../../modules/hosts/aurora/services/docker.nix
   ];
 
   # Shared module activations

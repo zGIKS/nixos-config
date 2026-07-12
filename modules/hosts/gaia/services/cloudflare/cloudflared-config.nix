@@ -7,12 +7,10 @@ in
 {
   options.myModules.services.cloudflared = {
     enable = lib.mkEnableOption "Cloudflare Tunnel daemon";
-
     tunnelId = lib.mkOption {
       type = lib.types.str;
       description = "Cloudflare tunnel UUID.";
     };
-
     routes = lib.mkOption {
       type = lib.types.listOf (lib.types.submodule {
         options = {
@@ -20,7 +18,6 @@ in
             type = lib.types.str;
             description = "Public hostname routed through the tunnel.";
           };
-
           upstream = lib.mkOption {
             type = lib.types.str;
             description = "Local service URL exposed through the tunnel.";
@@ -29,7 +26,6 @@ in
       });
       description = "Hostname to upstream routes exposed through the tunnel.";
     };
-
     credentialsFile = lib.mkOption {
       type = lib.types.str;
       description = "Path to the tunnel credentials JSON file.";
@@ -38,7 +34,6 @@ in
 
   config = {
     sops.secrets.cloudflaredCredentials = { };
-
     myModules.services.cloudflared = {
       enable = true;
       tunnelId = "f9c5f49d-9225-4ea8-9795-10047d606079";
@@ -54,7 +49,6 @@ in
       ];
       credentialsFile = config.sops.secrets.cloudflaredCredentials.path;
     };
-
     environment.etc."cloudflared/config.yml".source =
       yaml.generate "cloudflared-config.yml" {
         tunnel = cfg.tunnelId;
@@ -66,13 +60,11 @@ in
           { service = "http_status:404"; }
         ];
       };
-
     systemd.services.cloudflared = {
       description = "Cloudflare Tunnel";
       after = [ "network-online.target" ];
       wants = [ "network-online.target" ];
       wantedBy = [ "multi-user.target" ];
-
       serviceConfig = {
         ExecStart = "${cfg.package}/bin/cloudflared tunnel --config /etc/cloudflared/config.yml run ${cfg.tunnelId}";
         Restart = "on-failure";

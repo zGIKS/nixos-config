@@ -1,6 +1,6 @@
 {
   imports = [
     ./cloudflared.nix
-    ./caddy.nix
+    ./cloudflared-config.nix
   ];
 }

@@ -33,10 +33,11 @@
       };
 
       platformLib = import ./lib { inherit (nixpkgs) lib; };
-      overlays = import ./modules/packages/overlays { inherit pkgsUnstable; };
-
       mkHost = hostName: { roles, keyboardLayout }:
         let
+          overlays = import ./modules/hosts/${hostName}/packages/overlays {
+            inherit pkgsUnstable;
+          };
           specialArgs = {
             inherit username hostName platformLib nit pomodog roles keyboardLayout sops-nix;
           };

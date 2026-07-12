@@ -2,34 +2,28 @@
 
 {
   imports = [
-    ../../modules/system/sops.nix
+    ../../modules/hosts/gaia/system/sops.nix
     ./hardware-configuration.nix
     ./disk.nix
-    ../../modules/services/cloudflared.nix
-    ./services
     ./kernel
 
-    ../../modules/system/defaults.nix
-    ../../modules/hardware/bluetooth.nix
-    ../../modules/networking/base.nix
-    ../../modules/networking/tailscale.nix
-    ../../modules/services/pipewire.nix
-    ../../modules/services/printing.nix
-    ../../modules/services/keyring.nix
-    ../../modules/services/mounts.nix
-    ../../modules/services/flatpak.nix
-    ../../modules/packages/profiles/core.nix
-    ../../modules/packages/profiles/desktop.nix
-    ../../modules/packages/profiles/fonts.nix
-    ../../modules/packages/volta.nix
-    ../../modules/session/sway.nix
-    ../../modules/session/display-manager.nix
-    ../../modules/session/portals.nix
-    ../../modules/users/giks.nix
+    ../../modules/hosts/gaia/services
+
+    ../../modules/hosts/gaia/system/defaults.nix
+    ../../modules/hosts/gaia/hardware/bluetooth.nix
+    ../../modules/hosts/gaia/networking/base.nix
+    ../../modules/hosts/gaia/networking/tailscale.nix
+    ../../modules/hosts/gaia/packages/profiles/core.nix
+    ../../modules/hosts/gaia/packages/profiles/desktop.nix
+    ../../modules/hosts/gaia/packages/profiles/fonts.nix
+    ../../modules/hosts/gaia/packages/volta.nix
+    ../../modules/hosts/gaia/session/sway.nix
+    ../../modules/hosts/gaia/session/display-manager.nix
+    ../../modules/hosts/gaia/session/portals.nix
+    ../../modules/hosts/gaia/users/giks.nix
   ]
   ++ lib.optionals (lib.elem "dev" roles) [
-    ../../modules/packages/profiles/dev.nix
-    ../../modules/services/docker.nix
+    ../../modules/hosts/gaia/packages/profiles/dev.nix
   ];
 
   myModules.profiles.core.enable = true;
