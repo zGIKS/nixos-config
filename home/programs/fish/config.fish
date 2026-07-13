@@ -1,16 +1,12 @@
 set -gx EDITOR nvim
 set -gx VISUAL nvim
-set -gx VOLTA_HOME $HOME/.volta
-set -gx BUN_INSTALL $HOME/.bun
 if test -z "$LIBCLANG_PATH"; and test -e /usr/lib/libclang.so
     set -gx LIBCLANG_PATH /usr/lib
 end
 
 # Build a deterministic PATH with stable priority and no duplicates.
 set -l preferred_paths \
-    $VOLTA_HOME/bin \
     $HOME/.local/bin \
-    $BUN_INSTALL/bin \
     $HOME/.cargo/bin \
     $HOME/go/bin
 

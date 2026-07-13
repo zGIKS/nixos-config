@@ -15,10 +15,9 @@
     ../../modules/hosts/aurora/networking/tailscale.nix
     ../../modules/hosts/aurora/hardware/nvidia.nix
     ../../modules/hosts/aurora/packages/profiles/core.nix
-    ../../modules/hosts/aurora/packages/profiles/desktop.nix
+    ../../modules/hosts/shared/packages/profiles/desktop.nix
     ../../modules/hosts/aurora/packages/profiles/gaming.nix
     ../../modules/hosts/aurora/packages/profiles/fonts.nix
-    ../../modules/hosts/aurora/packages/volta.nix
     ../../modules/hosts/aurora/session/sway.nix
     ../../modules/hosts/aurora/session/display-manager.nix
     ../../modules/hosts/aurora/session/portals.nix

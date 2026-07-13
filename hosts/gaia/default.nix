@@ -13,9 +13,8 @@
     ../../modules/hosts/gaia/networking/base.nix
     ../../modules/hosts/gaia/networking/tailscale.nix
     ../../modules/hosts/gaia/packages/profiles/core.nix
-    ../../modules/hosts/gaia/packages/profiles/desktop.nix
+    ../../modules/hosts/shared/packages/profiles/desktop.nix
     ../../modules/hosts/gaia/packages/profiles/fonts.nix
-    ../../modules/hosts/gaia/packages/volta.nix
     ../../modules/hosts/gaia/session/sway.nix
     ../../modules/hosts/gaia/session/display-manager.nix
     ../../modules/hosts/gaia/session/portals.nix
