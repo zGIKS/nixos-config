@@ -14,6 +14,7 @@
     ../../modules/hosts/gaia/networking/tailscale.nix
     ../../modules/hosts/gaia/packages/profiles/core.nix
     ../../modules/hosts/shared/packages/profiles/desktop.nix
+    ../../modules/hosts/shared/system/binary-compatibility.nix
     ../../modules/hosts/gaia/packages/profiles/fonts.nix
     ../../modules/hosts/gaia/session/sway.nix
     ../../modules/hosts/gaia/session/display-manager.nix
