@@ -1,50 +1,62 @@
-{ config, lib, pkgs, username, roles, keyboardLayout, ... }:
+{ lib, roles, keyboardLayout, ... }:
 
 {
   imports = [
     ./hardware-configuration.nix
     ./disk.nix
-    ./services
-    ./kernel
+    ../../modules/hosts/shared/boot/grub.nix
+    ../../modules/hosts/shared/system/defaults.nix
+    ../../modules/hosts/shared/applications/profiles/desktop
+    ../../modules/hosts/shared/applications/profiles/dev-gui.nix
+    ../../modules/hosts/shared/applications/profiles/languages/go.nix
+    ../../modules/hosts/shared/applications/profiles/languages/lsp.nix
+    ../../modules/hosts/shared/applications/profiles/languages/node.nix
+    ../../modules/hosts/shared/applications/profiles/languages/python.nix
+    ../../modules/hosts/shared/applications/profiles/languages/rust.nix
+    ../../modules/hosts/shared/applications/profiles/tools/nit.nix
+    ../../modules/hosts/shared/applications/profiles/tools/pomodog.nix
+    ../../modules/hosts/aurora/system/services
+    ../../modules/hosts/aurora/boot/kernel.nix
 
-    ../../modules/system/defaults.nix
-    ../../modules/hardware/bluetooth.nix
-    ../../modules/networking/base.nix
-    ../../modules/networking/vpn.nix
-    ../../modules/networking/tailscale.nix
-    ../../modules/services/pipewire.nix
-    ../../modules/services/printing.nix
-    ../../modules/services/keyring.nix
-    ../../modules/services/mounts.nix
-    ../../modules/services/flatpak.nix
-    ../../modules/services/asus.nix
-    ../../modules/hardware/nvidia.nix
-    ../../modules/packages/profiles/core.nix
-    ../../modules/packages/profiles/desktop.nix
-    ../../modules/packages/profiles/fonts.nix
-    ../../modules/packages/volta.nix
-    ../../modules/session/sway.nix
-    ../../modules/session/display-manager.nix
-    ../../modules/session/portals.nix
-    ../../modules/users/giks.nix
+    ../../modules/hosts/aurora/system/defaults.nix
+    ../../modules/hosts/aurora/hardware/bluetooth.nix
+    ../../modules/hosts/aurora/hardware/steam.nix
+    ../../modules/hosts/aurora/system/networking/base.nix
+    ../../modules/hosts/aurora/system/networking/vpn.nix
+    ../../modules/hosts/aurora/system/networking/tailscale.nix
+    ../../modules/hosts/aurora/hardware/nvidia.nix
+    ../../modules/hosts/aurora/environment/profiles/core.nix
+    ../../modules/hosts/aurora/applications/profiles/desktop-tools.nix
+    ../../modules/hosts/shared/environment/profiles/core.nix
+    ../../modules/hosts/shared/environment/profiles/desktop-dev.nix
+    ../../modules/hosts/shared/environment/profiles/desktop.nix
+    ../../modules/hosts/shared/system/binary-compatibility.nix
+    ../../modules/hosts/aurora/applications/profiles/gaming.nix
+    ../../modules/hosts/aurora/applications/profiles/browsers.nix
+    ../../modules/hosts/aurora/applications/profiles/media.nix
+    ../../modules/hosts/aurora/environment/profiles/fonts.nix
+    ../../modules/hosts/aurora/environment/session/sway.nix
+    ../../modules/hosts/aurora/environment/session/display-manager.nix
+    ../../modules/hosts/aurora/environment/session/portals.nix
+    ../../modules/hosts/aurora/environment/session/flatpak.nix
+    ../../modules/hosts/shared/environment/users/giks.nix
   ]
   ++ lib.optionals (lib.elem "dev" roles) [
-    ../../modules/packages/profiles/dev.nix
-    ../../modules/services/android-debugging.nix
-    ../../modules/services/docker.nix
+    ../../modules/hosts/aurora/applications/profiles/dev.nix
   ];
 
   # Shared module activations
-  myModules.profiles.core.enable = true;
   myModules.desktop.sway.enable = lib.elem "desktop" roles;
+  myModules.hardware.steam.enable = true;
+  myModules.profiles.gaming.enable = true;
   platform.services.androidDebugging.enable = lib.elem "dev" roles;
   platform.services.docker.enable = lib.elem "dev" roles;
 
   myModules.profiles.dev = {
     enable = lib.elem "dev" roles;
     latex.enable = lib.elem "dev" roles;
-    lsp.enable = lib.elem "dev" roles;
   };
+  myModules.profiles.media.enable = true;
 
   # Host-specific facts
   networking.hostName = "aurora";
@@ -59,28 +71,4 @@
     rogControlCenter.enable = true;
   };
 
-  # Dual-boot Windows (host-specific)
-  boot.loader.grub.extraEntries = ''
-    menuentry "Windows 11" {
-      insmod part_gpt
-      insmod fat
-      search --no-floppy --file --set=root /EFI/Microsoft/Boot/bootmgfw.efi
-      chainloader /EFI/Microsoft/Boot/bootmgfw.efi
-    }
-  '';
-
-  # Flatpak session integration
-  environment.sessionVariables.XDG_DATA_DIRS = lib.mkForce [
-    "${config.services.displayManager.sessionData.desktops}/share"
-    "/run/current-system/sw/share"
-    "/etc/profiles/per-user/${username}/share"
-    "/var/lib/flatpak/exports/share"
-    "${config.users.users.${username}.home}/.local/share/flatpak/exports/share"
-  ];
-
-  # Host-specific packages
-  environment.systemPackages = with pkgs; [ ];
-
-  # Install heavier GUI dev apps via Home Manager on this host.
-  home-manager.users.${username}.myHome.apps.devGui.enable = true;
 }
