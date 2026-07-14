@@ -1,10 +1,12 @@
-{ config, lib, username, roles, keyboardLayout, ... }:
+{ lib, roles, keyboardLayout, ... }:
 
 {
   imports = [
     ../../modules/hosts/gaia/system/sops.nix
     ./hardware-configuration.nix
     ./disk.nix
+    ../../modules/hosts/shared/boot/grub.nix
+    ../../modules/hosts/shared/applications/profiles/dev-gui.nix
     ../../modules/hosts/gaia/system/services
     ../../modules/hosts/gaia/boot/kernel.nix
 
@@ -39,15 +41,4 @@
   networking.hostName = "gaia";
   services.xserver.xkb.layout = keyboardLayout;
 
-  boot.loader.grub.extraEntries = ''
-    menuentry "Windows 11" {
-      insmod part_gpt
-      insmod fat
-      search --no-floppy --file --set=root /EFI/Microsoft/Boot/bootmgfw.efi
-      chainloader /EFI/Microsoft/Boot/bootmgfw.efi
-    }
-  '';
-
-  # Install heavier GUI dev apps via Home Manager on this host.
-  home-manager.users.${username}.myHome.apps.devGui.enable = true;
 }

@@ -1,9 +1,11 @@
-{ config, lib, pkgs, username, roles, keyboardLayout, ... }:
+{ lib, roles, keyboardLayout, ... }:
 
 {
   imports = [
     ./hardware-configuration.nix
     ./disk.nix
+    ../../modules/hosts/shared/boot/grub.nix
+    ../../modules/hosts/shared/applications/profiles/dev-gui.nix
     ../../modules/hosts/aurora/system/services
     ../../modules/hosts/aurora/boot/kernel.nix
 
@@ -22,6 +24,7 @@
     ../../modules/hosts/aurora/environment/session/sway.nix
     ../../modules/hosts/aurora/environment/session/display-manager.nix
     ../../modules/hosts/aurora/environment/session/portals.nix
+    ../../modules/hosts/aurora/environment/session/flatpak.nix
     ../../modules/hosts/shared/environment/users/giks.nix
   ]
   ++ lib.optionals (lib.elem "dev" roles) [
@@ -55,28 +58,4 @@
     rogControlCenter.enable = true;
   };
 
-  # Dual-boot Windows (host-specific)
-  boot.loader.grub.extraEntries = ''
-    menuentry "Windows 11" {
-      insmod part_gpt
-      insmod fat
-      search --no-floppy --file --set=root /EFI/Microsoft/Boot/bootmgfw.efi
-      chainloader /EFI/Microsoft/Boot/bootmgfw.efi
-    }
-  '';
-
-  # Flatpak session integration
-  environment.sessionVariables.XDG_DATA_DIRS = lib.mkForce [
-    "${config.services.displayManager.sessionData.desktops}/share"
-    "/run/current-system/sw/share"
-    "/etc/profiles/per-user/${username}/share"
-    "/var/lib/flatpak/exports/share"
-    "${config.users.users.${username}.home}/.local/share/flatpak/exports/share"
-  ];
-
-  # Host-specific packages
-  environment.systemPackages = with pkgs; [ ];
-
-  # Install heavier GUI dev apps via Home Manager on this host.
-  home-manager.users.${username}.myHome.apps.devGui.enable = true;
 }
