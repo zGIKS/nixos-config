@@ -3,7 +3,11 @@
 {
   options.myModules.system.unfreePackages = lib.mkOption {
     type = lib.types.listOf lib.types.str;
-    default = [
+    default = [ ];
+  };
+
+  config = {
+    myModules.system.unfreePackages = [
       "datagrip"
       "typora"
       "vscode"
@@ -13,9 +17,7 @@
       "brave"
       "libsciter"
     ];
-  };
 
-  config = {
     time.timeZone = "America/Lima";
     i18n.defaultLocale = "en_US.UTF-8";
     console.useXkbConfig = true;
