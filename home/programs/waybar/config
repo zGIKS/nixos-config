@@ -75,7 +75,7 @@
     "tooltip": false
   },
   "battery": {
-    "interval": 2,
+    "interval": 30,
     "states": {
       "warning": 30,
       "critical": 15
