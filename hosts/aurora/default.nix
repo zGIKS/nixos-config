@@ -28,6 +28,7 @@
     ../../modules/hosts/aurora/environment/profiles/core.nix
     ../../modules/hosts/aurora/applications/profiles/desktop-tools.nix
     ../../modules/hosts/shared/environment/profiles/core.nix
+    ../../modules/hosts/shared/environment/profiles/desktop-dev.nix
     ../../modules/hosts/shared/environment/profiles/desktop.nix
     ../../modules/hosts/shared/system/binary-compatibility.nix
     ../../modules/hosts/aurora/applications/profiles/gaming.nix
@@ -45,16 +46,6 @@
   ];
 
   # Shared module activations
-  myModules.profiles.core.enable = true;
-  myModules.profiles.desktopApps.enable = true;
-  myModules.profiles.devGui.enable = true;
-  myModules.profiles.languages.go.enable = true;
-  myModules.profiles.languages.lsp.enable = true;
-  myModules.profiles.languages.node.enable = true;
-  myModules.profiles.languages.python.enable = true;
-  myModules.profiles.languages.rust.enable = true;
-  myModules.profiles.tools.nit.enable = true;
-  myModules.profiles.tools.pomodog.enable = true;
   myModules.desktop.sway.enable = lib.elem "desktop" roles;
   myModules.hardware.steam.enable = true;
   myModules.profiles.gaming.enable = true;

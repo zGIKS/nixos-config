@@ -23,6 +23,7 @@
     ../../modules/hosts/gaia/system/networking/base.nix
     ../../modules/hosts/gaia/system/networking/tailscale.nix
     ../../modules/hosts/shared/environment/profiles/core.nix
+    ../../modules/hosts/shared/environment/profiles/desktop-dev.nix
     ../../modules/hosts/shared/environment/profiles/desktop.nix
     ../../modules/hosts/shared/system/binary-compatibility.nix
     ../../modules/hosts/gaia/environment/profiles/fonts.nix
@@ -30,27 +31,10 @@
     ../../modules/hosts/gaia/environment/session/display-manager.nix
     ../../modules/hosts/gaia/environment/session/portals.nix
     ../../modules/hosts/shared/environment/users/giks.nix
-  ]
-  ++ lib.optionals (lib.elem "dev" roles) [
-    ../../modules/hosts/gaia/applications/profiles/dev.nix
   ];
 
-  myModules.profiles.core.enable = true;
-  myModules.profiles.desktopApps.enable = true;
-  myModules.profiles.devGui.enable = true;
-  myModules.profiles.languages.go.enable = true;
-  myModules.profiles.languages.lsp.enable = true;
-  myModules.profiles.languages.node.enable = true;
-  myModules.profiles.languages.python.enable = true;
-  myModules.profiles.languages.rust.enable = true;
-  myModules.profiles.tools.nit.enable = true;
-  myModules.profiles.tools.pomodog.enable = true;
   myModules.desktop.sway.enable = lib.elem "desktop" roles;
   platform.services.docker.enable = lib.elem "dev" roles;
-
-  myModules.profiles.dev = {
-    enable = lib.elem "dev" roles;
-  };
 
   sops.defaultSopsFile = ../../secrets/gaia/secrets.yaml;
 
