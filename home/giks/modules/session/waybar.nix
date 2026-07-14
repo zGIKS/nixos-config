@@ -1,4 +1,4 @@
-{ lib, pkgs, roles, platformLib, ... }:
+{ lib, roles, platformLib, ... }:
 
 let
   waybarConfigFiles = [
@@ -10,14 +10,13 @@ let
       target = "waybar/style.css";
       source = ../../../../home/programs/waybar/style.css;
     }
+    {
+      target = "waybar/icons/nixos.svg";
+      source = ../../../../home/programs/waybar/icons/nixos.svg;
+    }
   ];
 in
 {
-  home.packages = with pkgs;
-    lib.optionals (lib.elem "desktop" roles) [
-      waybar
-    ];
-
   xdg.configFile = platformLib.mkConfigLinks (
     lib.optionals (lib.elem "desktop" roles) waybarConfigFiles
   );

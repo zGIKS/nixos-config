@@ -19,9 +19,21 @@ Configuración personal de NixOS con `flakes` y Home Manager.
 ## Comandos útiles
 
 - Validar: `nix --extra-experimental-features 'nix-command flakes' flake check --no-build`
+- Actualizar dependencias: `nix flake update`
 - Aplicar sistema: `sudo nixos-rebuild switch --flake .#gaia`
 - Aplicar sistema: `sudo nixos-rebuild switch --flake .#aurora`
 - Ver hostname actual: `hostname`
+
+## Actualización por PC
+
+- `gaia`: `sudo nixos-rebuild switch --flake .#gaia`
+- `aurora`: `sudo nixos-rebuild switch --flake .#aurora`
+
+Flujo típico para actualizar todo:
+
+1. Ejecuta `nix flake update` para refrescar `flake.lock`.
+2. Aplica la configuración en la PC correspondiente con `nixos-rebuild switch`.
+3. Si cambiaste cosas del usuario, vuelve a iniciar sesión para que Home Manager recargue la sesión.
 
 ## Personalización rápida
 

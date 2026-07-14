@@ -2,14 +2,14 @@
   description = "giks NixOS and Home Manager configuration";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     sops-nix = {
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     home-manager = {
-      url = "github:nix-community/home-manager/release-25.11";
+      url = "github:nix-community/home-manager/release-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nit = {
@@ -33,10 +33,18 @@
       };
 
       platformLib = import ./lib { inherit (nixpkgs) lib; };
-      overlays = import ./modules/packages/overlays { inherit pkgsUnstable; };
-
       mkHost = hostName: { roles, keyboardLayout }:
         let
+          hostOverlays = if hostName == "aurora" then
+            (import ./modules/hosts/aurora/applications/overlays {
+              inherit pkgsUnstable;
+            })
+          else {
+            default = final: prev: { };
+          };
+          sharedOverlays = import ./modules/hosts/shared/applications/overlays {
+            inherit pkgsUnstable;
+          };
           specialArgs = {
             inherit username hostName platformLib nit pomodog roles keyboardLayout sops-nix;
           };
@@ -45,7 +53,7 @@
           inherit system specialArgs;
           modules = [
             ./hosts/${hostName}
-            { nixpkgs.overlays = [ overlays.default ]; }
+            { nixpkgs.overlays = [ sharedOverlays.default hostOverlays.default ]; }
             home-manager.nixosModules.home-manager
             {
               home-manager.useGlobalPkgs = true;

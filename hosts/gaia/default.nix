@@ -1,60 +1,44 @@
-{ config, lib, username, roles, keyboardLayout, ... }:
+{ lib, roles, keyboardLayout, ... }:
 
 {
   imports = [
-    ../../modules/system/sops.nix
-    ../../modules/services/cloudflared.nix
+    ../../modules/hosts/gaia/system/sops.nix
     ./hardware-configuration.nix
-    ./services
+    ./disk.nix
+    ../../modules/hosts/shared/boot/grub.nix
+    ../../modules/hosts/shared/system/defaults.nix
+    ../../modules/hosts/shared/applications/profiles/desktop
+    ../../modules/hosts/shared/applications/profiles/dev-gui.nix
+    ../../modules/hosts/shared/applications/profiles/languages/go.nix
+    ../../modules/hosts/shared/applications/profiles/languages/lsp.nix
+    ../../modules/hosts/shared/applications/profiles/languages/node.nix
+    ../../modules/hosts/shared/applications/profiles/languages/python.nix
+    ../../modules/hosts/shared/applications/profiles/languages/rust.nix
+    ../../modules/hosts/shared/applications/profiles/tools/nit.nix
+    ../../modules/hosts/shared/applications/profiles/tools/pomodog.nix
+    ../../modules/hosts/gaia/system/services
+    ../../modules/hosts/gaia/boot/kernel.nix
 
-    ../../modules/system/defaults.nix
-    ../../modules/kernel/boot.nix
-    ../../modules/hardware/bluetooth.nix
-    ../../modules/networking/base.nix
-    ../../modules/networking/vpn.nix
-    ../../modules/networking/tailscale.nix
-    ../../modules/services/pipewire.nix
-    ../../modules/services/printing.nix
-    ../../modules/services/keyring.nix
-    ../../modules/services/flatpak.nix
-    ../../modules/packages/profiles/core.nix
-    ../../modules/packages/profiles/desktop.nix
-    ../../modules/packages/profiles/fonts.nix
-    ../../modules/packages/volta.nix
-    ../../modules/session/sway.nix
-    ../../modules/session/display-manager.nix
-    ../../modules/session/portals.nix
-    ../../modules/users/giks.nix
-  ]
-  ++ lib.optionals (lib.elem "dev" roles) [
-    ../../modules/packages/profiles/dev.nix
-    ../../modules/services/docker.nix
+    ../../modules/hosts/gaia/hardware/bluetooth.nix
+    ../../modules/hosts/gaia/system/networking/base.nix
+    ../../modules/hosts/gaia/system/networking/tailscale.nix
+    ../../modules/hosts/shared/environment/profiles/core.nix
+    ../../modules/hosts/shared/environment/profiles/desktop-dev.nix
+    ../../modules/hosts/shared/environment/profiles/desktop.nix
+    ../../modules/hosts/shared/system/binary-compatibility.nix
+    ../../modules/hosts/gaia/environment/profiles/fonts.nix
+    ../../modules/hosts/gaia/environment/session/sway.nix
+    ../../modules/hosts/gaia/environment/session/display-manager.nix
+    ../../modules/hosts/gaia/environment/session/portals.nix
+    ../../modules/hosts/shared/environment/users/giks.nix
   ];
 
-  myModules.profiles.core.enable = true;
   myModules.desktop.sway.enable = lib.elem "desktop" roles;
   platform.services.docker.enable = lib.elem "dev" roles;
 
-  myModules.profiles.dev = {
-    enable = lib.elem "dev" roles;
-    latex.enable = lib.elem "dev" roles;
-    lsp.enable = lib.elem "dev" roles;
-  };
-
-  sops.defaultSopsFile = ./secrets/secrets.yaml;
+  sops.defaultSopsFile = ../../secrets/gaia/secrets.yaml;
 
   networking.hostName = "gaia";
   services.xserver.xkb.layout = keyboardLayout;
 
-  boot.loader.grub.extraEntries = ''
-    menuentry "Windows 11" {
-      insmod part_gpt
-      insmod fat
-      search --no-floppy --file --set=root /EFI/Microsoft/Boot/bootmgfw.efi
-      chainloader /EFI/Microsoft/Boot/bootmgfw.efi
-    }
-  '';
-
-  # Install heavier GUI dev apps via Home Manager on this host.
-  home-manager.users.${username}.myHome.apps.devGui.enable = true;
 }

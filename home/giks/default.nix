@@ -12,7 +12,6 @@
     ./modules/session/waybar.nix
     ./modules/session/wofi.nix
     ./modules/session/eww.nix
-    ./modules/session/apps.nix
   ];
 
   myHome.git.enable = true;
