@@ -12,6 +12,7 @@
       builtins.elem name [
         "google-chrome"
         "discord"
+        "discord-ptb"
         "spotify"
         "datagrip"
         "idea"

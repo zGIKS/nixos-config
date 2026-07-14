@@ -5,24 +5,24 @@
     ../../modules/hosts/gaia/system/sops.nix
     ./hardware-configuration.nix
     ./disk.nix
-    ../../modules/hosts/gaia/services
-    ../../modules/hosts/gaia/system/kernel.nix
+    ../../modules/hosts/gaia/system/services
+    ../../modules/hosts/gaia/boot/kernel.nix
 
     ../../modules/hosts/gaia/system/defaults.nix
     ../../modules/hosts/gaia/hardware/bluetooth.nix
-    ../../modules/hosts/gaia/networking/base.nix
-    ../../modules/hosts/gaia/networking/tailscale.nix
-    ../../modules/hosts/gaia/packages/profiles/core.nix
-    ../../modules/hosts/shared/packages/profiles/desktop.nix
+    ../../modules/hosts/gaia/system/networking/base.nix
+    ../../modules/hosts/gaia/system/networking/tailscale.nix
+    ../../modules/hosts/gaia/environment/profiles/core.nix
+    ../../modules/hosts/shared/environment/profiles/desktop.nix
     ../../modules/hosts/shared/system/binary-compatibility.nix
-    ../../modules/hosts/gaia/packages/profiles/fonts.nix
-    ../../modules/hosts/gaia/session/sway.nix
-    ../../modules/hosts/gaia/session/display-manager.nix
-    ../../modules/hosts/gaia/session/portals.nix
-    ../../modules/hosts/shared/users/giks.nix
+    ../../modules/hosts/gaia/environment/profiles/fonts.nix
+    ../../modules/hosts/gaia/environment/session/sway.nix
+    ../../modules/hosts/gaia/environment/session/display-manager.nix
+    ../../modules/hosts/gaia/environment/session/portals.nix
+    ../../modules/hosts/shared/environment/users/giks.nix
   ]
   ++ lib.optionals (lib.elem "dev" roles) [
-    ../../modules/hosts/gaia/packages/profiles/dev.nix
+    ../../modules/hosts/gaia/applications/profiles/dev.nix
   ];
 
   myModules.profiles.core.enable = true;

@@ -35,7 +35,9 @@
       platformLib = import ./lib { inherit (nixpkgs) lib; };
       mkHost = hostName: { roles, keyboardLayout }:
         let
-          overlays = import ./modules/hosts/${hostName}/packages/overlays {
+          overlays = import (if builtins.elem hostName [ "aurora" "gaia" ]
+            then ./modules/hosts/${hostName}/applications/overlays
+            else ./modules/hosts/${hostName}/packages/overlays) {
             inherit pkgsUnstable;
           };
           specialArgs = {

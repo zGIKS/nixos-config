@@ -4,28 +4,28 @@
   imports = [
     ./hardware-configuration.nix
     ./disk.nix
-    ../../modules/hosts/aurora/services
-    ../../modules/hosts/aurora/system/kernel.nix
+    ../../modules/hosts/aurora/system/services
+    ../../modules/hosts/aurora/boot/kernel.nix
 
     ../../modules/hosts/aurora/system/defaults.nix
     ../../modules/hosts/aurora/hardware/bluetooth.nix
     ../../modules/hosts/aurora/hardware/steam.nix
-    ../../modules/hosts/aurora/networking/base.nix
-    ../../modules/hosts/aurora/networking/vpn.nix
-    ../../modules/hosts/aurora/networking/tailscale.nix
+    ../../modules/hosts/aurora/system/networking/base.nix
+    ../../modules/hosts/aurora/system/networking/vpn.nix
+    ../../modules/hosts/aurora/system/networking/tailscale.nix
     ../../modules/hosts/aurora/hardware/nvidia.nix
-    ../../modules/hosts/aurora/packages/profiles/core.nix
-    ../../modules/hosts/shared/packages/profiles/desktop.nix
+    ../../modules/hosts/aurora/environment/profiles/core.nix
+    ../../modules/hosts/shared/environment/profiles/desktop.nix
     ../../modules/hosts/shared/system/binary-compatibility.nix
-    ../../modules/hosts/aurora/packages/profiles/gaming.nix
-    ../../modules/hosts/aurora/packages/profiles/fonts.nix
-    ../../modules/hosts/aurora/session/sway.nix
-    ../../modules/hosts/aurora/session/display-manager.nix
-    ../../modules/hosts/aurora/session/portals.nix
-    ../../modules/hosts/shared/users/giks.nix
+    ../../modules/hosts/aurora/applications/profiles/gaming.nix
+    ../../modules/hosts/aurora/environment/profiles/fonts.nix
+    ../../modules/hosts/aurora/environment/session/sway.nix
+    ../../modules/hosts/aurora/environment/session/display-manager.nix
+    ../../modules/hosts/aurora/environment/session/portals.nix
+    ../../modules/hosts/shared/environment/users/giks.nix
   ]
   ++ lib.optionals (lib.elem "dev" roles) [
-    ../../modules/hosts/aurora/packages/profiles/dev.nix
+    ../../modules/hosts/aurora/applications/profiles/dev.nix
   ];
 
   # Shared module activations
