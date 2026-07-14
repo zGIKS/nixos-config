@@ -1,4 +1,4 @@
-{ lib, pkgs, roles, platformLib, ... }:
+{ lib, roles, platformLib, ... }:
 
 let
   waybarConfigFiles = [
@@ -17,11 +17,6 @@ let
   ];
 in
 {
-  home.packages = with pkgs;
-    lib.optionals (lib.elem "desktop" roles) [
-      waybar
-    ];
-
   xdg.configFile = platformLib.mkConfigLinks (
     lib.optionals (lib.elem "desktop" roles) waybarConfigFiles
   );

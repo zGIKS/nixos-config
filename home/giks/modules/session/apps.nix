@@ -5,24 +5,6 @@ let
 in
 {
   options.myHome.apps = {
-    base.enable = lib.mkEnableOption "base desktop applications" // {
-      default = lib.elem "desktop" roles;
-    };
-    browsers.enable = lib.mkEnableOption "web browsers" // {
-      default = lib.elem "desktop" roles;
-    };
-    media.enable = lib.mkEnableOption "media and chat desktop applications" // {
-      default = lib.elem "desktop" roles;
-    };
-    documents.enable = lib.mkEnableOption "document and archive desktop applications" // {
-      default = lib.elem "desktop" roles;
-    };
-    devGui.enable = lib.mkEnableOption "heavy GUI development applications" // {
-      default = false;
-    };
-    devTools.enable = lib.mkEnableOption "development desktop applications" // {
-      default = lib.elem "dev" roles;
-    };
     kimi.enable = lib.mkEnableOption "Kimi Code CLI" // {
       default = lib.elem "dev" roles;
     };
@@ -40,54 +22,4 @@ in
     ''
   );
 
-  config.home.packages = with pkgs;
-    [
-      pomodog.packages.${pkgs.stdenv.hostPlatform.system}.default
-    ]
-    ++ lib.optionals cfg.base.enable [
-      brightnessctl
-      grim
-      gsimplecal
-      gvfs
-      tumbler
-      thunar
-      pavucontrol
-      playerctl
-      slurp
-      sway-contrib.grimshot
-      swappy
-      wdisplays
-      yazi
-      wl-clipboard
-      wofi
-      kdePackages.ark
-    ]
-    ++ lib.optionals cfg.browsers.enable [
-      brave
-      google-chrome
-    ]
-    ++ lib.optionals cfg.media.enable [
-      discord-ptb
-      mpv
-      obs-studio
-      rustdesk-flutter
-      spotify
-    ]
-    ++ lib.optionals cfg.documents.enable [
-      typora
-    ]
-    ++ lib.optionals cfg.devGui.enable [
-      jetbrains.datagrip
-      jetbrains.idea
-      android-studio
-    ]
-    ++ lib.optionals cfg.devTools.enable [
-      vscode
-      zed-editor
-      zellij
-    ]
-    ++ lib.optionals cfg.kimi.enable [
-      python313
-      uv
-    ];
 }

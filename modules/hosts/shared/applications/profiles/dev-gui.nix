@@ -1,5 +1,14 @@
-{ username, ... }:
+{ config, lib, pkgs, ... }:
 
+let
+  cfg = config.myModules.profiles.devGui;
+in
 {
-  home-manager.users.${username}.myHome.apps.devGui.enable = true;
+  options.myModules.profiles.devGui.enable = lib.mkEnableOption "heavy GUI development applications";
+
+  config = lib.mkIf cfg.enable {
+    environment.systemPackages = with pkgs; [
+      jetbrains.datagrip
+    ];
+  };
 }

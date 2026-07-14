@@ -1,4 +1,4 @@
-{ lib, pkgs, roles, platformLib, ... }:
+{ lib, roles, platformLib, ... }:
 
 let
   sharedConfigFiles = [
@@ -28,13 +28,6 @@ let
   ];
 in
 {
-  home.packages = with pkgs;
-    [ alacritty fastfetch ]
-    ++ lib.optionals (lib.elem "desktop" roles) [
-      cava
-      cmatrix
-    ];
-
   xdg.configFile = platformLib.mkConfigLinks (
     sharedConfigFiles
     ++ lib.optionals (lib.elem "desktop" roles) cavaConfigFiles

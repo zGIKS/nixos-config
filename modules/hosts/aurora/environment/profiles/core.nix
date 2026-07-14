@@ -5,22 +5,7 @@
 
   config = lib.mkIf config.myModules.profiles.core.enable {
     environment.systemPackages = with pkgs; [
-      bash-completion
-      bun
-      curl
-      efibootmgr
-      fish
-      gh
-      git
-      htop
-      neovim
-      nano
-      os-prober
       pipes
-      starship
-      unzip
-      wget
-      zellij
     ];
   };
 }
