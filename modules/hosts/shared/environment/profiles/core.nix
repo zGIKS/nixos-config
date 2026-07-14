@@ -21,7 +21,6 @@ in
       starship
       unzip
       wget
-      zellij
     ];
   };
 }

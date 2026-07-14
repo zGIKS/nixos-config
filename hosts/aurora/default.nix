@@ -14,6 +14,7 @@
     ../../modules/hosts/shared/applications/profiles/languages/python.nix
     ../../modules/hosts/shared/applications/profiles/languages/rust.nix
     ../../modules/hosts/shared/applications/profiles/tools/nit.nix
+    ../../modules/hosts/shared/applications/profiles/tools/pomodog.nix
     ../../modules/hosts/aurora/system/services
     ../../modules/hosts/aurora/boot/kernel.nix
 
@@ -53,6 +54,7 @@
   myModules.profiles.languages.python.enable = true;
   myModules.profiles.languages.rust.enable = true;
   myModules.profiles.tools.nit.enable = true;
+  myModules.profiles.tools.pomodog.enable = true;
   myModules.desktop.sway.enable = lib.elem "desktop" roles;
   myModules.hardware.steam.enable = true;
   myModules.profiles.gaming.enable = true;

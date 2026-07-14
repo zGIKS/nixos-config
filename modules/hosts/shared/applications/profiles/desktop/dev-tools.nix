@@ -12,8 +12,6 @@ in
     environment.systemPackages = with pkgs; [
       gnumake
       gnutar
-      nerd-fonts.fira-code
-      nerd-fonts.jetbrains-mono
       vscode
       zellij
     ];

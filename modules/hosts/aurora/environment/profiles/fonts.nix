@@ -5,6 +5,7 @@
     corefonts
     inter
     material-design-icons
+    nerd-fonts.fira-code
     nerd-fonts.jetbrains-mono
     noto-fonts
     noto-fonts-cjk-sans

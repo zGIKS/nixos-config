@@ -1,8 +1,13 @@
+{ lib, roles, ... }:
+
 {
+  options.myModules.profiles.desktopApps.enable = lib.mkEnableOption "desktop applications" // {
+    default = lib.elem "desktop" roles;
+  };
+
   imports = [
-    ./base.nix
     ./shell.nix
-    ./desktop-tools.nix
+    ./tools
     ./browsers.nix
     ./documents.nix
     ./dev-tools.nix

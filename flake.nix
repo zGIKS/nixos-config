@@ -35,9 +35,14 @@
       platformLib = import ./lib { inherit (nixpkgs) lib; };
       mkHost = hostName: { roles, keyboardLayout }:
         let
-          overlays = import (if builtins.elem hostName [ "aurora" "gaia" ]
-            then ./modules/hosts/${hostName}/applications/overlays
-            else ./modules/hosts/${hostName}/packages/overlays) {
+          hostOverlays = if hostName == "aurora" then
+            (import ./modules/hosts/aurora/applications/overlays {
+              inherit pkgsUnstable;
+            })
+          else {
+            default = final: prev: { };
+          };
+          sharedOverlays = import ./modules/hosts/shared/applications/overlays {
             inherit pkgsUnstable;
           };
           specialArgs = {
@@ -48,7 +53,7 @@
           inherit system specialArgs;
           modules = [
             ./hosts/${hostName}
-            { nixpkgs.overlays = [ overlays.default ]; }
+            { nixpkgs.overlays = [ sharedOverlays.default hostOverlays.default ]; }
             home-manager.nixosModules.home-manager
             {
               home-manager.useGlobalPkgs = true;
