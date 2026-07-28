@@ -1,5 +1,9 @@
 { ... }:
 
 {
-  services.ollama.enable = true;
+  services.ollama = {
+    enable = true;
+    host = "0.0.0.0";
+    openFirewall = true;
+  };
 }
