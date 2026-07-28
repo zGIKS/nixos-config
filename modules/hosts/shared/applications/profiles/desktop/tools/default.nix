@@ -6,5 +6,7 @@
     ./display.nix
     ./launcher.nix
     ./panels.nix
+    ./codex.nix
+    ./antigravity.nix
   ];
 }

@@ -12,7 +12,6 @@ in
     environment.systemPackages = with pkgs; [
       python3
       python313
-      uv
     ];
   };
 }

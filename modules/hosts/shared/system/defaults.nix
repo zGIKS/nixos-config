@@ -15,6 +15,7 @@
       "vista-fonts"
       "symbola"
       "brave"
+      "google-antigravity"
       "libsciter"
     ];
 
