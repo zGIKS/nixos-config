@@ -20,10 +20,14 @@
       url = "github:zGIKS/pomodog";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    antigravityNix = {
+      url = "github:jacopone/antigravity-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     codexDesktopLinux.url = "github:ilysenko/codex-desktop-linux";
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, sops-nix, home-manager, nit, pomodog, codexDesktopLinux, ... }:
+  outputs = { self, nixpkgs, nixpkgs-unstable, sops-nix, home-manager, nit, pomodog, antigravityNix, codexDesktopLinux, ... }:
     let
       system = "x86_64-linux";
       username = "giks";
@@ -47,7 +51,7 @@
             inherit pkgsUnstable;
           };
           specialArgs = {
-            inherit username hostName platformLib nit pomodog codexDesktopLinux roles keyboardLayout sops-nix;
+            inherit username hostName platformLib nit pomodog antigravityNix codexDesktopLinux roles keyboardLayout sops-nix;
           };
         in
         nixpkgs.lib.nixosSystem {
