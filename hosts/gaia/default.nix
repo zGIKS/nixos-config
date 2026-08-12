@@ -2,7 +2,6 @@
 
 {
   imports = [
-    ../../modules/hosts/gaia/system/sops.nix
     ./hardware-configuration.nix
     ./disk.nix
     ../../modules/hosts/shared/boot/grub.nix
@@ -35,8 +34,6 @@
 
   myModules.desktop.sway.enable = lib.elem "desktop" roles;
   platform.services.docker.enable = lib.elem "dev" roles;
-
-  sops.defaultSopsFile = ../../secrets/gaia/secrets.yaml;
 
   networking.hostName = "gaia";
   services.xserver.xkb.layout = keyboardLayout;
