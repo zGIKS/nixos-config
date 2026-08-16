@@ -4,11 +4,11 @@ let
   cfg = config.myModules.profiles.desktopApps;
 in
 {
-  options.myModules.profiles.desktopApps.browsers.enable = lib.mkEnableOption "web browsers" // {
+  options.myModules.profiles.desktopApps.browsers.brave.enable = lib.mkEnableOption "brave browser" // {
     default = lib.elem "desktop" roles;
   };
 
-  config = lib.mkIf (cfg.enable && cfg.browsers.enable) {
+  config = lib.mkIf (cfg.enable && cfg.browsers.brave.enable) {
     environment.systemPackages = with pkgs; [
       brave
     ];

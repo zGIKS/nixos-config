@@ -7,14 +7,10 @@
     ../../modules/hosts/shared/boot/grub.nix
     ../../modules/hosts/shared/system/defaults.nix
     ../../modules/hosts/shared/applications/profiles/desktop
-    ../../modules/hosts/shared/applications/profiles/dev-gui.nix
-    ../../modules/hosts/shared/applications/profiles/languages/go.nix
-    ../../modules/hosts/shared/applications/profiles/languages/lsp.nix
-    ../../modules/hosts/shared/applications/profiles/languages/node.nix
-    ../../modules/hosts/shared/applications/profiles/languages/python.nix
-    ../../modules/hosts/shared/applications/profiles/languages/rust.nix
-    ../../modules/hosts/shared/applications/profiles/tools/nit.nix
-    ../../modules/hosts/shared/applications/profiles/tools/pomodog.nix
+    ../../modules/hosts/shared/applications/profiles/development
+    ../../modules/hosts/shared/applications/profiles/productivity
+    ../../modules/hosts/shared/applications/profiles/shell
+    ../../modules/hosts/shared/applications/profiles/ai
     ../../modules/hosts/aurora/system/services
     ../../modules/hosts/aurora/boot/kernel.nix
 

@@ -6,10 +6,8 @@
   };
 
   imports = [
-    ./shell.nix
-    ./tools
     ./browsers.nix
-    ./documents.nix
-    ./dev-tools.nix
+    ./environment
+    ./utilities
   ];
 }

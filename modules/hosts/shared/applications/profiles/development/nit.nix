@@ -1,14 +1,14 @@
 { config, lib, nit, pkgs, roles, ... }:
 
 let
-  cfg = config.myModules.profiles.tools.nit;
+  cfg = config.myModules.profiles.ai;
 in
 {
-  options.myModules.profiles.tools.nit.enable = lib.mkEnableOption "Nit development tool" // {
+  options.myModules.profiles.ai.nit.enable = lib.mkEnableOption "Nit development tool" // {
     default = lib.elem "dev" roles;
   };
 
-  config = lib.mkIf cfg.enable {
+  config = lib.mkIf (cfg.enable && cfg.nit.enable) {
     environment.systemPackages = [
       nit.packages.${pkgs.stdenv.hostPlatform.system}.nit
     ];
