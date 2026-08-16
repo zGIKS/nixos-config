@@ -25,36 +25,48 @@
       subagents = {
         projectRootResolution = "git-root";
         defaultThinking = "medium";
+
         agentOverrides = {
-          scout = {
+          explorer = {
             thinking = "low";
             inheritProjectContext = true;
             inheritSkills = true;
             defaultContext = "fresh";
           };
+
           researcher = {
             thinking = "medium";
             inheritProjectContext = true;
             inheritSkills = true;
             defaultContext = "fresh";
           };
-          worker = {
+
+          architect = {
             thinking = "high";
             inheritProjectContext = true;
             inheritSkills = true;
             defaultContext = "fork";
           };
+
+          developer = {
+            thinking = "medium";
+            inheritProjectContext = true;
+            inheritSkills = true;
+            defaultContext = "fork";
+          };
+
+          tester = {
+            thinking = "medium";
+            inheritProjectContext = true;
+            inheritSkills = true;
+            defaultContext = "fresh";
+          };
+
           reviewer = {
             thinking = "high";
             inheritProjectContext = true;
             inheritSkills = true;
             defaultContext = "fresh";
-          };
-          oracle = {
-            thinking = "high";
-            inheritProjectContext = true;
-            inheritSkills = true;
-            defaultContext = "fork";
           };
         };
       };
