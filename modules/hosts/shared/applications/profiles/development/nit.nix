@@ -1,10 +1,10 @@
 { config, lib, nit, pkgs, roles, ... }:
 
 let
-  cfg = config.myModules.profiles.ai;
+  cfg = config.myModules.profiles.development;
 in
 {
-  options.myModules.profiles.ai.nit.enable = lib.mkEnableOption "Nit development tool" // {
+  options.myModules.profiles.development.nit.enable = lib.mkEnableOption "Nit development tool" // {
     default = lib.elem "dev" roles;
   };
 

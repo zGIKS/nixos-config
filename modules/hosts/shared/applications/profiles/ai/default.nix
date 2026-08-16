@@ -6,7 +6,6 @@
   };
 
   imports = [
-    ./nit.nix
     ./pi.nix
   ];
 }
