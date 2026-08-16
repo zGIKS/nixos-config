@@ -8,6 +8,7 @@
     ./modules/shell.nix
     ./modules/nvim.nix
     ./modules/theme.nix
+    ./modules/pi.nix
     ./modules/session/sway.nix
     ./modules/session/waybar.nix
     ./modules/session/wofi.nix

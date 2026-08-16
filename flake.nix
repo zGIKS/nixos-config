@@ -25,9 +25,13 @@
       url = "github:lukasl-dev/pi.nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    personalNotes = {
+      url = "git+ssh://git@github.com/zGIKS/personal-notes.git";
+      flake = false;
+    };
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, nit, pomodog, antigravityNix, codexDesktopLinux, pi, ... }:
+  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, nit, pomodog, antigravityNix, codexDesktopLinux, pi, personalNotes, ... }:
     let
       system = "x86_64-linux";
       username = "giks";
@@ -51,7 +55,7 @@
             inherit pkgsUnstable;
           };
           specialArgs = {
-            inherit username hostName platformLib nit pomodog antigravityNix codexDesktopLinux roles keyboardLayout;
+            inherit username hostName platformLib nit pomodog antigravityNix codexDesktopLinux pi personalNotes roles keyboardLayout;
           };
         in
         nixpkgs.lib.nixosSystem {

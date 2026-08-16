@@ -293,6 +293,22 @@
         "type": "github"
       }
     },
+    "personalNotes": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1786861403,
+        "narHash": "sha256-+e2T5yeY81E5Y1rreqU0vfeHAnL2/pckxm2ZEvTZw58=",
+        "ref": "refs/heads/main",
+        "rev": "fc67de5f2f437c651e09e43d026ad18bc0c13dc9",
+        "revCount": 66,
+        "type": "git",
+        "url": "ssh://git@github.com/zGIKS/personal-notes.git"
+      },
+      "original": {
+        "type": "git",
+        "url": "ssh://git@github.com/zGIKS/personal-notes.git"
+      }
+    },
     "pi": {
       "inputs": {
         "bun2nix": "bun2nix",
@@ -347,6 +363,7 @@
         "nit": "nit",
         "nixpkgs": "nixpkgs_2",
         "nixpkgs-unstable": "nixpkgs-unstable",
+        "personalNotes": "personalNotes",
         "pi": "pi",
         "pomodog": "pomodog"
       }
