@@ -1,1 +1,0 @@
-This not a host its shared kernel :0

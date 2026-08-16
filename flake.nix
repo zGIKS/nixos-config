@@ -21,9 +21,13 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     codexDesktopLinux.url = "github:ilysenko/codex-desktop-linux";
+    pi = {
+      url = "github:lukasl-dev/pi.nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, nit, pomodog, antigravityNix, codexDesktopLinux, ... }:
+  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, nit, pomodog, antigravityNix, codexDesktopLinux, pi, ... }:
     let
       system = "x86_64-linux";
       username = "giks";
@@ -54,7 +58,7 @@
           inherit system specialArgs;
           modules = [
             ./hosts/${hostName}
-            { nixpkgs.overlays = [ sharedOverlays.default hostOverlays.default ]; }
+            { nixpkgs.overlays = [ sharedOverlays.default hostOverlays.default pi.overlays.default ]; }
             home-manager.nixosModules.home-manager
             {
               home-manager.useGlobalPkgs = true;
