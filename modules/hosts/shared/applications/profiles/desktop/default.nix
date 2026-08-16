@@ -6,7 +6,7 @@
   };
 
   imports = [
-    ./browsers.nix
+    ./brave.nix
     ./environment
     ./utilities
   ];

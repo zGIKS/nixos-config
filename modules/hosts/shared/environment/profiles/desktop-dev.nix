@@ -13,6 +13,6 @@
   myModules.profiles.languages.python.enable = lib.elem "dev" roles;
   myModules.profiles.languages.rust.enable = lib.elem "dev" roles;
 
-  myModules.profiles.ai.nit.enable = lib.elem "dev" roles;
+  myModules.profiles.development.nit.enable = lib.elem "dev" roles;
   myModules.profiles.productivity.pomodog.enable = lib.elem "desktop" roles;
 }
