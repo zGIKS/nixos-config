@@ -296,11 +296,11 @@
     "personalNotes": {
       "flake": false,
       "locked": {
-        "lastModified": 1786915025,
-        "narHash": "sha256-TYbU/butKtCRe06P1La8wJBO49iQSGaog9+rq2lakso=",
+        "lastModified": 1786926984,
+        "narHash": "sha256-/r0HCJaly9Sj8JJTLVVC3sHvqD09XNKTgOYLbdcORTQ=",
         "ref": "refs/heads/main",
-        "rev": "aa4e2665b924ce5b2b8cdadaa7176d879510f515",
-        "revCount": 72,
+        "rev": "ee567db4d9548552e45728c3998130fdd4f6f835",
+        "revCount": 75,
         "type": "git",
         "url": "ssh://git@github.com/zGIKS/personal-notes.git"
       },
