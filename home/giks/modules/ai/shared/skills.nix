@@ -1,28 +1,36 @@
 { lib, personalNotes, target, flatten ? false, ... }:
 
 let
+  # flatName is only used when flatten = true. It defaults to the last path
+  # segment, overridden where that would collide with another skill's last
+  # segment (both DDD's and TDD's Next.js skills end in "next").
   skills = [
-    "operating-systems/nixos-multi-host-architecture"
-    "software-design/design-system-patterns"
-    "software-design/frontend-design"
-    "software-design/impeccable"
-    "software-design/shadcn"
-    "software-design/tailwind-design-system"
-    "software-design/ui-design"
-    "software-design/vercel-composition-patterns"
-    "software-design/web-design-guidelines"
-    "software-engineering/domain-driven-design-ddd/angular"
-    "software-engineering/domain-driven-design-ddd/flutter"
-    "software-engineering/domain-driven-design-ddd/java-25"
-    "software-engineering/domain-driven-design-ddd/next"
-    "software-engineering/test-driven-development-tdb/java"
-    "software-engineering/test-driven-development-tdb/next"
-    "software-testing-qa/testing-by-method"
+    { path = "operating-systems/nixos-multi-host-architecture"; }
+    { path = "software-design/design-system-patterns"; }
+    { path = "software-design/frontend-design"; }
+    { path = "software-design/impeccable"; }
+    { path = "software-design/shadcn"; }
+    { path = "software-design/tailwind-design-system"; }
+    { path = "software-design/ui-design"; }
+    { path = "software-design/vercel-composition-patterns"; }
+    { path = "software-design/web-design-guidelines"; }
+    { path = "software-engineering/domain-driven-design-ddd/angular"; }
+    { path = "software-engineering/domain-driven-design-ddd/flutter"; }
+    { path = "software-engineering/domain-driven-design-ddd/java-25"; }
+    { path = "software-engineering/domain-driven-design-ddd/next"; flatName = "ddd-next"; }
+    { path = "software-engineering/test-driven-development-tdb/java"; }
+    { path = "software-engineering/test-driven-development-tdb/next"; flatName = "tdd-next"; }
+    { path = "software-testing-qa/testing-by-method/mutation"; flatName = "mutation-testing"; }
   ];
 in
 {
-  home.file = lib.listToAttrs (map (skill: {
-    name = if flatten then "${target}/${lib.last (lib.splitString "/" skill)}" else "${target}/${skill}";
-    value.source = "${personalNotes}/skills/${skill}";
-  }) skills);
+  home.file = lib.listToAttrs (map (skill:
+    let
+      flatName = skill.flatName or (lib.last (lib.splitString "/" skill.path));
+    in
+    {
+      name = if flatten then "${target}/${flatName}" else "${target}/${skill.path}";
+      value.source = "${personalNotes}/skills/${skill.path}";
+    }
+  ) skills);
 }
