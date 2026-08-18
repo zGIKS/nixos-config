@@ -1,5 +1,25 @@
 {
   "nodes": {
+    "airi": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs-unstable"
+        ]
+      },
+      "locked": {
+        "lastModified": 1787010277,
+        "narHash": "sha256-DSyaw5Br3uwU4HfVdkKDEfkY1p63B/9aLfbvPdPlnUY=",
+        "owner": "09641061",
+        "repo": "airi",
+        "rev": "ac516572db4b5fcea686c6a4d7ef33f9d6b299e4",
+        "type": "github"
+      },
+      "original": {
+        "owner": "09641061",
+        "repo": "airi",
+        "type": "github"
+      }
+    },
     "antigravityNix": {
       "inputs": {
         "flake-utils": "flake-utils",
@@ -357,6 +377,7 @@
     },
     "root": {
       "inputs": {
+        "airi": "airi",
         "antigravityNix": "antigravityNix",
         "codexDesktopLinux": "codexDesktopLinux",
         "home-manager": "home-manager",

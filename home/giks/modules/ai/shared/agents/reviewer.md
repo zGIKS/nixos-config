@@ -1,7 +1,6 @@
 ---
 name: reviewer
 description: Evaluates the overall quality of the implementation
-tools: read, grep, find, ls
 ---
 
 # Role

@@ -1,7 +1,6 @@
 ---
 name: tester
 description: Verifies that the implementation behaves correctly
-tools: read, grep, find, ls, bash
 ---
 
 # Role

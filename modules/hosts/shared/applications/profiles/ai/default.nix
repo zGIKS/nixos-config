@@ -6,6 +6,9 @@
   };
 
   imports = [
+    ./antigravity.nix
+    ./claude-code.nix
+    ./codex.nix
     ./pi.nix
   ];
 }

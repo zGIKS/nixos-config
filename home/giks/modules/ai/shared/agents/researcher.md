@@ -1,7 +1,6 @@
 ---
 name: researcher
 description: Gathers external technical documentation and evidence
-tools: read, grep, find, ls, web_search, fetch_content, get_search_content
 ---
 
 # Role

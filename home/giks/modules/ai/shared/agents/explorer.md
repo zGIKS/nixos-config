@@ -1,7 +1,6 @@
 ---
 name: explorer
 description: Investigates the codebase and reports relevant context
-tools: read, grep, find, ls
 ---
 
 # Role

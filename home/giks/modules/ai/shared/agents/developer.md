@@ -1,7 +1,6 @@
 ---
 name: developer
 description: Implements code changes according to the given requirement or plan
-tools: read, grep, find, ls, bash, edit, write, web_search, fetch_content, get_search_content
 ---
 
 # Role

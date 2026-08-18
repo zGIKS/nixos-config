@@ -1,7 +1,6 @@
 ---
 name: architect
 description: Designs the implementation plan before development begins
-tools: read, grep, find, ls
 ---
 
 # Role
