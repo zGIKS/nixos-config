@@ -1,4 +1,4 @@
-{ lib, personalNotes, target, ... }:
+{ lib, personalNotes, target, flatten ? false, ... }:
 
 let
   skills = [
@@ -22,7 +22,7 @@ let
 in
 {
   home.file = lib.listToAttrs (map (skill: {
-    name = "${target}/${skill}";
+    name = if flatten then "${target}/${lib.last (lib.splitString "/" skill)}" else "${target}/${skill}";
     value.source = "${personalNotes}/skills/${skill}";
   }) skills);
 }
