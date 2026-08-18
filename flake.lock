@@ -7,11 +7,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1787010277,
-        "narHash": "sha256-DSyaw5Br3uwU4HfVdkKDEfkY1p63B/9aLfbvPdPlnUY=",
+        "lastModified": 1787013309,
+        "narHash": "sha256-iFbOw30bKQiF1QjGSyhepxdSaQy/iKOS/hFiKbLhcqo=",
         "owner": "09641061",
         "repo": "airi",
-        "rev": "ac516572db4b5fcea686c6a4d7ef33f9d6b299e4",
+        "rev": "80a52f9f4ecadd497a61910d08c98d62341bdcbf",
         "type": "github"
       },
       "original": {

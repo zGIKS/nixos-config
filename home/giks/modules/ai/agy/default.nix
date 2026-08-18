@@ -4,7 +4,7 @@
     ./agents.nix
     (import ../shared/skills.nix {
       inherit lib personalNotes;
-      target = ".agents/skills";
+      target = ".gemini/antigravity-cli/skills";
     })
   ];
 }
