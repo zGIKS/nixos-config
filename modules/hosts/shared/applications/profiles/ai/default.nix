@@ -5,10 +5,5 @@
     default = lib.elem "dev" roles;
   };
 
-  imports = [
-    ./antigravity.nix
-    ./claude-code.nix
-    ./codex.nix
-    ./pi.nix
-  ];
+  imports = [ ./airi.nix ];
 }

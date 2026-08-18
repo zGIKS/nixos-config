@@ -1,4 +1,4 @@
-{ username, ... }:
+{ username, airi, ... }:
 {
   home.stateVersion = "25.11";
   home.username = username;
@@ -8,10 +8,7 @@
     ./modules/shell.nix
     ./modules/nvim.nix
     ./modules/theme.nix
-    ./modules/ai/claude
-    ./modules/ai/agy
-    ./modules/ai/codex
-    ./modules/ai/pi
+    airi.homeModules.ai
     ./modules/session/sway.nix
     ./modules/session/waybar.nix
     ./modules/session/wofi.nix
