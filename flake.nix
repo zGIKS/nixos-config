@@ -4,10 +4,6 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
-    sops-nix = {
-      url = "github:Mic92/sops-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     home-manager = {
       url = "github:nix-community/home-manager/release-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -20,9 +16,30 @@
       url = "github:zGIKS/pomodog";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    antigravityNix = {
+      url = "github:jacopone/antigravity-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    codexDesktopLinux.url = "github:ilysenko/codex-desktop-linux";
+    pi = {
+      url = "github:lukasl-dev/pi.nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    nixvim = {
+      url = "github:nix-community/nixvim";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    airi = {
+      url = "github:09641061/airi";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
+    personalNotes = {
+      url = "git+ssh://git@github.com/zGIKS/personal-notes.git";
+      flake = false;
+    };
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, sops-nix, home-manager, nit, pomodog, ... }:
+  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, nit, pomodog, antigravityNix, codexDesktopLinux, pi, airi, personalNotes, nixvim, ... }:
     let
       system = "x86_64-linux";
       username = "giks";
@@ -46,14 +63,14 @@
             inherit pkgsUnstable;
           };
           specialArgs = {
-            inherit username hostName platformLib nit pomodog roles keyboardLayout sops-nix;
+            inherit username hostName platformLib nit pomodog antigravityNix codexDesktopLinux pi airi personalNotes nixvim roles keyboardLayout;
           };
         in
         nixpkgs.lib.nixosSystem {
           inherit system specialArgs;
           modules = [
             ./hosts/${hostName}
-            { nixpkgs.overlays = [ sharedOverlays.default hostOverlays.default ]; }
+            { nixpkgs.overlays = [ sharedOverlays.default hostOverlays.default pi.overlays.default ]; }
             home-manager.nixosModules.home-manager
             {
               home-manager.useGlobalPkgs = true;

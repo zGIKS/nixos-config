@@ -1,3 +1,0 @@
-creation_rules:
-  - path_regex: .*secrets/gaia/secrets\.yaml$
-    age: age18qwu3mqew6z2m68uqlrnshq4t64vpmmz9grq2tk6cp5hkv9wg3fqvaeu3f
