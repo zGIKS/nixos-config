@@ -17,6 +17,7 @@
       "brave"
       "google-antigravity"
       "libsciter"
+      "discord-ptb"
     ];
 
     time.timeZone = "America/Lima";

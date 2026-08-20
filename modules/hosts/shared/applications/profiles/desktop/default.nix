@@ -7,6 +7,7 @@
 
   imports = [
     ./brave.nix
+    ./communications.nix
     ./environment
     ./utilities
   ];

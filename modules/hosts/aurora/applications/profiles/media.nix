@@ -8,7 +8,6 @@ in
 
   config = lib.mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
-      discord-ptb
       mpv
       obs-studio
       rustdesk-flutter

@@ -13,12 +13,12 @@
     ../../modules/hosts/shared/applications/profiles/ai
     ../../modules/hosts/aurora/system/services
     ../../modules/hosts/aurora/boot/kernel.nix
+    ../../modules/hosts/shared/system/networking/vpn.nix
 
     ../../modules/hosts/aurora/system/defaults.nix
     ../../modules/hosts/aurora/hardware/bluetooth.nix
     ../../modules/hosts/aurora/hardware/steam.nix
     ../../modules/hosts/aurora/system/networking/base.nix
-    ../../modules/hosts/aurora/system/networking/vpn.nix
     ../../modules/hosts/aurora/system/networking/tailscale.nix
     ../../modules/hosts/aurora/hardware/nvidia.nix
     ../../modules/hosts/aurora/environment/profiles/core.nix
