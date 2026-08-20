@@ -342,11 +342,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1781153490,
-        "narHash": "sha256-kLB3xUpUI3PTTub93RSFAeBYXMryNbWxlEEaLyO9z3k=",
+        "lastModified": 1787191915,
+        "narHash": "sha256-I8YHsj5z+vCooQZAqYeOihrjEvjeIWKU/0nPCsFTkoU=",
         "owner": "zGIKS",
         "repo": "nit",
-        "rev": "0c21f34ce6020a5693064f0690190361603577df",
+        "rev": "6491e6bcd7a66b2d0d3f3eedfd7c64d59bde9e5b",
         "type": "github"
       },
       "original": {
