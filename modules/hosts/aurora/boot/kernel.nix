@@ -1,7 +1,9 @@
 { config, lib, pkgs, ... }:
 
 {
-  boot.kernelPackages = lib.mkDefault pkgs.linuxPackages_latest;
+  # Keep the 7.1 kernel series: the current latest is incompatible with
+  # the NVIDIA driver version used by this host.
+  boot.kernelPackages = lib.mkDefault pkgs.linuxPackages_7_1;
 
   hardware.alsa.enablePersistence = true;
 

@@ -6,7 +6,7 @@
   imports = [
     ./modules/git.nix
     ./modules/shell.nix
-    ./modules/nvim.nix
+    ./modules/nvim
     ./modules/theme.nix
     airi.homeModules.ai
     ./modules/session/sway.nix
