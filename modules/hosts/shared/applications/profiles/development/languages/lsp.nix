@@ -16,6 +16,8 @@ in
       eslint
       prettier
       pyright
+      shfmt
+      stylua
       svelte-language-server
       tailwindcss
       typescript-language-server
