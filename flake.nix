@@ -21,9 +21,25 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     codexDesktopLinux.url = "github:ilysenko/codex-desktop-linux";
+    pi = {
+      url = "github:lukasl-dev/pi.nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    nixvim = {
+      url = "github:nix-community/nixvim";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    airi = {
+      url = "github:09641061/airi";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
+    personalNotes = {
+      url = "git+ssh://git@github.com/zGIKS/personal-notes.git";
+      flake = false;
+    };
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, nit, pomodog, antigravityNix, codexDesktopLinux, ... }:
+  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, nit, pomodog, antigravityNix, codexDesktopLinux, pi, airi, personalNotes, nixvim, ... }:
     let
       system = "x86_64-linux";
       username = "giks";
@@ -47,14 +63,14 @@
             inherit pkgsUnstable;
           };
           specialArgs = {
-            inherit username hostName platformLib nit pomodog antigravityNix codexDesktopLinux roles keyboardLayout;
+            inherit username hostName platformLib nit pomodog antigravityNix codexDesktopLinux pi airi personalNotes nixvim roles keyboardLayout;
           };
         in
         nixpkgs.lib.nixosSystem {
           inherit system specialArgs;
           modules = [
             ./hosts/${hostName}
-            { nixpkgs.overlays = [ sharedOverlays.default hostOverlays.default ]; }
+            { nixpkgs.overlays = [ sharedOverlays.default hostOverlays.default pi.overlays.default ]; }
             home-manager.nixosModules.home-manager
             {
               home-manager.useGlobalPkgs = true;
