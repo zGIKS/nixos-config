@@ -1,6 +1,10 @@
 { config, lib, ... }:
 
 {
+  imports = [
+    ./sops.nix
+  ];
+
   options.myModules.system.unfreePackages = lib.mkOption {
     type = lib.types.listOf lib.types.str;
     default = [ ];
