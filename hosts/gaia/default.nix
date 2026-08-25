@@ -16,6 +16,7 @@
 
     ../../modules/hosts/gaia/hardware/bluetooth.nix
     ../../modules/hosts/gaia/system/networking/base.nix
+    ../../modules/hosts/shared/system/networking/vpn.nix
     ../../modules/hosts/gaia/system/networking/tailscale.nix
     ../../modules/hosts/shared/environment/profiles/core.nix
     ../../modules/hosts/shared/environment/profiles/desktop-dev.nix

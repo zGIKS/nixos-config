@@ -1,6 +1,10 @@
 { config, lib, ... }:
 
 {
+  imports = [
+    ./sops.nix
+  ];
+
   options.myModules.system.unfreePackages = lib.mkOption {
     type = lib.types.listOf lib.types.str;
     default = [ ];
@@ -17,6 +21,7 @@
       "brave"
       "google-antigravity"
       "libsciter"
+      "discord-ptb"
     ];
 
     time.timeZone = "America/Lima";

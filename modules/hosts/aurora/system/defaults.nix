@@ -3,7 +3,6 @@
 {
   myModules.system.unfreePackages = lib.mkAfter [
     "google-chrome"
-    "discord-ptb"
     "spotify"
     "idea"
     "android-studio"
