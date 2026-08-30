@@ -16,15 +16,6 @@
       url = "github:zGIKS/pomodog";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    antigravityNix = {
-      url = "github:jacopone/antigravity-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    codexDesktopLinux.url = "github:ilysenko/codex-desktop-linux";
-    pi = {
-      url = "github:lukasl-dev/pi.nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     nixvim = {
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -33,13 +24,9 @@
       url = "github:09641061/airi";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
-    personalNotes = {
-      url = "git+ssh://git@github.com/zGIKS/personal-notes.git";
-      flake = false;
-    };
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, nit, pomodog, antigravityNix, codexDesktopLinux, pi, airi, personalNotes, nixvim, ... }:
+  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, nit, pomodog, airi, nixvim, ... }:
     let
       system = "x86_64-linux";
       username = "giks";
@@ -63,19 +50,19 @@
             inherit pkgsUnstable;
           };
           specialArgs = {
-            inherit username hostName platformLib nit pomodog antigravityNix codexDesktopLinux pi airi personalNotes nixvim roles keyboardLayout;
+            inherit username hostName platformLib nit pomodog airi nixvim roles keyboardLayout;
           };
         in
         nixpkgs.lib.nixosSystem {
           inherit system specialArgs;
           modules = [
             ./hosts/${hostName}
-            { nixpkgs.overlays = [ sharedOverlays.default hostOverlays.default pi.overlays.default ]; }
+            { nixpkgs.overlays = [ sharedOverlays.default hostOverlays.default ]; }
             home-manager.nixosModules.home-manager
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
-              home-manager.backupFileExtension = "backup";
+              home-manager.backupFileExtension = "hmbackup";
               home-manager.extraSpecialArgs = specialArgs;
               home-manager.users.${username} = import ./home/giks;
             }

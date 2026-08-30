@@ -9,6 +9,9 @@
     ./modules/nvim
     ./modules/theme.nix
     airi.homeModules.ai
+    ({ pkgs, airi, ... }: {
+      programs.pi.coding-agent.package = airi.packages.${pkgs.stdenv.hostPlatform.system}.pi-coding-agent;
+    })
     ./modules/session/sway.nix
     ./modules/session/waybar.nix
     ./modules/session/wofi.nix
