@@ -11,7 +11,6 @@ in
       mpv
       obs-studio
       rustdesk-flutter
-      spotify
     ];
   };
 }

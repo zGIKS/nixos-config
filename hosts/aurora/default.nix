@@ -7,6 +7,7 @@
     ../../modules/hosts/shared/boot/grub.nix
     ../../modules/hosts/shared/system/defaults.nix
     ../../modules/hosts/shared/applications/profiles/desktop
+    ../../modules/hosts/shared/applications/profiles/media.nix
     ../../modules/hosts/shared/applications/profiles/development
     ../../modules/hosts/shared/applications/profiles/productivity
     ../../modules/hosts/shared/applications/profiles/shell

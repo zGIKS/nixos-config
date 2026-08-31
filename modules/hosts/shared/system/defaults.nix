@@ -22,6 +22,7 @@
       "google-antigravity"
       "libsciter"
       "discord-ptb"
+      "spotify"
     ];
 
     time.timeZone = "America/Lima";

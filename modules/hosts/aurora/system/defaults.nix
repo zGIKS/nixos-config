@@ -3,7 +3,6 @@
 {
   myModules.system.unfreePackages = lib.mkAfter [
     "google-chrome"
-    "spotify"
     "idea"
     "android-studio"
     "wpsoffice"
