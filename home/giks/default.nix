@@ -37,4 +37,6 @@
 
   home.file.".gitignore_global".text = ''
   '';
+
+  home.file.".gemini/antigravity-cli/settings.json".force = true;
 }
