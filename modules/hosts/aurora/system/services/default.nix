@@ -9,5 +9,6 @@
     ./mounts.nix
     ./pipewire.nix
     ./printing.nix
+    ../../../shared/system/services/openssh.nix
   ];
 }
