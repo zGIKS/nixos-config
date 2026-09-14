@@ -49,10 +49,8 @@
   platform.services.androidDebugging.enable = lib.elem "dev" roles;
   platform.services.docker.enable = lib.elem "dev" roles;
 
-  myModules.profiles.dev = {
-    enable = lib.elem "dev" roles;
-    latex.enable = lib.elem "dev" roles;
-  };
+  myModules.profiles.dev.enable = lib.elem "dev" roles;
+  myModules.profiles.languages.latex.enable = lib.elem "dev" roles;
   myModules.profiles.media.enable = true;
 
   # Host-specific facts
