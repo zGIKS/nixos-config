@@ -3,8 +3,8 @@
 let
   sharedConfigFiles = [
     {
-      target = "alacritty/alacritty.toml";
-      source = ../../../home/programs/alacritty/alacritty.toml;
+      target = "foot/foot.ini";
+      source = ../../../home/programs/foot/foot.ini;
     }
     {
       target = "fastfetch/config.jsonc";

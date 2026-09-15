@@ -209,7 +209,7 @@ channels = stereo
 ; xaxis = none
  
 # enable synchronized sync. 1 = on, 0 = off
-# removes flickering in alacritty terminal emulator.
+# removes flickering in terminal emulators.
 # defaults to off since the behaviour in other terminal emulators is unknown
 synchronized_sync = 1
 
