@@ -6,7 +6,7 @@
   };
 
   imports = [
-    ./alacritty.nix
+    ./foot.nix
     ./fastfetch.nix
   ];
 }

@@ -1,10 +1,10 @@
 # Minimal Sway config (core)
 set $mod Mod4
-set $term alacritty
+set $term foot
 
 font pango:sans-serif 11
 floating_modifier $mod
 
 # Modular config fragments
-include /etc/sway/config.d/*
-include ~/.config/sway/config.d/*
+include /etc/sway/config.d/*.conf
+include ~/.config/sway/config.d/*.conf

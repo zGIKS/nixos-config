@@ -14,7 +14,7 @@
     })
     ./modules/session/sway.nix
     ./modules/session/waybar.nix
-    ./modules/session/wofi.nix
+    ./modules/session/fuzzel.nix
     ./modules/session/eww.nix
   ];
 
