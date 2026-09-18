@@ -24,6 +24,7 @@
     ../../modules/hosts/aurora/hardware/nvidia.nix
     ../../modules/hosts/aurora/environment/profiles/core.nix
     ../../modules/hosts/aurora/applications/profiles/desktop-tools.nix
+    ../../modules/hosts/aurora/applications/profiles/display.nix
     ../../modules/hosts/shared/environment/profiles/core.nix
     ../../modules/hosts/shared/environment/profiles/desktop-dev.nix
     ../../modules/hosts/shared/environment/profiles/desktop.nix

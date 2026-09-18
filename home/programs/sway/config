@@ -8,3 +8,7 @@ floating_modifier $mod
 # Modular config fragments
 include /etc/sway/config.d/*.conf
 include ~/.config/sway/config.d/*.conf
+
+# User-managed persistent outputs written by nwg-displays.
+# Ignored silently when the file does not exist (e.g. hosts without it).
+include ~/.config/sway/outputs
