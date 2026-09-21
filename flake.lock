@@ -8,11 +8,11 @@
         "pi": "pi"
       },
       "locked": {
-        "lastModified": 1789942649,
-        "narHash": "sha256-eevDb65LicBjH2zTLkfGTkpIzCMBT6LXI26Zx2ez0p0=",
+        "lastModified": 1790006688,
+        "narHash": "sha256-M/CfstCs2RGrCl5zjUuTzmv8jj80xzHFua1bIoqxWkY=",
         "owner": "09641061",
         "repo": "airi",
-        "rev": "ea59df20025b155e0697fcc7d33a90800c9f42a7",
+        "rev": "d90bfc4583eb0c765161362f18cc72951dd808f1",
         "type": "github"
       },
       "original": {
