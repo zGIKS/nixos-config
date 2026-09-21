@@ -29,8 +29,7 @@
     ../../modules/hosts/shared/environment/profiles/desktop-dev.nix
     ../../modules/hosts/shared/environment/profiles/desktop.nix
     ../../modules/hosts/shared/system/binary-compatibility.nix
-    ../../modules/hosts/aurora/applications/profiles/gaming.nix
-    ../../modules/hosts/aurora/applications/profiles/browsers.nix
+    ../../modules/hosts/aurora/applications/profiles/default.nix
     ../../modules/hosts/aurora/applications/profiles/media.nix
     ../../modules/hosts/aurora/environment/profiles/fonts.nix
     ../../modules/hosts/aurora/environment/session/sway.nix
@@ -38,19 +37,14 @@
     ../../modules/hosts/aurora/environment/session/portals.nix
     ../../modules/hosts/aurora/environment/session/flatpak.nix
     ../../modules/hosts/shared/environment/users/giks.nix
-  ]
-  ++ lib.optionals (lib.elem "dev" roles) [
-    ../../modules/hosts/aurora/applications/profiles/dev.nix
   ];
 
   # Shared module activations
   myModules.desktop.sway.enable = lib.elem "desktop" roles;
   myModules.hardware.steam.enable = true;
-  myModules.profiles.gaming.enable = true;
   platform.services.androidDebugging.enable = lib.elem "dev" roles;
   platform.services.docker.enable = lib.elem "dev" roles;
 
-  myModules.profiles.dev.enable = lib.elem "dev" roles;
   myModules.profiles.languages.latex.enable = lib.elem "dev" roles;
   myModules.profiles.media.enable = true;
 
