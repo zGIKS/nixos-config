@@ -6,6 +6,7 @@
     ./docker.nix
     ./flatpak.nix
     ./keyring.nix
+    ./libvirt.nix
     ./mounts.nix
     ./pipewire.nix
     ./printing.nix
