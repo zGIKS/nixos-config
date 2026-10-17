@@ -11,6 +11,7 @@ in
     antigravity.enable = lib.mkEnableOption "Antigravity CLI (agy)" // { default = true; };
     piCodingAgent.enable = lib.mkEnableOption "Pi coding agent" // { default = true; };
     herdr.enable = lib.mkEnableOption "Herdr terminal workspace manager" // { default = true; };
+    mcode.enable = lib.mkEnableOption "MiniMax Code CLI (mcode)" // { default = true; };
   };
 
   config = lib.mkIf cfg.enable {
@@ -18,6 +19,7 @@ in
       ++ lib.optionals cfg.codex.enable [ airi.packages.${system}.codex ]
       ++ lib.optionals cfg.antigravity.enable [ airi.packages.${system}.antigravity-cli ]
       ++ lib.optionals cfg.piCodingAgent.enable [ airi.packages.${system}.pi-coding-agent ]
-      ++ lib.optionals cfg.herdr.enable [ airi.packages.${system}.herdr ];
+      ++ lib.optionals cfg.herdr.enable [ airi.packages.${system}.herdr ]
+      ++ lib.optionals cfg.mcode.enable [ airi.packages.${system}.mcode ];
   };
 }
