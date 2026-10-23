@@ -8,11 +8,11 @@
         "pi": "pi"
       },
       "locked": {
-        "lastModified": 1792206844,
-        "narHash": "sha256-7ZCNpw3PrlgEFZ5ZL91hNLKE9nqS3fMSumBn2DNxXk4=",
+        "lastModified": 1792716519,
+        "narHash": "sha256-oKNwZhQGwYG6atj/kp1ML2w1xbVatv1ff1p8uygKG3Q=",
         "owner": "09641061",
         "repo": "airi",
-        "rev": "5f1a0f5d9a01e3a3c9326ab71e1dc8bc7897cbee",
+        "rev": "2c8ba5166d8fd117135fbd647ecafe1a71963abf",
         "type": "github"
       },
       "original": {
@@ -355,11 +355,11 @@
         "nixpkgs-x86_64-darwin": "nixpkgs-x86_64-darwin"
       },
       "locked": {
-        "lastModified": 1791892157,
-        "narHash": "sha256-HwskvVBJpc4F5d+mnIQwbEeMvAKEVNE6IXczHx3wA3I=",
+        "lastModified": 1792574651,
+        "narHash": "sha256-M2UVwrUwzD/PsKLvn3vOm/TpGaG3IBRCPHqhQJcCreo=",
         "owner": "lukasl-dev",
         "repo": "pi.nix",
-        "rev": "f49d69d52582b5781e1705608b607e77a43e3071",
+        "rev": "e40b5a8551837d532b4f13355402cb88f1936d90",
         "type": "github"
       },
       "original": {
