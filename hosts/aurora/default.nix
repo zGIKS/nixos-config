@@ -60,5 +60,6 @@
     enable = true;
     rogControlCenter.enable = true;
   };
+  platform.services.libvirt.enable = true;
 
 }
