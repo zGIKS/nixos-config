@@ -1,16 +1,11 @@
-{ config, lib, pkgs, ... }:
+{ lib, config, pkgs, ... }:
 
-let
-  cfg = config.myModules.profiles.media;
-in
 {
-  options.myModules.profiles.media.enable = lib.mkEnableOption "Aurora media applications";
+  options.myModules.profiles.media.enable = lib.mkEnableOption "media applications";
 
-  config = lib.mkIf cfg.enable {
+  config = lib.mkIf config.myModules.profiles.media.enable {
     environment.systemPackages = with pkgs; [
-      mpv
-      obs-studio
-      rustdesk-flutter
+      spotify
     ];
   };
 }

@@ -1,19 +1,34 @@
-{ lib, ... }:
+{ config, lib, ... }:
 
 {
-  myModules.system.unfreePackages = lib.mkAfter [
-    "google-chrome"
-    "idea"
-    "android-studio"
-    "wpsoffice"
-    "nvidia-x11"
-    "nvidia-kernel-modules"
-    "nvidia-settings"
-    "nvidia-persistenced"
-    "nvidia-persistenced-1.0"
-    "rustdesk"
-    "steam"
-    "steam-original"
-    "steam-unwrapped"
-  ];
+  options.myModules.system.unfreePackages = lib.mkOption {
+    type = lib.types.listOf lib.types.str;
+    default = [ ];
+  };
+
+  config = {
+    myModules.system.unfreePackages = [
+      "datagrip"
+      "typora"
+      "vscode"
+      "corefonts"
+      "vista-fonts"
+      "symbola"
+      "brave"
+      "google-antigravity"
+      "libsciter"
+      "discord-ptb"
+      "spotify"
+    ];
+
+    time.timeZone = "America/Lima";
+    i18n.defaultLocale = "en_US.UTF-8";
+    console.useXkbConfig = true;
+
+    nixpkgs.config.allowUnfreePredicate = pkg:
+      builtins.elem (lib.getName pkg) config.myModules.system.unfreePackages;
+
+    nix.settings.experimental-features = [ "nix-command" "flakes" ];
+    system.stateVersion = "25.11";
+  };
 }
