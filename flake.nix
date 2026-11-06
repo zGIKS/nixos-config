@@ -18,7 +18,7 @@
     };
     nixvim = {
       url = "github:nix-community/nixvim";
-      inputs.nixpkgs.follows = "nixpkgs";
+      # NOTA: No usar follows aquí para evitar el warning de nixvim sobre nixpkgs.source
     };
     airi = {
       url = "github:09641061/airi";
