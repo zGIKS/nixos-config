@@ -1,9 +1,26 @@
 { config, lib, pkgs, ... }:
 
+let
+  cfg = config.myModules.profiles.core;
+in
 {
-  config = lib.mkIf config.myModules.profiles.core.enable {
+  options.myModules.profiles.core.enable = lib.mkEnableOption "core system profile";
+
+  config = lib.mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
-      pipes
+      bash-completion
+      bun
+      curl
+      efibootmgr
+      fish
+      gh
+      git
+      htop
+      neovim
+      os-prober
+      starship
+      unzip
+      wget
     ];
   };
 }

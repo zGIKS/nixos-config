@@ -18,7 +18,7 @@
     };
     nixvim = {
       url = "github:nix-community/nixvim";
-      inputs.nixpkgs.follows = "nixpkgs";
+      # NOTA: No usar follows aquí para evitar el warning de nixvim sobre nixpkgs.source
     };
     airi = {
       url = "github:09641061/airi";
@@ -39,7 +39,7 @@
       platformLib = import ./lib { inherit (nixpkgs) lib; };
       mkHost = hostName: { roles, keyboardLayout }:
         let
-          sharedOverlays = import ./modules/hosts/shared/applications/overlays {
+          auroraOverlays = import ./modules/hosts/aurora/applications/overlays {
             inherit pkgsUnstable;
           };
           specialArgs = {
@@ -50,7 +50,7 @@
           inherit system specialArgs;
           modules = [
             ./hosts/${hostName}
-            { nixpkgs.overlays = [ sharedOverlays.default ]; }
+            { nixpkgs.overlays = [ auroraOverlays.default ]; }
             home-manager.nixosModules.home-manager
             {
               home-manager.useGlobalPkgs = true;
@@ -63,10 +63,6 @@
         };
     in {
       nixosConfigurations = {
-        gaia = mkHost "gaia" {
-          roles = [ "desktop" "dev" ];
-          keyboardLayout = "latam";
-        };
         aurora = mkHost "aurora" {
           roles = [ "desktop" "dev" ];
           keyboardLayout = "us";

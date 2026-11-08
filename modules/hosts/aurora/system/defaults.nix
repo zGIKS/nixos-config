@@ -1,19 +1,14 @@
-{ lib, ... }:
+{ config, lib, ... }:
 
 {
-  myModules.system.unfreePackages = lib.mkAfter [
-    "google-chrome"
-    "idea"
-    "android-studio"
-    "wpsoffice"
-    "nvidia-x11"
-    "nvidia-kernel-modules"
-    "nvidia-settings"
-    "nvidia-persistenced"
-    "nvidia-persistenced-1.0"
-    "rustdesk"
-    "steam"
-    "steam-original"
-    "steam-unwrapped"
-  ];
+  config = {
+    time.timeZone = "America/Lima";
+    i18n.defaultLocale = "en_US.UTF-8";
+    console.useXkbConfig = true;
+
+    nixpkgs.config.allowUnfree = true;
+
+    nix.settings.experimental-features = [ "nix-command" "flakes" ];
+    system.stateVersion = "25.11";
+  };
 }
