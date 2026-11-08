@@ -5,6 +5,8 @@
 
   config = lib.mkIf config.myModules.profiles.media.enable {
     environment.systemPackages = with pkgs; [
+      mpv
+      obs-studio
       spotify
     ];
   };
