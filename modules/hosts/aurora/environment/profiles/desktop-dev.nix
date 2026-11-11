@@ -1,7 +1,7 @@
 { lib, roles, ... }:
 
 # roles comes from flake.nix specialArgs. The language/tool modules receive
-# nit and pomodog through the same specialArgs mechanism.
+# nit through the same specialArgs mechanism.
 {
   myModules.profiles.core.enable = true;
   myModules.profiles.desktopApps.enable = lib.elem "desktop" roles;
@@ -15,5 +15,4 @@
 
   myModules.profiles.development.enable = lib.elem "dev" roles;
   myModules.profiles.development.nit.enable = lib.elem "dev" roles;
-  myModules.profiles.productivity.pomodog.enable = lib.elem "desktop" roles;
 }

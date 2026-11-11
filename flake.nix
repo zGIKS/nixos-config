@@ -12,13 +12,9 @@
       url = "github:zGIKS/nit";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    pomodog = {
-      url = "github:zGIKS/pomodog";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, nit, pomodog, ... }:
+  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, nit, ... }:
     let
       system = "x86_64-linux";
       username = "giks";
@@ -35,7 +31,7 @@
             inherit pkgsUnstable;
           };
           specialArgs = {
-            inherit username hostName platformLib nit pomodog roles keyboardLayout;
+            inherit username hostName platformLib nit roles keyboardLayout;
           };
         in
         nixpkgs.lib.nixosSystem {

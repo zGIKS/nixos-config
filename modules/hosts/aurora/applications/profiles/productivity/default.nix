@@ -7,6 +7,5 @@
 
   imports = [
     ./typora.nix
-    ./pomodog.nix
   ];
 }

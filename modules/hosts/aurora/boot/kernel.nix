@@ -1,10 +1,9 @@
 { config, lib, pkgs, ... }:
 
 {
-  # Pin below linuxPackages_latest: newer kernels have been incompatible
-  # with the NVIDIA driver version used by this host. 7.0 through 7.2 reached
-  # upstream end of life and were removed from nixpkgs, so 7.3 is the oldest
-  # 7.x series left.
+  # 7.0 through 7.2 were removed from nixpkgs after reaching upstream end of
+  # life, so 7.3 is the oldest 7.x series left. The NVIDIA module pinned in
+  # hardware/nvidia.nix is what makes it buildable.
   boot.kernelPackages = lib.mkDefault pkgs.linuxPackages_7_3;
 
   hardware.alsa.enablePersistence = true;
