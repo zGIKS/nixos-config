@@ -35,7 +35,8 @@ pkgs.stdenv.mkDerivation {
     runHook preInstall
     mkdir -p $out/lib/pi $out/bin
     cp -r . $out/lib/pi/
-    makeWrapper $out/lib/pi/pi $out/bin/pi
+    makeWrapper $out/lib/pi/pi $out/bin/pi \
+      --set-default PI_XAI_CLIENT_VERSION "1.0.13"
     runHook postInstall
   '';
 

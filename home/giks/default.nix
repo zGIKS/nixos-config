@@ -53,6 +53,7 @@
         "npm:@narumitw/pi-lsp@0.49.11"
         "npm:@narumitw/pi-plan-mode@0.59.5"
         "npm:@piex-dev/xai-oauth"
+        "npm:pi-antigravity"
       ];
     };
   };

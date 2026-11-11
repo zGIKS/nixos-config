@@ -25,6 +25,10 @@ in
   };
 
   config = lib.mkIf cfg.enable {
+    home.sessionVariables = {
+      PI_XAI_CLIENT_VERSION = "1.0.13";
+    };
+
     # settings.json stays a regular file. Pi rewrites it (theme, model,
     # changelog), so a home-manager symlink would be clobbered or made
     # immutable. jq deep-merges the declarative fragment over the live file.
