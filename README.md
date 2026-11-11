@@ -1,43 +1,42 @@
 # giks dotfiles
 
-Configuración personal de NixOS con `flakes` y Home Manager.
+Configuración personal de NixOS con Flakes y Home Manager.
 
 ## Estructura
 
-- `hosts/` define máquinas concretas, actualmente `gaia` y `aurora`
-- `modules/nixos/` contiene módulos del sistema y perfiles (`core`, `desktop`, `dev`)
-- `modules/home/` contiene módulos reutilizables de Home Manager
-- `home/programs/` guarda archivos de configuración enlazados a `$XDG_CONFIG_HOME`
-- `users/giks/home.nix` ensambla la configuración del usuario
+- `hosts/aurora/`: Composición específica del host (hardware, discos y selección de módulos).
+- `modules/hosts/aurora/`: Módulos del sistema organizados por capas:
+  - `boot/`: Configuración de GRUB y kernel Linux.
+  - `hardware/`: Drivers NVIDIA, Bluetooth y soporte Steam.
+  - `system/`: Servicios (Docker, PipeWire, ASUS ROG, OpenSSH, Tailscale, etc.).
+  - `environment/`: Sesión Sway, display manager (`greetd`), fuentes y perfiles.
+  - `applications/`: Perfiles de paquetes de desarrollo, escritorio, IA y navegadores.
+- `home/giks/`: Configuración de usuario con Home Manager (Git, Neovim, Pi, terminal, agentes).
+- `home/programs/`: Archivos de configuración enlazados a `$XDG_CONFIG_HOME` (Waybar, Sway, Foot, Fish, Fuzzel, Eww).
 
 ## Host actual
 
-- Hosts: `gaia`, `aurora`
+- Host: `aurora` (ASUS ROG Strix)
 - Usuario: `giks`
 - Roles activos: `desktop`, `dev`
 
 ## Comandos útiles
 
-- Validar: `nix --extra-experimental-features 'nix-command flakes' flake check --no-build`
-- Actualizar dependencias: `nix flake update`
-- Aplicar sistema: `sudo nixos-rebuild switch --flake .#gaia`
-- Aplicar sistema: `sudo nixos-rebuild switch --flake .#aurora`
-- Ver hostname actual: `hostname`
+- Validar configuración: `nix flake check --no-build`
+- Evaluar paquetes del sistema: `nix eval .#nixosConfigurations.aurora.config.environment.systemPackages`
+- Aplicar cambios al sistema: `sudo nixos-rebuild switch --flake .#aurora`
+- Actualizar dependencias del flake: `nix flake update`
 
-## Actualización por PC
+## Actualización de herramientas de IA
 
-- `gaia`: `sudo nixos-rebuild switch --flake .#gaia`
-- `aurora`: `sudo nixos-rebuild switch --flake .#aurora`
+Los paquetes de IA (`antigravity`, `claude`, `codex`, `herdr`, `pi`) se gestionan en:
+`modules/hosts/aurora/applications/profiles/ai/packages/<herramienta>/`
 
-Flujo típico para actualizar todo:
-
-1. Ejecuta `nix flake update` para refrescar `flake.lock`.
-2. Aplica la configuración en la PC correspondiente con `nixos-rebuild switch`.
-3. Si cambiaste cosas del usuario, vuelve a iniciar sesión para que Home Manager recargue la sesión.
-
-## Personalización rápida
-
-- Cambia `hostName`, `username` y `roles` en `flake.nix`
-- Añade paquetes base en `modules/nixos/profiles/core.nix`
-- Añade paquetes de desarrollo en `modules/nixos/profiles/dev.nix`
-- Añade programas de Home Manager en `modules/home/programs/`
+Cada uno cuenta con su script `update.sh` que consulta upstream, descarga el binario o release oficial, calcula su hash SRI y actualiza su `default.nix` automáticamente:
+```bash
+./modules/hosts/aurora/applications/profiles/ai/packages/antigravity/update.sh
+./modules/hosts/aurora/applications/profiles/ai/packages/claude/update.sh
+./modules/hosts/aurora/applications/profiles/ai/packages/codex/update.sh
+./modules/hosts/aurora/applications/profiles/ai/packages/herdr/update.sh
+./modules/hosts/aurora/applications/profiles/ai/packages/pi/update.sh
+```

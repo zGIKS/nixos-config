@@ -51,6 +51,7 @@ in
       else
         rm -f "$tmp"
       fi
+      chmod 600 "$file"
     '';
   };
 }

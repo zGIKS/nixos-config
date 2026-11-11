@@ -12,7 +12,6 @@ in
     users.extraGroups.docker.members = [ username ];
 
     environment.systemPackages = with pkgs; [
-      docker
       docker-buildx
       docker-compose
     ];

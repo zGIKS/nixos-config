@@ -44,16 +44,16 @@
         });
       };
       packages = [
-        "npm:@earendil-works/pi-coding-agent@1.5.0"
+        "npm:@earendil-works/pi-coding-agent@1.5.2"
         "npm:@earendil-works/pi-client@1.1.0"
         "npm:@earendil-works/pi-server@1.1.0"
-        "npm:pi-subagents@0.84.0"
-        "npm:pi-web-access@0.46.0"
-        "npm:pi-mcp-adapter@7.0.0"
-        "npm:@narumitw/pi-lsp@0.49.11"
-        "npm:@narumitw/pi-plan-mode@0.59.5"
-        "npm:@piex-dev/xai-oauth"
-        "npm:pi-antigravity"
+        "npm:pi-subagents@0.88.0"
+        "npm:pi-web-access@0.47.0"
+        "npm:pi-mcp-adapter@7.0.1"
+        "npm:@narumitw/pi-lsp@0.49.12"
+        "npm:@narumitw/pi-plan-mode@0.60.0"
+        "npm:@piex-dev/xai-oauth@0.1.1"
+        "npm:pi-antigravity@0.12.0"
       ];
     };
   };

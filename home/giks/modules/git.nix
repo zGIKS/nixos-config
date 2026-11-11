@@ -34,7 +34,7 @@ in
         user.email = config.myHome.git.userEmail;
         init.defaultBranch = "main";
         pull.rebase = true;
-        core.editor = "nano";
+        core.editor = "nvim";
         core.excludesfile = "${homeDir}/.gitignore_global";
         commit.gpgsign = true;
         gpg.format = "ssh";

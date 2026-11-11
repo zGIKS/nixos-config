@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-# Asks GitHub for the latest codex release tag, re-downloads the linux
-# binary asset to compute its hash, and rewrites ../packages/codex.nix.
+# Asks GitHub for the latest codex release tag, downloads the linux
+# binary asset to compute its hash, and rewrites default.nix in place.
 set -euo pipefail
 cd "$(dirname "${BASH_SOURCE[0]}")"
 
@@ -10,6 +10,10 @@ url="https://github.com/openai/codex/releases/download/${tag}/codex-package-x86_
 
 echo "latest codex: $tag"
 base32=$(nix-prefetch-url "$url" 2>/dev/null | tail -1)
+if [[ -z "$base32" ]]; then
+  echo "error: failed to prefetch $url" >&2
+  exit 1
+fi
 hash=$(nix hash convert --hash-algo sha256 --to sri "$base32")
 
 sed -i \
@@ -17,4 +21,10 @@ sed -i \
   -e "s|tag = \".*\"; # nix-update: tag|tag = \"${tag}\"; # nix-update: tag|" \
   -e "s|hash = \".*\"; # nix-update: hash|hash = \"${hash}\"; # nix-update: hash|" \
   default.nix
-echo "updated codex.nix -> ${tag}"
+
+grep -q "version = \"${version}\"; # nix-update: version" default.nix
+grep -q "tag = \"${tag}\"; # nix-update: tag" default.nix
+grep -q "hash = \"${hash}\"; # nix-update: hash" default.nix
+
+echo "updated codex (default.nix) -> ${tag}"
+

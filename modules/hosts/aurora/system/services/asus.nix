@@ -7,12 +7,6 @@ in
   options.myModules.services.asus = {
     enable = lib.mkEnableOption "ASUS ROG laptop services (asusd, supergfxd)";
 
-    userService = {
-      enable = lib.mkEnableOption "per-user asusd instance" // {
-        default = false;
-      };
-    };
-
     rogControlCenter = {
       enable = lib.mkEnableOption "ROG Control Center GUI" // {
         default = false;

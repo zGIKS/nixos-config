@@ -203,8 +203,16 @@ in
         code_mode_host = true
         EOF
           chmod 600 "$config"
-        elif grep -q '^code_mode_host = false$' "$config"; then
-          sed -i 's/^code_mode_host = false$/code_mode_host = true/' "$config"
+        elif grep -q '^code_mode_host[[:space:]]*=' "$config"; then
+          sed -i 's/^code_mode_host[[:space:]]*=.*/code_mode_host = true/' "$config"
+          chmod 600 "$config"
+        else
+          if ! grep -q '^\[features\]' "$config"; then
+            printf '\n[features]\ncode_mode_host = true\n' >> "$config"
+          else
+            sed -i '/^\[features\]/a code_mode_host = true' "$config"
+          fi
+          chmod 600 "$config"
         fi
       '';
     }
