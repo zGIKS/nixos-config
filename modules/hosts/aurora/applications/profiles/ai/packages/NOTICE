@@ -1,0 +1,11 @@
+The derivations in this directory were vendored from airi
+(https://github.com/09641061/airi) and are maintained in this repository.
+
+airi publishes no license of its own. The license of each tool is declared in
+its derivation's `meta.license` and belongs to that tool's upstream project:
+
+- claude-code: unfree, Anthropic
+- antigravity-cli: unfree, Google
+- pi-coding-agent: unfree, earendil-works
+- codex: Apache License 2.0, OpenAI
+- herdr: MIT, herdrdev

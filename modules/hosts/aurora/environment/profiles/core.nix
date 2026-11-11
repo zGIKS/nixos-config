@@ -16,7 +16,6 @@ in
       gh
       git
       htop
-      neovim
       os-prober
       starship
       unzip

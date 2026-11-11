@@ -16,17 +16,9 @@
       url = "github:zGIKS/pomodog";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nixvim = {
-      url = "github:nix-community/nixvim";
-      # NOTA: No usar follows aquí para evitar el warning de nixvim sobre nixpkgs.source
-    };
-    airi = {
-      url = "github:09641061/airi";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-    };
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, nit, pomodog, airi, nixvim, ... }:
+  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, nit, pomodog, ... }:
     let
       system = "x86_64-linux";
       username = "giks";
@@ -43,7 +35,7 @@
             inherit pkgsUnstable;
           };
           specialArgs = {
-            inherit username hostName platformLib nit pomodog airi nixvim roles keyboardLayout;
+            inherit username hostName platformLib nit pomodog roles keyboardLayout;
           };
         in
         nixpkgs.lib.nixosSystem {

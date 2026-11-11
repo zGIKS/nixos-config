@@ -1,9 +1,11 @@
 { config, lib, pkgs, ... }:
 
 {
-  # Keep the 7.1 kernel series: the current latest is incompatible with
-  # the NVIDIA driver version used by this host.
-  boot.kernelPackages = lib.mkDefault pkgs.linuxPackages_7_1;
+  # Pin below linuxPackages_latest: newer kernels have been incompatible
+  # with the NVIDIA driver version used by this host. 7.0 through 7.2 reached
+  # upstream end of life and were removed from nixpkgs, so 7.3 is the oldest
+  # 7.x series left.
+  boot.kernelPackages = lib.mkDefault pkgs.linuxPackages_7_3;
 
   hardware.alsa.enablePersistence = true;
 

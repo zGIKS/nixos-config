@@ -8,6 +8,7 @@
   imports = [
     ./cli.nix
     ./datagrip.nix
+    ./neovim.nix
     ./nit.nix
     ./languages
   ];
