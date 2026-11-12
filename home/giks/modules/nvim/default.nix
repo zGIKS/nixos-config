@@ -25,6 +25,8 @@ let
     tokyonight-nvim
     nvim-web-devicons
     nvim-treesitter
+    plenary-nvim
+    nui-nvim
     neo-tree-nvim
   ];
 
