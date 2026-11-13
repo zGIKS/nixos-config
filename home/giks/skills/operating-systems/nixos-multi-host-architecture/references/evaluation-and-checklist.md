@@ -31,27 +31,34 @@ A scalable multi-host architecture relies on automated validation gates and nati
 
 ### 1. Canonical Flake Validation: `nix flake check`
 `nix flake check` is the canonical CI and pre-commit validation command. It performs:
-- Complete evaluation of all flake outputs (packages, configurations, checks, formatters);
-- Execution of all tests declared in `checks.<system>`;
-- Validation of flake structure and schema.
+- Schema validation and structural sanity checks of all flake outputs;
+- Complete build execution of all test derivations declared in `checks.<system>.*`;
+- Type-checking and evaluation of `packages`, `apps`, `devShells`, and `nixosConfigurations`.
+*(Note: `nix flake check` checks derivations and flake structure; it does not execute `formatter.<system>`, which is run separately via `nix fmt`.)*
 
-Fast dry-run evaluations for specific machines:
+Evaluation and verification commands for specific hosts:
 ```bash
-# Dry-run evaluation of a host's top-level system derivation
-nix build .#nixosConfigurations.<host>.config.system.build.toplevel --dry-run
+# Dry-build: evaluates the configuration and displays what would be built or fetched without building
+nixos-rebuild dry-build --flake .#<host>
 
-# Or using nixos-rebuild
-nixos-rebuild build --flake .#<host> --dry-run
+# Dry-run: evaluates configuration and shows systemd units that would be activated or restarted
+nixos-rebuild dry-run --flake .#<host>
+
+# Test in-memory: builds and activates the configuration immediately without updating bootloader or generation history
+sudo nixos-rebuild test --flake .#<host>
+
+# Build a runnable QEMU virtual machine for the host
+nixos-rebuild build-vm --flake .#<host>
+./result/bin/run-<host>-vm
 ```
 
 ### 2. Multi-Machine NixOS VM Integration Tests (`pkgs.testers.runNixOSTest`)
 NixOS provides first-class, declarative VM testing using `pkgs.testers.runNixOSTest` (or `nixosTest`).
 It spins up isolated micro-VMs in QEMU running the actual NixOS system configurations and tests network communication, services, and systemd units using an interactive Python test script.
 
-Add tests to flake `checks.<system>`:
+#### Test Definition: `tests/service-integration.nix`
 
 ```nix
-# tests/service-integration.nix
 { pkgs }:
 
 pkgs.testers.runNixOSTest {
@@ -62,6 +69,14 @@ pkgs.testers.runNixOSTest {
     database = { config, pkgs, ... }: {
       services.postgresql = {
         enable = true;
+        # Crucial: enableTCPIP is false by default in NixOS (Unix domain socket only)
+        enableTCPIP = true;
+        authentication = pkgs.lib.mkOverride 10 ''
+          local all all trust
+          host all all 192.168.1.0/24 trust
+          host all all 127.0.0.1/32 trust
+          host all all ::1/128 trust
+        '';
         initialScript = pkgs.writeText "init.sql" ''
           CREATE DATABASE app;
         '';
@@ -90,17 +105,38 @@ pkgs.testers.runNixOSTest {
 }
 ```
 
+#### Cable Test into `flake.nix` `checks` Output
+
+```nix
+# flake.nix
+outputs = { self, nixpkgs, ... }@inputs:
+let
+  supportedSystems = [ "x86_64-linux" "aarch64-linux" ];
+  forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
+in
+{
+  # Wire tests into flake checks so `nix flake check` runs them automatically
+  checks = forAllSystems (system: {
+    db-integration = import ./tests/service-integration.nix {
+      pkgs = nixpkgs.legacyPackages.${system};
+    };
+  });
+};
+```
+
 Run VM tests locally or in CI:
 ```bash
+# Runs all checks across the repository
 nix flake check
-# Or run an individual test directly:
-nix build .#checks.x86_64-linux.api-and-db-integration-test
+
+# Or build/run an individual test directly:
+nix build .#checks.x86_64-linux.db-integration
 ```
 
 ### 3. Flake Formatter (`formatter.<system>`)
-Standardize repository formatting via the native flake `formatter` output:
+Standardize repository formatting via the native flake `formatter` output using `pkgs.nixfmt` (the official RFC 166 formatter package; note that `nixfmt-rfc-style` is an obsolete alias):
 ```nix
-formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.nixfmt-rfc-style);
+formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.nixfmt);
 ```
 Enables running `nix fmt` across all Nix files in the repository without external wrappers.
 
@@ -144,15 +180,15 @@ config = {
 - [ ] The flake is the composition root and pins inputs cleanly.
 - [ ] Flake inputs deduplicate nixpkgs via `inputs.<name>.inputs.nixpkgs.follows = "nixpkgs"`.
 - [ ] Each host declares `nixpkgs.hostPlatform` inside its configuration rather than using the legacy `system` parameter in `nixosSystem`.
-- [ ] `system.stateVersion` is set to the initial install version and is **never** bumped on updates.
-- [ ] Repository exposes official `formatter.<system>` output (`nixfmt-rfc-style`).
+- [ ] `system.stateVersion` is tied to initial provisioning and is not bumped casually on routine updates.
+- [ ] Repository exposes official `formatter.<system>` output (`pkgs.nixfmt`).
 - [ ] `nix.settings.experimental-features = [ "nix-command" "flakes" ];` is enabled.
 
 ### Module Contracts & Dependency Injection
 - [ ] Module arguments are injected via `_module.args` inside modules instead of polluting flake `specialArgs`.
 - [ ] Flake `specialArgs` is reserved exclusively for values needed before module evaluation (such as passing `inputs`).
-- [ ] Capabilities are controlled via namespaced module options (`lib.mkOption`, `lib.mkEnableOption`, `lib.mkPackageOption`).
-- [ ] Option types use strict types (`types.str`, `types.bool`, `types.listOf`, `types.submodule`, `types.enum`).
+- [ ] Shared configuration uses typed options (`lib.mkOption`, `lib.mkEnableOption`, `lib.mkPackageOption`).
+- [ ] Structured daemon configurations use RFC 42 `settings` with `freeformType` where appropriate.
 - [ ] Invariants and mutual exclusivity rules are enforced via `assertions` and `warnings`.
 
 ### Services & Systemd Architecture
@@ -160,14 +196,21 @@ config = {
 - [ ] Startup ordering is defined explicitly with `after` / `before` (not relying on `requires`/`wants` to order boot).
 - [ ] Target hooks use `wantedBy = [ "multi-user.target" ];` ([Install] section).
 - [ ] Daemons apply security hardening baselines (`DynamicUser = true`, `ProtectSystem = "strict"`, `ProtectHome = true`, `PrivateTmp = true`, `NoNewPrivileges = true`, `CapabilityBoundingSet = ""`).
+- [ ] Capabilities prefer `services.<x>.enable` or `programs.<x>.enable` over raw `environment.systemPackages`.
+
+### Secrets & Security
+- [ ] Secrets are never stored in plaintext or in `/nix/store` (since the store is world-readable).
+- [ ] Runtime credentials are referenced exclusively via `*File` options (`EnvironmentFile`, `passwordFile`, `initialScriptFile`) from secure runtime locations (`/run/secrets/`).
 
 ### Overlays & Packaging
 - [ ] Overlays are pure functions `(final: prev: { ... })`.
 - [ ] Overlays avoid global overrides of foundational packages to prevent massive rebuild cascades.
+- [ ] Package overrides use targeted `pkg.override` / `overrideAttrs` when only one consumer needs them.
 - [ ] Packages are declared in NixOS modules, never in Home Manager (`home.packages` is absent).
-- [ ] Home Manager contains user configuration and dotfiles only.
+- [ ] Imperative package managers (`nix-env -i`, `nix profile install`) are forbidden.
 
-### Quality Gates & Automated Testing
+### Quality Gates, Antipatterns & Automated Testing
+- [ ] Code avoids the 8 official `nix.dev` antipatterns (no wide `with pkgs;`, no ambient `<nixpkgs>`, no `rec`, no IFD, filtered `src`, no shallow `//`).
 - [ ] `nix flake check` passes cleanly without errors.
 - [ ] Multi-node service workflows are validated with `pkgs.testers.runNixOSTest` micro-VM integration tests.
 

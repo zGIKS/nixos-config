@@ -60,6 +60,50 @@ The NixOS module system uses priorities to resolve conflicting definitions:
 - **`lib.mkForce value`**: Assigns priority 50 (forces value over normal assignments). Use sparingly, only when an architectural boundary must guarantee an override.
 - **`lib.mkMerge [ ... ]`**: Merges multiple configuration attribute sets explicitly.
 
+### Structured Settings Options (RFC 42 & `freeformType`)
+
+Instead of writing repetitive, flat option definitions for every single parameter of an upstream service, use the RFC 42 `settings` pattern with a generator from `pkgs.formats`:
+
+```nix
+options.platform.services.app.settings = lib.mkOption {
+  type = lib.types.submodule {
+    # Allow any valid YAML configuration keys without individual option declarations
+    freeformType = (pkgs.formats.yaml { }).type;
+
+    options = {
+      # Declare explicit options only for values NixOS must inspect or validate
+      port = lib.mkOption {
+        type = lib.types.port;
+        default = 8080;
+        description = "Service port (also opened in firewall).";
+      };
+    };
+  };
+  default = { };
+  description = "Structured service configuration serialized directly to config file.";
+};
+```
+Generate configuration files using `pkgs.formats.yaml`, `pkgs.formats.json`, `pkgs.formats.toml`, or `pkgs.formats.ini`:
+```nix
+configFile = (pkgs.formats.yaml { }).generate "app-config.yaml" cfg.settings;
+```
+
+### Overriding Upstream Modules: `disabledModules` (Pattern 2.6)
+
+When replacing an upstream NixOS module (for example to backport an updated service definition or patch upstream logic), do not fork Nixpkgs. Use `disabledModules`:
+
+```nix
+{
+  # Path relative to nixpkgs/nixos/modules/
+  disabledModules = [ "services/web-servers/caddy.nix" ];
+
+  imports = [
+    # Import your custom module implementation
+    ./modules/custom-caddy.nix
+  ];
+}
+```
+
 ### Compile-time Validation: Assertions & Warnings
 
 Every module contract should validate its operational invariants at evaluation time:
@@ -155,8 +199,15 @@ in
    Arguments injected via `_module.args` can use `lib.mkDefault`, allowing hosts or child profiles to override injected defaults gracefully. Flake `specialArgs` cannot participate in priority merging.
 3. **Overridable and Scoped**:
    Host composition modules or profile aggregators can supply or modify arguments scoped to their needs without coordinating with `flake.nix`.
-4. **Typesafe & Testable**:
+4. **Testable & Isolated**:
    Modules injecting or consuming `_module.args` can be tested in isolation (e.g. inside `pkgs.testers.runNixOSTest`) without mocking flake-level infrastructure.
+
+### Type Semantics of `_module.args` vs Typed Options
+
+It is important to understand the type guarantees of each mechanism:
+- **`_module.args` is untyped**: In the NixOS option system, `_module.args` is defined with type `types.lazyAttrsOf types.raw`. It evaluates arguments lazily as raw Nix expressions without performing schema validation, type checking, or constraint assertions.
+- **Use `options` for Typed Configuration**: For any system or domain configuration (ports, hostnames, boolean toggles, credentials paths), declare explicit options using `lib.mkOption` and `lib.types.*`. Access them via `config.<namespace>`.
+- **Use `_module.args` for Helpers and Raw Context**: Reserve `_module.args` for injecting utility libraries, flake inputs, platform helper functions, or raw instances that cannot be cleanly modeled as typed options.
 
 ### When to use `specialArgs` vs `_module.args`
 

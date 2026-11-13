@@ -19,6 +19,23 @@ Service modules should expose clean options instead of requiring hosts to modify
 
 ---
 
+### Secret Management at Operating System Level (Patterns 10.1 & 10.2)
+
+1. **The Nix Store is World-Readable (`chmod a+r /nix/store`)**:
+   - Every file, derivation, and string copied into `/nix/store` is globally readable by any unprivileged user or process running on the host.
+   - **Absolute Rule**: **NEVER** write plaintext secrets, API keys, private certificates, or passwords inside Nix files.
+   - **Path Literal Anti-Pattern**: Never pass a file path containing a secret as a Nix path literal (e.g. `passwordFile = ./secrets/db.pass;`). Nix copies path literals directly into `/nix/store/...` with world-readable permissions during evaluation.
+
+2. **Official NixOS Secret Mechanism: `*File` Options with Runtime Paths**:
+   - Always reference secrets using strings pointing to runtime filesystem paths that exist outside the Nix store (e.g., in `/run/secrets/` on a memory-backed tmpfs or root-owned persistent state):
+     ```nix
+     services.postgresql.initialScriptFile = "/run/secrets/pg_init.sql";
+     systemd.services.api.serviceConfig.EnvironmentFile = "/run/secrets/api.env";
+     ```
+   - Runtime provisioning of these files should be handled by a dedicated secret manager (e.g. `sops-nix`, `agenix`, or systemd encrypted credentials), ensuring they are decrypted into volatile memory with `0400` root permissions on boot.
+
+---
+
 ### Systemd Architecture: Ordering vs Dependency
 
 A common and critical misconception in systemd is conflating **dependency** with **startup order**. They are separate concepts managed by different directives:
@@ -156,6 +173,52 @@ Typical responsibilities:
 System packages must be declared through NixOS options such as
 `environment.systemPackages`, `fonts.packages`, or the package option of the
 owning service. Home Manager must **never** manage package installation.
+
+---
+
+### Prefer `programs.<x>.enable` and `services.<x>.enable` Over Raw Packages (Patterns 7.1 & 7.2)
+
+A common mistake in NixOS configurations is adding software directly to `environment.systemPackages` when an official NixOS module exists:
+
+```nix
+# BAD: Only installs the binary; misses critical system integration
+environment.systemPackages = [ pkgs.wireshark pkgs.gnupg pkgs.swaylock ];
+
+# GOOD: Official NixOS modules configure capabilities, PAM, and permissions
+programs.wireshark.enable = true; # Adds setuid dumpcap wrapper and wireshark user group
+programs.gnupg.agent.enable = true; # Configures pinentry, GPG agent daemon, and socket forwarding
+security.pam.services.swaylock = { }; # Required for swaylock to verify user passwords under PAM
+```
+
+#### Why `programs.*` and `services.*` are required:
+- **Setuid / Capabilities**: Many tools require Linux capabilities or setuid bits (e.g. `dumpcap`, `ping`, `traceroute`). Nix store binaries are mounted `nosuid`. Only NixOS modules create setuid wrappers in `/run/wrappers/bin`.
+- **PAM Integration**: Screen lockers (`swaylock`, `hyprlock`) and authentication agents fail without PAM service entries in `/etc/pam.d/`.
+- **D-Bus & Polkit**: Daemons and desktop utilities require D-Bus service files in `/etc/dbus-1/system.d` and Polkit action rules. Raw packages in `systemPackages` do not register these with system daemons.
+- **Rule**: Whenever a tool has an official module under `programs.<name>` or `services.<name>`, use the module rather than `environment.systemPackages`.
+
+---
+
+### Prohibit Imperative Package Managers (Pattern 7.5)
+
+To maintain absolute reproducibility, auditable state, and reliable system rollbacks across all hosts:
+- **Never use imperative package installation**:
+  - Do not use `nix-env -i` or `nix-env -e`.
+  - Do not use `nix profile install`.
+- **Why**: Imperative package profiles create mutable state in `~/.nix-profile/` that shadows system-wide configurations, conflicts with declarative packages, breaks generation rollbacks (`nixos-rebuild switch --rollback` does not affect `nix-env`), and introduces untracked drift across your host fleet.
+
+---
+
+### Overlay vs `override` vs `overrideAttrs` (Pattern 11.4)
+
+Choose the right mechanism for package customization based on scope and architectural boundaries:
+
+| Mechanism | Purpose | Scope | When to use |
+|---|---|---|---|
+| `pkg.override { ... }` | Modifies inputs passed to a derivation function | Local to the caller | Toggling build flags or passing alternate libraries to a single program (e.g. `pkgs.ripgrep.override { withPCRE2 = true; }`). |
+| `pkg.overrideAttrs (old: { ... })` | Modifies the raw `mkDerivation` attributes | Local to the caller | Applying source patches, bumping a specific package version, or modifying build phases (`patches = [ ./fix.patch ];`). |
+| `overlays = [ ... ]` | Modifies the entire Nixpkgs package tree | Global to the host | When a package or library must be changed across **all** consumers and dependent services in the system. |
+
+**Rule of Thumb**: Prefer local `override` or `overrideAttrs` when only one service or profile needs a modified tool. Use overlays only when widespread system-level replacement is strictly required.
 
 ---
 

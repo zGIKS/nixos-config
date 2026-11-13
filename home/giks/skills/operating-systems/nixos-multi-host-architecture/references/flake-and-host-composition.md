@@ -11,14 +11,15 @@ for holding machine-specific configuration details.
 ### Native Flake Standards
 
 1. **Input deduplication (`follows`)**:
-   Flake inputs that depend on `nixpkgs` (such as Home Manager, hardware modules,
-   or third-party tools) should pin their `nixpkgs` reference to the root flake's
-   nixpkgs input via `inputs.<name>.inputs.nixpkgs.follows = "nixpkgs"`.
-   Without this, each input pulls its own pinned nixpkgs commit, resulting in:
-   - multiple distinct evaluations of nixpkgs;
-   - bloated `flake.lock` files;
-   - duplicated store paths and duplicate libraries in the Nix store;
-   - significantly higher evaluation time and memory consumption during builds.
+   Flake inputs that consume `nixpkgs` (such as Home Manager, hardware modules,
+   or system tools) can pin their `nixpkgs` reference to the root flake's
+   input via `inputs.<name>.inputs.nixpkgs.follows = "nixpkgs"`.
+   - **Purpose**: Consolidates entries in `flake.lock` and ensures that shared
+     tools and NixOS modules resolve against the same locked Nixpkgs tree as the host.
+   - **Nix Manual Context**: The Nix Manual notes that overriding every transitive
+     input is not always necessary if the dependency's packages are self-contained or
+     not evaluated by the host. Apply `follows` deliberately where lockfile deduplication
+     and package set consistency across modules are required.
 
 2. **Modern `hostPlatform` over legacy `system`**:
    Do **not** pass the legacy `system` argument to `nixpkgs.lib.nixosSystem { system = "..."; }`.
@@ -38,11 +39,30 @@ for holding machine-specific configuration details.
 
 4. **Flake Formatter (`formatter.<system>`)**:
    Expose an official formatter output so that `nix fmt` works out of the box across
-   the entire repository (e.g. `nixfmt-rfc-style`).
+   the entire repository using `pkgs.nixfmt` (the standard RFC 166 package; `nixfmt-rfc-style` is an obsolete alias):
+   ```nix
+   formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.nixfmt);
+   ```
 
-5. **Experimental Features**:
-   Ensure `nix.settings.experimental-features = [ "nix-command" "flakes" ];` is enabled
-   in shared system configuration to guarantee consistent CLI behavior across all hosts.
+5. **Flakes as Experimental Features vs Traditional Channels**:
+   Flakes and the `nix` CLI are currently marked as **experimental features** in upstream Nix.
+   Traditional NixOS uses channels (`nix-channel`) and `<nixpkgs>` via `NIX_PATH`.
+   Flake-based systems must explicitly enable experimental features in configuration:
+   ```nix
+   nix.settings.experimental-features = [ "nix-command" "flakes" ];
+   ```
+
+6. **Aligning `nix.registry` and `nix.nixPath` with the Flake**:
+   In flake-managed systems, legacy tools (`nix-shell`, `nix-build`, `<nixpkgs>`) still query `NIX_PATH`.
+   To guarantee that all system tools use the exact same Nixpkgs revision as the flake:
+   ```nix
+   # Pin the system flake registry to match the flake input
+   nix.registry.nixpkgs.flake = inputs.nixpkgs;
+
+   # Map NIX_PATH / <nixpkgs> directly to the locked flake input in /etc
+   environment.etc."nix/inputs/nixpkgs".source = "${inputs.nixpkgs}";
+   nix.nixPath = [ "nixpkgs=/etc/nix/inputs/nixpkgs" ];
+   ```
 
 ### Canonical `flake.nix` Example
 
@@ -71,9 +91,9 @@ for holding machine-specific configuration details.
       forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
     in
     {
-      # Official formatter for `nix fmt`
+      # Official formatter for `nix fmt` (using official pkgs.nixfmt package)
       formatter = forAllSystems (system:
-        nixpkgs.legacyPackages.${system}.nixfmt-rfc-style
+        nixpkgs.legacyPackages.${system}.nixfmt
       );
 
       # Reusable flake overlays (exported for downstream consumers or integration)
@@ -173,10 +193,46 @@ hosts/<host-name>/
     role = "database-replica";
   };
 
-  # State version: immutable record of initial installation
+  # State version: tied to initial provisioning
   system.stateVersion = "24.11";
 }
 ```
+
+### Worked Example: Adding a New Host (`workstation-02`)
+
+1. **Record Machine Facts**:
+   On the target physical or virtual machine, generate hardware facts:
+   ```bash
+   nixos-generate-config --dir /tmp/facts
+   ```
+   Copy `/tmp/facts/hardware-configuration.nix` to `hosts/workstation-02/hardware-configuration.nix`.
+2. **Create Host Composition (`hosts/workstation-02/default.nix`)**:
+   ```nix
+   { config, lib, pkgs, inputs, ... }:
+   {
+     imports = [
+       ./hardware-configuration.nix
+       ../../modules/hosts/shared/boot/efi.nix
+       ../../modules/hosts/shared/applications/profiles/desktop.nix
+     ];
+
+     nixpkgs.hostPlatform = "x86_64-linux";
+     networking.hostName = "workstation-02";
+     system.stateVersion = "24.11";
+   }
+   ```
+3. **Register in `flake.nix`**:
+   ```nix
+   nixosConfigurations.workstation-02 = nixpkgs.lib.nixosSystem {
+     specialArgs = { inherit inputs; };
+     modules = [ ./hosts/workstation-02 ];
+   };
+   ```
+4. **Validate and Deploy**:
+   ```bash
+   nix flake check
+   nixos-rebuild dry-build --flake .#workstation-02
+   ```
 
 ---
 
@@ -185,16 +241,15 @@ hosts/<host-name>/
 `system.stateVersion` records the NixOS release version when the machine state was first initialized (e.g. `"24.11"`).
 
 ### Why it exists
-NixOS services often have stateful components (database file layouts, internal directory formats, configuration file defaults).
-If NixOS were to change these defaults automatically during a channel or flake upgrade, existing data could be corrupted or services could fail to start.
-`system.stateVersion` instructs NixOS modules to preserve backwards-compatible behaviors for stateful data.
+NixOS services frequently manage stateful data (PostgreSQL database schemas, OpenSSH host key algorithms, user group IDs, state directory layouts).
+When a new NixOS release introduces a change to default state locations or formats, checking `system.stateVersion` ensures that existing systems preserve backwards-compatible defaults, preventing breaking changes or data corruption.
 
-### The Absolute Rule
-> **NEVER bump or change `system.stateVersion` during regular system updates or upgrades.**
+### Official NixOS Guidance
+> **Do not bump `system.stateVersion` casually during routine system updates or flake upgrades.**
 
-- Updating `system.stateVersion` does **NOT** update your system packages or kernel; that is done entirely by updating flake inputs (`nix flake update`).
-- Changing `system.stateVersion` will silently switch state file locations, database assumptions, or service defaults, frequently causing data corruption or service crashes.
-- Leave `system.stateVersion` fixed at the value set when the host was first created.
+- Updating `system.stateVersion` does **NOT** update packages, libraries, or the Linux kernel. Software updates are achieved entirely by updating flake inputs (`nix flake update`) and rebuilding.
+- The official NixOS manual states that `stateVersion` should remain pinned to the release where the machine was first provisioned.
+- While it is possible to change it, doing so requires manually reading release notes for every intermediate release, backing up data, and executing necessary data migrations. In multi-host infrastructure, keep it tied to the provisioning version.
 
 ---
 
@@ -224,3 +279,41 @@ In a multi-host architecture, overlays must be structured to prevent massive bui
 - **Pure & Scoped**: Overlays must be deterministic functions of `final` (the completed package set) and `prev` (the previous package set).
 - **Avoid Global Overrides**: Overriding foundational libraries (e.g. `glibc`, `openssl`, `python3`, `systemd`) at the top of the package tree forces Nix to rebuild every dependent package locally from source across all hosts, bypassing Hydra/binary caches.
 - **Rule**: Prefer package additions (`final.myPackage = ...`) or targeted localized overrides (e.g. `final.myApp = prev.myApp.override { ... };`) rather than modifying packages that sit at the root of large dependency trees.
+
+### Mixing Stable and Unstable Nixpkgs (Pattern 11.5)
+
+In multi-host flakes, hosts may need recent packages from `nixpkgs-unstable` alongside a stable channel base:
+
+```nix
+# Exposing unstable packages via _module.args without global overlay pollution
+{ inputs, pkgs, ... }:
+
+let
+  pkgs-unstable = import inputs.nixpkgs-unstable {
+    inherit (pkgs.stdenv.hostPlatform) system;
+    config.allowUnfree = true;
+  };
+in
+{
+  _module.args.pkgs-unstable = pkgs-unstable;
+}
+```
+
+- **Architectural Risks**:
+  - **Duplicate Closures**: Pulling large desktop apps or services from both stable and unstable causes duplicate glibc, LLVM, or Python runtimes in the Nix store.
+  - **ABI Incompatibilities**: Never mix system daemons (like display managers, PipeWire, or systemd services) between stable and unstable. Confine unstable packages strictly to standalone terminal utilities or leaf applications (e.g. `neovim`, `vscode`).
+
+### Permitting Unfree Software Declaratively (Pattern 11.6)
+
+Configure `nixpkgs.config.allowUnfree` explicitly in host modules:
+```nix
+nixpkgs.config.allowUnfree = true;
+
+# Or using a targeted predicate for finer auditing:
+nixpkgs.config.allowUnfreePredicate = pkg:
+  builtins.elem (lib.getName pkg) [
+    "steam"
+    "steam-original"
+    "nvidia-x11"
+  ];
+```
