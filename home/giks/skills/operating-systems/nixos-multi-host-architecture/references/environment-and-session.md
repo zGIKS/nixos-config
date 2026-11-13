@@ -30,7 +30,7 @@ user configuration, not in this layer.
 
 ---
 
-### Environment Variables: `variables` vs `sessionVariables` (Pattern 8.1)
+### Environment Variables: `variables` vs `sessionVariables`
 
 NixOS provides two distinct options for defining environment variables, with different scopes in the process lifecycle:
 
@@ -45,7 +45,7 @@ NixOS provides two distinct options for defining environment variables, with dif
 
 ---
 
-### Declarative Display Managers and Compositors (Pattern 8.2)
+### Declarative Display Managers and Compositors
 
 Desktop and graphical session enablement belongs at the system layer in NixOS:
 

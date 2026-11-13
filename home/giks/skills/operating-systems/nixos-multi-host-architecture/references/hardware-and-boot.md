@@ -22,14 +22,14 @@ policy whenever possible.
 Do not place general applications, user preferences, or unrelated networking
 rules in this layer.
 
-### Hardware Fact Management (Patterns 5.1, 5.2, 5.5)
+### Hardware Fact Management
 
-1. **Keep `hardware-configuration.nix` Generated and Unedited (Pattern 5.1)**:
+1. **Keep `hardware-configuration.nix` Generated and Unedited**:
    - Generated automatically by `nixos-generate-config`.
    - Contains discovered machine facts: kernel modules (`boot.initrd.availableKernelModules`), microcode updates, and platform quirks.
    - **Rule**: Never manually modify `hardware-configuration.nix`. Place all custom hardware policies (e.g. graphics drivers, CPU frequency governors, undervolting, custom kernel options) in separate, tracked modules (e.g., `modules/hosts/shared/hardware/nvidia.nix`).
 
-2. **Official Hardware Profiles: `nixos-hardware` (Pattern 5.2)**:
+2. **Official Hardware Profiles: `nixos-hardware`**:
    For laptops, standard workstations, and SBCs with known hardware quirks, import official vendor/model profiles from the `nixos-hardware` organization rather than maintaining complex hand-written hardware workarounds:
    ```nix
    # flake.nix
@@ -42,7 +42,7 @@ rules in this layer.
    ];
    ```
 
-3. **Emerging Declarative Hardware: `nixos-facter` (Pattern 5.5)**:
+3. **Declarative Hardware Facts: `nixos-facter`**:
    Modern reproducible fleets can utilize `nixos-facter` to record immutable, JSON-serialized hardware facts without relying on legacy Perl generator scripts:
    ```nix
    hardware.facter.reportPath = ./facter.json;
@@ -67,7 +67,7 @@ Typical responsibilities:
 Filesystem declarations belong in the filesystem layer unless they are
 unavoidably coupled to initrd or bootloader behavior.
 
-### Declarative Bootloader Standards (Pattern 5.3)
+### Declarative Bootloader Standards
 
 1. **Modern UEFI Systems (`systemd-boot`)**:
    Standard choice for modern UEFI x86_64 and AArch64 hardware:

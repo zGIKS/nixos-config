@@ -1,10 +1,10 @@
-# Official Nix Antipatterns and Best Practices (nix.dev)
+# Official Nix Antipatterns and Best Practices
 
-This reference documents the 8 core antipatterns identified by official documentation (`nix.dev` and the Nix/Nixpkgs manuals) that must be avoided in scalable multi-host architectures.
+This reference documents core Nix antipatterns identified by official documentation—including the 7 primary antipatterns codified in `nix.dev` best practices and the hermetic evaluation requirements defined in the Nix reference manual.
 
 ---
 
-## 1. Avoid Wide `with pkgs;` (Pattern 9.1)
+## 1. Avoid Wide `with pkgs;`
 
 ### The Anti-Pattern
 Placing `with pkgs;` at the top of a module or file header:
@@ -40,7 +40,7 @@ with pkgs;
 
 ---
 
-## 2. Avoid Ambient `<nixpkgs>` and `NIX_PATH` in Flakes (Pattern 9.2)
+## 2. Avoid Ambient `<nixpkgs>` and `NIX_PATH` in Flakes
 
 ### The Anti-Pattern
 Relying on angle-bracket syntax `<nixpkgs>` or `<nixos-config>` inside a flake-managed codebase:
@@ -65,7 +65,7 @@ outputs = { self, nixpkgs, ... }@inputs: {
 
 ---
 
-## 3. Avoid `rec { ... }` in Attribute Sets (Pattern 9.3)
+## 3. Avoid `rec { ... }` in Attribute Sets
 
 ### The Anti-Pattern
 Using recursive attribute sets `rec { ... }`:
@@ -96,7 +96,7 @@ in
 
 ---
 
-## 4. Avoid Import From Derivation (IFD) on Critical Paths (Pattern 9.4)
+## 4. Avoid Import From Derivation (IFD) on Critical Paths
 
 ### The Anti-Pattern
 Using the output of a derivation as a Nix expression inside `import`:
@@ -118,7 +118,7 @@ Keep configuration data as native Nix attribute sets, or generate files at build
 
 ---
 
-## 5. Avoid Unquoted URLs and Bare `src = ./.` (Pattern 9.5)
+## 5. Avoid Unquoted URLs and Bare `src = ./.`
 
 ### The Anti-Pattern
 1. Writing bare URLs without quotes: `url = http://example.com;` (deprecated syntax in modern Nix).
@@ -151,24 +151,46 @@ Bare `src = ./.` copies your entire directory tree into the Nix store. Any chang
 
 ---
 
-## 6. Avoid Implicit Nixpkgs Configuration (Pattern 9.6)
+## 6. Avoid Implicit Nixpkgs Configuration
 
 ### The Anti-Pattern
-Relying on ambient or implicit Nixpkgs configuration like `~/.config/nixpkgs/config.nix` or environment variables for package evaluations.
+Importing Nixpkgs without explicitly specifying configuration or overlays, or relying on ambient files:
+```nix
+# BAD: Relies on implicit global settings
+let
+  pkgs = import nixpkgs { }; # Implicitly checks ~/.config/nixpkgs/config.nix and NIXPKGS_ALLOW_UNFREE
+in ...
+```
+
+### Why it is harmful
+1. **User and Machine Drift**: When `config` or `overlays` are omitted from `import nixpkgs { }`, Nixpkgs automatically searches for `~/.config/nixpkgs/config.nix`, `/etc/nixpkgs/config.nix`, and environment variables like `NIXPKGS_ALLOW_UNFREE`.
+2. **Loss of Hermeticity**: Building the exact same flake or expression under a different user account or on a CI worker will produce different results or unexpected evaluation failures because of missing unfree permissions.
 
 ### Canonical Best Practice
-Declare package configuration explicitly within the host's NixOS module hierarchy:
-```nix
-nixpkgs.config = {
-  allowUnfree = true;
-  # Or targeted permission:
-  allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [ "steam" "nvidia-x11" ];
-};
-```
+- When importing Nixpkgs directly in standalone expressions, always pass an explicit `config` attribute set and explicit `overlays` list:
+  ```nix
+  # GOOD: Completely overrides and ignores ambient user configuration files
+  pkgs = import nixpkgs {
+    inherit system;
+    config = {
+      allowUnfree = true;
+      # Explicit package permissions
+      allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [ "steam" "nvidia-x11" ];
+    };
+    overlays = [ ];
+  };
+  ```
+- Within NixOS host compositions, declare package configuration declaratively in module options:
+  ```nix
+  nixpkgs.config = {
+    allowUnfree = true;
+    allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [ "steam" "nvidia-x11" ];
+  };
+  ```
 
 ---
 
-## 7. Avoid Shallow `//` on Nested Sets (Pattern 9.7)
+## 7. Avoid Shallow `//` on Nested Sets
 
 ### The Anti-Pattern
 Using the shallow update operator `//` to merge nested attribute sets:
@@ -195,7 +217,7 @@ The Nix update operator `//` only operates on the top level. When merging nested
 
 ---
 
-## 8. Avoid Flake Evaluation Impurities (Pattern 9.8)
+## 8. Avoid Flake Evaluation Impurities
 
 ### The Anti-Pattern
 Attempting to read environment variables (`builtins.getEnv`) or files not tracked by Git inside flake evaluation:

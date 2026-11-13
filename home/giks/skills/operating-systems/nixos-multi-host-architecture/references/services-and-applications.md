@@ -19,18 +19,26 @@ Service modules should expose clean options instead of requiring hosts to modify
 
 ---
 
-### Secret Management at Operating System Level (Patterns 10.1 & 10.2)
+### Secret Management at the Operating System Level
 
 1. **The Nix Store is World-Readable (`chmod a+r /nix/store`)**:
    - Every file, derivation, and string copied into `/nix/store` is globally readable by any unprivileged user or process running on the host.
    - **Absolute Rule**: **NEVER** write plaintext secrets, API keys, private certificates, or passwords inside Nix files.
    - **Path Literal Anti-Pattern**: Never pass a file path containing a secret as a Nix path literal (e.g. `passwordFile = ./secrets/db.pass;`). Nix copies path literals directly into `/nix/store/...` with world-readable permissions during evaluation.
 
-2. **Official NixOS Secret Mechanism: `*File` Options with Runtime Paths**:
-   - Always reference secrets using strings pointing to runtime filesystem paths that exist outside the Nix store (e.g., in `/run/secrets/` on a memory-backed tmpfs or root-owned persistent state):
+2. **Official NixOS Secret Mechanism: `*File` Options and Runtime Credentials**:
+   - Always reference secrets using strings pointing to runtime filesystem paths that exist outside the Nix store (e.g., in `/run/secrets/` on a memory-backed tmpfs or root-owned persistent state).
+   - Use official NixOS module `*File` options where available, or systemd runtime credentials:
      ```nix
-     services.postgresql.initialScriptFile = "/run/secrets/pg_init.sql";
-     systemd.services.api.serviceConfig.EnvironmentFile = "/run/secrets/api.env";
+     # Real NixOS *File module options:
+     services.nextcloud.config.adminpassFile = "/run/secrets/nextcloud-admin-pass";
+     services.grafana.security.secretKeyFile = "/run/secrets/grafana-secret-key";
+
+     # Native systemd runtime environment files and credentials:
+     systemd.services.api.serviceConfig = {
+       EnvironmentFile = "/run/secrets/api.env";
+       LoadCredential = [ "db-password:/run/secrets/db.pass" ];
+     };
      ```
    - Runtime provisioning of these files should be handled by a dedicated secret manager (e.g. `sops-nix`, `agenix`, or systemd encrypted credentials), ensuring they are decrypted into volatile memory with `0400` root permissions on boot.
 
@@ -176,7 +184,7 @@ owning service. Home Manager must **never** manage package installation.
 
 ---
 
-### Prefer `programs.<x>.enable` and `services.<x>.enable` Over Raw Packages (Patterns 7.1 & 7.2)
+### Prefer `programs.<x>.enable` and `services.<x>.enable` Over Raw Packages
 
 A common mistake in NixOS configurations is adding software directly to `environment.systemPackages` when an official NixOS module exists:
 
@@ -198,7 +206,7 @@ security.pam.services.swaylock = { }; # Required for swaylock to verify user pas
 
 ---
 
-### Prohibit Imperative Package Managers (Pattern 7.5)
+### Prohibit Imperative Package Managers
 
 To maintain absolute reproducibility, auditable state, and reliable system rollbacks across all hosts:
 - **Never use imperative package installation**:
@@ -208,7 +216,7 @@ To maintain absolute reproducibility, auditable state, and reliable system rollb
 
 ---
 
-### Overlay vs `override` vs `overrideAttrs` (Pattern 11.4)
+### Overlay vs `override` vs `overrideAttrs`
 
 Choose the right mechanism for package customization based on scope and architectural boundaries:
 
@@ -250,7 +258,7 @@ recompilation of thousands of packages from source across your entire fleet.
        openssl = prev.openssl.override { withCryptodev = true; };
      }
      ```
-     This invalidates Hydra/NixOS binary cache signatures and forces hours of compilation on every host.
+     This changes the derivation hash of all dependent packages. Because these new hashes do not exist in upstream binary caches (`cache.nixos.org`), Nix cannot download pre-built substitutes and is forced to recompile thousands of packages locally from source on every host.
    - **Best Practice (New Package Attributes)**:
      Add your custom or patched package under a unique attribute name so downstream packages only pull it when explicitly requested:
      ```nix

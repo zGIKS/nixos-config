@@ -88,14 +88,14 @@ Generate configuration files using `pkgs.formats.yaml`, `pkgs.formats.json`, `pk
 configFile = (pkgs.formats.yaml { }).generate "app-config.yaml" cfg.settings;
 ```
 
-### Overriding Upstream Modules: `disabledModules` (Pattern 2.6)
+### Overriding Upstream Modules: `disabledModules`
 
 When replacing an upstream NixOS module (for example to backport an updated service definition or patch upstream logic), do not fork Nixpkgs. Use `disabledModules`:
 
 ```nix
 {
-  # Path relative to nixpkgs/nixos/modules/
-  disabledModules = [ "services/web-servers/caddy.nix" ];
+  # Path relative to nixpkgs/nixos/modules/ (note directory modules end in /default.nix)
+  disabledModules = [ "services/web-servers/caddy/default.nix" ];
 
   imports = [
     # Import your custom module implementation

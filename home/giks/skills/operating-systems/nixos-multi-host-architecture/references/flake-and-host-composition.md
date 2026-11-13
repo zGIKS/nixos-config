@@ -71,11 +71,11 @@ for holding machine-specific configuration details.
   description = "Production multi-host NixOS infrastructure";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
     home-manager = {
-      url = "github:nix-community/home-manager/release-24.11";
+      url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -148,7 +148,7 @@ hosts/<host-name>/
 ### Host Composition Responsibilities
 
 - **Platform Architecture**: Declares `nixpkgs.hostPlatform = "x86_64-linux";`.
-- **State Version**: Declares `system.stateVersion = "24.11";` (see stateVersion rules below).
+- **State Version**: Declares `system.stateVersion = "25.11";` (see stateVersion rules below).
 - **Machine Identity**: Declares `networking.hostName` and host identity facts.
 - **Hardware & Storage**: Imports `hardware-configuration.nix` and `disk.nix`.
 - **Capability Selection**: Enables shared service and profile options (e.g. `platform.services.sshd.enable = true;`).
@@ -194,7 +194,7 @@ hosts/<host-name>/
   };
 
   # State version: tied to initial provisioning
-  system.stateVersion = "24.11";
+  system.stateVersion = "25.11";
 }
 ```
 
@@ -218,7 +218,7 @@ hosts/<host-name>/
 
      nixpkgs.hostPlatform = "x86_64-linux";
      networking.hostName = "workstation-02";
-     system.stateVersion = "24.11";
+     system.stateVersion = "25.11";
    }
    ```
 3. **Register in `flake.nix`**:
@@ -238,13 +238,13 @@ hosts/<host-name>/
 
 ## 3. The `system.stateVersion` Rule
 
-`system.stateVersion` records the NixOS release version when the machine state was first initialized (e.g. `"24.11"`).
+`system.stateVersion` records the NixOS release version when the machine state was first initialized (e.g. `"25.11"`).
 
 ### Why it exists
 NixOS services frequently manage stateful data (PostgreSQL database schemas, OpenSSH host key algorithms, user group IDs, state directory layouts).
 When a new NixOS release introduces a change to default state locations or formats, checking `system.stateVersion` ensures that existing systems preserve backwards-compatible defaults, preventing breaking changes or data corruption.
 
-### Official NixOS Guidance
+### State Version Migration and Fleet Policy
 > **Do not bump `system.stateVersion` casually during routine system updates or flake upgrades.**
 
 - Updating `system.stateVersion` does **NOT** update packages, libraries, or the Linux kernel. Software updates are achieved entirely by updating flake inputs (`nix flake update`) and rebuilding.
@@ -277,10 +277,10 @@ In a multi-host architecture, overlays must be structured to prevent massive bui
 ### Scoped, Pure Overlays vs Rebuild Cascades
 
 - **Pure & Scoped**: Overlays must be deterministic functions of `final` (the completed package set) and `prev` (the previous package set).
-- **Avoid Global Overrides**: Overriding foundational libraries (e.g. `glibc`, `openssl`, `python3`, `systemd`) at the top of the package tree forces Nix to rebuild every dependent package locally from source across all hosts, bypassing Hydra/binary caches.
+- **Avoid Global Overrides**: Overriding foundational libraries (e.g. `glibc`, `openssl`, `python3`, `systemd`) at the top of the package tree changes the derivation hash of all dependent packages. Because these new hashes do not exist in upstream binary caches (`cache.nixos.org`), Nix cannot download pre-built substitutes and is forced to recompile thousands of packages locally from source across all hosts.
 - **Rule**: Prefer package additions (`final.myPackage = ...`) or targeted localized overrides (e.g. `final.myApp = prev.myApp.override { ... };`) rather than modifying packages that sit at the root of large dependency trees.
 
-### Mixing Stable and Unstable Nixpkgs (Pattern 11.5)
+### Mixing Stable and Unstable Nixpkgs
 
 In multi-host flakes, hosts may need recent packages from `nixpkgs-unstable` alongside a stable channel base:
 
@@ -303,7 +303,7 @@ in
   - **Duplicate Closures**: Pulling large desktop apps or services from both stable and unstable causes duplicate glibc, LLVM, or Python runtimes in the Nix store.
   - **ABI Incompatibilities**: Never mix system daemons (like display managers, PipeWire, or systemd services) between stable and unstable. Confine unstable packages strictly to standalone terminal utilities or leaf applications (e.g. `neovim`, `vscode`).
 
-### Permitting Unfree Software Declaratively (Pattern 11.6)
+### Permitting Unfree Software Declaratively
 
 Configure `nixpkgs.config.allowUnfree` explicitly in host modules:
 ```nix

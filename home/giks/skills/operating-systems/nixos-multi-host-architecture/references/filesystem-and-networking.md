@@ -20,9 +20,9 @@ Typical responsibilities:
 Host-specific device identifiers belong in the host directory. Reusable mount
 or persistence policy belongs in a module.
 
-### Declarative Storage Specifications (Patterns 6.1 & 6.3)
+### Declarative Storage Specifications
 
-1. **Persistent Device Identifiers (UUIDs or Labels - Pattern 6.1)**:
+1. **Persistent Device Identifiers (UUIDs or Labels)**:
    Never use kernel-assigned disk names like `/dev/sda1` or `/dev/nvme0n1p2`, as they can change between boots or upon hardware changes. Always reference devices by UUID or filesystem label:
    ```nix
    # hosts/<host>/disk.nix
@@ -44,7 +44,7 @@ or persistence policy belongs in a module.
    ];
    ```
 
-2. **Declarative LUKS Encryption in Initrd (Pattern 6.3)**:
+2. **Declarative LUKS Encryption in Initrd**:
    Configure full-disk or partition encryption declaratively for early-boot unlocking:
    ```nix
    boot.initrd.luks.devices."cryptroot" = {
@@ -74,9 +74,9 @@ Typical responsibilities:
 The networking layer may configure connectivity required by a service, but the
 service daemon itself belongs in the services layer.
 
-### Declarative Networking Patterns (Patterns 6.5, 6.6, 6.7)
+### Declarative Networking Patterns
 
-1. **Host Identity and Declarative Firewall (Pattern 6.7)**:
+1. **Host Identity and Declarative Firewall**:
    Every host must declare its identity and explicit firewall policy:
    ```nix
    networking.hostName = "srv-core-01";
@@ -88,7 +88,7 @@ service daemon itself belongs in the services layer.
    };
    ```
 
-2. **NetworkManager for Desktops and Laptops (Pattern 6.5)**:
+2. **NetworkManager for Desktops and Laptops**:
    For interactive workstations, laptops, and machines with roaming wireless or VPN requirements:
    ```nix
    networking.networkmanager.enable = true;
@@ -96,7 +96,7 @@ service daemon itself belongs in the services layer.
    networking.useDHCP = lib.mkDefault false;
    ```
 
-3. **`systemd-networkd` for Servers and Headless Hosts (Pattern 6.6)**:
+3. **`systemd-networkd` for Servers and Headless Hosts**:
    For stable server infrastructure, virtualization hosts, and cloud instances, use `systemd-networkd`:
    ```nix
    networking.useNetworkd = true;

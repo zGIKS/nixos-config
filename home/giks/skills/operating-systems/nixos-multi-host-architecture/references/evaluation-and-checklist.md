@@ -38,11 +38,11 @@ A scalable multi-host architecture relies on automated validation gates and nati
 
 Evaluation and verification commands for specific hosts:
 ```bash
-# Dry-build: evaluates the configuration and displays what would be built or fetched without building
+# Dry-build: evaluates the configuration and displays what store paths would be built or fetched without building
 nixos-rebuild dry-build --flake .#<host>
 
-# Dry-run: evaluates configuration and shows systemd units that would be activated or restarted
-nixos-rebuild dry-run --flake .#<host>
+# Dry-activate: builds the system and runs the activation script in dry-run mode, showing systemd units that would be stopped, started, or reloaded
+nixos-rebuild dry-activate --flake .#<host>
 
 # Test in-memory: builds and activates the configuration immediately without updating bootloader or generation history
 sudo nixos-rebuild test --flake .#<host>
@@ -200,7 +200,7 @@ config = {
 
 ### Secrets & Security
 - [ ] Secrets are never stored in plaintext or in `/nix/store` (since the store is world-readable).
-- [ ] Runtime credentials are referenced exclusively via `*File` options (`EnvironmentFile`, `passwordFile`, `initialScriptFile`) from secure runtime locations (`/run/secrets/`).
+- [ ] Runtime credentials are referenced exclusively via official `*File` options or systemd runtime credentials (e.g. `EnvironmentFile`, `LoadCredential`, `passwordFile`) from secure runtime locations (`/run/secrets/`).
 
 ### Overlays & Packaging
 - [ ] Overlays are pure functions `(final: prev: { ... })`.
@@ -210,7 +210,7 @@ config = {
 - [ ] Imperative package managers (`nix-env -i`, `nix profile install`) are forbidden.
 
 ### Quality Gates, Antipatterns & Automated Testing
-- [ ] Code avoids the 8 official `nix.dev` antipatterns (no wide `with pkgs;`, no ambient `<nixpkgs>`, no `rec`, no IFD, filtered `src`, no shallow `//`).
+- [ ] Code avoids official nix.dev antipatterns and flake impurities (no wide `with pkgs;`, no ambient `<nixpkgs>`, no `rec`, no IFD, filtered `src`, no shallow `//`).
 - [ ] `nix flake check` passes cleanly without errors.
 - [ ] Multi-node service workflows are validated with `pkgs.testers.runNixOSTest` micro-VM integration tests.
 

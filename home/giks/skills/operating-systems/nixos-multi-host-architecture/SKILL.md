@@ -27,13 +27,13 @@ NixOS module composition instead of a single monolithic configuration file.
 7. **Hardened Daemons & Declarative Packages**:
    Apply Linux namespace sandboxing by default (`DynamicUser = true`, `ProtectSystem = "strict"`, `ProtectHome = true`, `PrivateTmp = true`, `NoNewPrivileges = true`, `CapabilityBoundingSet = ""`). Prefer `services.<x>.enable` and `programs.<x>.enable` over raw `environment.systemPackages` to inherit PAM, polkit, dbus, and setuid wrappers. Prohibit imperative package managers (`nix-env -i`).
 8. **Secrets Never in Plaintext or `/nix/store`**:
-   The Nix store is world-readable (`chmod a+r /nix/store`). Never commit secrets or pass secret file paths as Nix path literals. Always use `*File` options (`EnvironmentFile`, `passwordFile`, `initialScriptFile`) pointing to runtime paths (`/run/secrets/`).
+   The Nix store is world-readable (`chmod a+r /nix/store`). Never commit secrets or pass secret file paths as Nix path literals. Always reference runtime credentials via official `*File` options or systemd runtime credentials (`EnvironmentFile`, `LoadCredential`, `passwordFile`) pointing to secure runtime paths (`/run/secrets/`).
 9. **Pure, Scoped, and Rebuild-Safe Overlays**:
    Overlays must be pure functions `(final: prev: { ... })`. Avoid global overrides of foundational packages that trigger rebuild cascades across the entire fleet. Prefer targeted `pkg.override` / `overrideAttrs` for local customizations.
 10. **Strict Home Manager Boundary**:
     Home Manager is for user configuration and dotfiles only. It must **never** define, install, or download packages (`home.packages` is forbidden). All packages are owned by NixOS.
 11. **Avoid Antipatterns & Automate Verification**:
-    Strictly avoid the 8 official `nix.dev` antipatterns (no wide `with pkgs;`, no ambient `<nixpkgs>`, no `rec`, no IFD on critical paths, clean sources, no shallow `//`). Validate with `nix flake check`, VM tests (`pkgs.testers.runNixOSTest`), and verify hosts using `nixos-rebuild dry-build`, `test`, or `build-vm`.
+    Strictly avoid official nix.dev antipatterns and flake impurities (no wide `with pkgs;`, no ambient `<nixpkgs>`, no `rec`, no IFD on critical paths, clean sources, no shallow `//`). Validate with `nix flake check`, VM tests (`pkgs.testers.runNixOSTest`), and verify hosts using `nixos-rebuild dry-build`, `dry-activate`, `test`, or `build-vm`.
 
 ## Architectural model
 
