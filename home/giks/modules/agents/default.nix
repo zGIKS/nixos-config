@@ -2,8 +2,8 @@
 #
 # Prompts, skill files, and the per-tool projections come from the airi
 # configuration (https://github.com/09641061/airi), now maintained here.
-# Two skills carry their own upstream terms inside their frontmatter:
-# software-design/frontend-design and software-design/vercel-composition-patterns.
+# Skills carrying their own upstream terms inside their frontmatter:
+# software-design/frontend-design, impeccable, hallmark.
 { config, lib, ... }:
 
 let
