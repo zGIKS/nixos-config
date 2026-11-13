@@ -11,14 +11,39 @@ Use an organization-approved stable Go release, standard `testing`/`httptest`, `
 
 ## Authority and scope
 
-The architectural source is `~/personal-notes/software-engineering/domain-driven-design-ddd/go/go-gin-ddd.md` (repository-relative: `software-engineering/domain-driven-design-ddd/go/go-gin-ddd.md`). If that checkout is elsewhere, locate it rather than assuming this path exists on every machine.
+This skill is the authoritative operational and architectural specification for Domain-Driven Design in Go with Gin. It defines package placement, dependency boundaries, persistence mapping, error contracts, and runtime lifecycle.
 
-- Reviewed guide content: Git blob `c0cd1f01149be86697dc5bd91501247a8f29311c`.
-- Guide repository base commit: `d584a0ce145a660504858e9e629bfd9820f5c4aa`; the reviewed guide update was **uncommitted**, so that commit alone does not identify this revision.
-- This skill and its nine references derive from that content. Compare `git hash-object <guide-path>` before claiming synchronization with a later revision. A mismatch requires semantic review, not automatic rejection of the user's code.
-- The guide's own pending-status marker is not changed by updating this skill. Linked `go-tdb` architecture remains separately unsynchronized; see [testing](references/testing.md). Do not claim ecosystem-wide alignment.
+References below provide decisions and operational checks for each layer.
 
-Use the guide for rationale, complete examples, and pinned repository evidence. References below provide decisions and checks rather than copies of the guide. If the guide is unavailable, say so and use the recorded baseline; do not claim a live comparison.
+## Architectural references & evidence
+
+- Eric Evans, *Domain-Driven Design: Tackling Complexity in the Heart of Software* — Bounded Context and Shared Kernel patterns.
+- [DDD Crew — Context Mapping patterns](https://virtualddd.com/ddd-crew/context-mapping/) — Shared Kernel and Anti-Corruption Layer.
+- [Martin Fowler — Bounded Context](https://martinfowler.com/bliki/BoundedContext.html) — boundaries and model consistency.
+- [Mark Seemann — Composition Root](https://blog.ploeh.dk/2011/07/28/CompositionRoot/) — centralized composition at the process boundary, modular composition per sub-application.
+- [Kamil Grzybek — Modular Monolith with DDD](https://github.com/kgrzybek/modular-monolith-with-ddd) — lean host pattern calling module initialization; each module owns its composition root.
+- [Al-Qora'n & Al-Said Ahmad (2025) — Modular monolith architecture in cloud environments](https://doi.org/10.3390/fi17110496) — systematic review of modular monolith trade-offs and structural governance.
+- [Carvalho et al. (2025) — Towards a progressive scalability for modular monolith applications](https://doi.org/10.5220/0013327600003982) — G1 governance criterion: architectural boundaries verified automatically in build/test.
+- [Özkan et al. (2025) — Domain-driven design in software development](https://doi.org/10.1016/j.jss.2024.112287) — systematic literature review of DDD in software development and bounded context boundaries.
+- [Go Code Review Comments — Interfaces](https://go.dev/wiki/CodeReviewComments#interfaces) — "Go interfaces generally belong in the package that uses values of the interface type" and "Do not define interfaces before they are used".
+- [Go 1.13 Errors — working with errors](https://go.dev/blog/go1.13-errors) — sentinel errors, `errors.Is`/`errors.As`, and `%w` wrapping.
+- [The repository pattern in Go — threedots.tech](https://threedots.tech/post/repository-pattern-in-go/) — consumer-defined repository interfaces in Go.
+- [Database transactions in Go with layered architecture — threedots.tech](https://threedots.tech/post/database-transactions-in-go/) — keeping transaction handles out of the logic layer.
+- [Go and a Package Focused Design](https://blog.gopheracademy.com/advent-2016/go-and-package-focused-design/) — packages as the unit of cohesion and encapsulation.
+- [Go Wiki — TableDrivenTests](https://go.dev/wiki/TableDrivenTests) — table-driven tests and named subtests.
+- [Go — Organizing a Go module](https://go.dev/doc/modules/layout) — `internal/`, executable layout, and import boundaries.
+
+### Pinned repository evidence & lessons
+
+| Repository / evidence | Pattern observed | Architectural lesson |
+|---|---|---|
+| [sklinkert/go-ddd](https://github.com/sklinkert/go-ddd) | GORM to sqlc; PostgreSQL integration tests; manual wiring | Keep generated access in infrastructure; single-file wiring works for 1 context but does not scale to modular monoliths |
+| [marcusolsson/goddd](https://github.com/marcusolsson/goddd) | Removal of Java-style interfaces and empty hierarchies | Avoid importing inheritance-style scaffolding into Go |
+| [ThreeDotsLabs/wild-workouts-go-ddd-example](https://github.com/ThreeDotsLabs/wild-workouts-go-ddd-example) | Clean architecture and CQRS in Go; 100% technical common | Shared package is strictly technical; ports belong to consumers |
+| [bxcodec/golang-ddd-modular-monolith-with-hexagonal](https://github.com/bxcodec/golang-ddd-modular-monolith-with-hexagonal) | Factory per module, but central `Config` struct with module keys | Anti-pattern: module autonomy is broken when module configuration is centralized in the host |
+| [kamil5b/go-pste-monolith](https://github.com/kamil5b/go-pste-monolith) | Centralized `container.go` (415 lines) wiring all contexts | Anti-pattern: bootstrap becomes a God Package; context internals must remain publicly exported |
+| [rizkydwicmt/vibe-ddd-golang](https://github.com/rizkydwicmt/vibe-ddd-golang) | Context-level `module.go` registering Gin routes and dependencies | Modular composition root per bounded context keeps boundaries intact |
+| [kgrzybek/modular-monolith-with-ddd](https://github.com/kgrzybek/modular-monolith-with-ddd) | Lean host orchestrating bounded context module entry points via `Initialize` | Benchmark for composition: host manages runtime, modules manage their own dependencies |
 
 ## Non-negotiable working rules
 
@@ -28,7 +53,7 @@ Use the guide for rationale, complete examples, and pinned repository evidence. 
 4. **Use inbound interfaces deliberately.** `interfaces/rest/` owns REST resources and handlers; `interfaces/events/` owns incoming message adaptation. Publishers and outbound clients belong in infrastructure. Place ACLs by direction, not name.
 5. **Organize by context and responsibility.** Keep aggregate concepts cohesive. Keep use-case input/result/handler together when useful; `resources/` and `transform/` are optional, not obligatory packages.
 6. **Make failures and consistency explicit.** Match errors with `errors.Is`/`errors.As`, propagate request context, check commit results, and document callback retries. No unsafe external effects in retryable transactions or destructive event consumption before persistence succeeds.
-7. **Keep composition outside the model.** `cmd/api/` and optional `internal/bootstrap/` own initialization and cleanup. Shared packages require real compatible consumers and explicit ownership.
+7. **Keep composition modular and outside the model.** Each context owns its self-contained composition root (`module.go`) and scoped configuration (`Config`). A lean host (`cmd/api/` / `internal/bootstrap/`) owns process lifecycle, shared technical infrastructure, and module coordination without reaching into context internals. Shared packages require real compatible consumers and explicit ownership.
 8. **Review growth, not just line count.** Review every hand-written Go file over 150 physical lines; split/move/merge/delete by responsibility or record a cohesion rationale. Never hand-edit generated output.
 9. **Test continuously.** Unit tests stay beside code. Integration/E2E live under module-root `/test`, grouped by context and responsibility, and have explicit CI execution.
 10. **Add only justified mechanisms.** No mandatory database, ORM, migration/configuration/DI library, event bus, outbox, interface pair, or empty layer. Existing useful organization need not be renamed merely to resemble examples.

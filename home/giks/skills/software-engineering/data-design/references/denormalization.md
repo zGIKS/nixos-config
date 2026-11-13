@@ -18,7 +18,7 @@ Pick one and name it in the documentation:
 
 - **Transactional triggers** — the duplicate is updated in the same transaction. Strong consistency, hidden control flow, engine-specific.
 - **Materialized views with scheduled refresh** — the redundancy is derived and explicitly stale by a known bound. The safest option when a staleness window is acceptable.
-- **Asynchronous domain events** — the write model publishes, projections update. Eventual consistency, and the natural fit when the read model is already separated by [CQRS](../../domain-driven-design-ddd/ddd-core/references/cqrs.md).
+- **Asynchronous domain events** — the write model publishes, projections update. Eventual consistency, and the natural fit when the read model is already separated by CQRS.
 - **Computed/generated columns** — when the derivation is local to the row, let the engine do it rather than the application.
 
 Duplication with no mechanism is not denormalization; it is divergence with extra steps.

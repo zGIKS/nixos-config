@@ -9,7 +9,7 @@ Baseline stack: Relational Databases (PostgreSQL 16+ Standard), SQL DDL, Flyway 
 
 Naming principle is mandatory across the whole physical schema: **`snake_case` plural table names**, immutable `id` surrogate primary keys (`UUIDv7` or `BIGINT`), and explicit foreign keys named `<singular_entity>_id`.
 
-For domain modeling rules determining transactional boundaries and aggregate roots before data modeling begins, see [ddd-core](../domain-driven-design-ddd/ddd-core/SKILL.md).
+Enforce transactional boundaries and aggregate roots before data modeling begins; model relationally from business aggregates rather than deriving aggregates from tables.
 
 ## Core rules
 

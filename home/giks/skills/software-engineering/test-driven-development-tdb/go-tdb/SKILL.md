@@ -81,8 +81,11 @@ Domain correctness is not a mock interaction. Repository correctness is not an i
 
 Use generic placeholders such as `[context-name]`, `[Aggregate]`, and `[ValueObject]` only to illustrate locations or patterns. Replace them with real business names and documented requirements. Do not invent bounded contexts, thresholds, domain errors, or APIs just to make example tests pass.
 
-## Official documentation
+## Official documentation & references
 
+- Kent Beck, *Test-Driven Development: By Example* — TDD cycle and executable specifications.
+- Martin Fowler, *Mocks Aren't Stubs* ([martinfowler.com/articles/mocksArentStubs.html](https://martinfowler.com/articles/mocksArentStubs.html)) and *The Practical Test Pyramid* ([martinfowler.com/articles/practical-test-pyramid.html](https://martinfowler.com/articles/practical-test-pyramid.html)).
+- [ThreeDotsLabs — The repository pattern in Go](https://threedots.tech/post/repository-pattern-in-go/) — contract testing for database repositories.
 - [Go testing](https://pkg.go.dev/testing)
 - [Go fuzzing](https://go.dev/doc/security/fuzz/)
 - [Go race detector](https://go.dev/doc/articles/race_detector)

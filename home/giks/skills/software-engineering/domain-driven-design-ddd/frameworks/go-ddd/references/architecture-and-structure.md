@@ -15,7 +15,7 @@ Identify module/workspace boundaries, declared package names, import cycles, pub
 | `infrastructure/` | Persistence/mapping, outbound clients, publishers, transaction mechanics | Inbound handlers or business policy |
 | `interfaces/rest/` | REST resources, binding, handlers, safe HTTP error mapping | Queries to storage, invariants, cross-context orchestration |
 | `interfaces/events/` | Message decoding/envelopes, delivery metadata, delegation and ack/nack | A business workflow hidden in a message callback |
-| `bootstrap/` | Dependency construction and process lifecycle | A globally accessible service locator or business dependency |
+| `bootstrap/` | Process host lifecycle, shared technical infrastructure, coordinating context modules, inter-context adapter wiring | Instantiating private repositories or handlers directly; leaking as a business/domain dependency or service locator |
 
 Application consumes domain behavior and narrow ports; adapters depend inward. Constructors normally return concrete implementations. An interface is justified by a real consumer, not the mere existence of a struct.
 
@@ -26,8 +26,11 @@ Application consumes domain behavior and narrow ports; adapters depend inward. C
 ```text
 cmd/api/main.go
 internal/
-  bootstrap/                         # optional; split wiring by context if useful
+  bootstrap/                         # lean process host & lifecycle
+    run.go
   enrollments/
+    module.go                        # context composition root & public entry point
+    config.go                        # context-scoped configuration
     domain/enrollment/
       enrollment.go
       confirmation.go
@@ -47,15 +50,25 @@ internal/
         confirm_enrollment_test.go
       events/                        # optional incoming messages
       acl/                           # optional inbound adaptation, not outbound calls
-  shared/                            # optional focused capabilities only
+  shared/                            # optional focused technical capabilities only
     observability/
     httpmiddleware/
+    postgres/                        # technical client factory, not business repositories
 test/
+  architecture/                      # automated boundary enforcement (go list -deps)
+    boundaries_test.go
   integration/enrollments/persistence/
   integration/enrollments/rest/
   e2e/enrollments/
   e2e/journeys/
 ```
+
+### Lean Host vs. Context Composition Root
+
+To scale a modular monolith across multiple bounded contexts without turning bootstrap into an unmaintainable God Package (kamil5b, 2024) or breaking package encapsulation:
+- **Each context owns its composition root (`module.go`) and scoped configuration (`config.go`).** It instantiates its own private persistence adapters, application use cases, and registers HTTP routes onto a supplied `gin.IRouter`.
+- **The Host (`internal/bootstrap/` or `cmd/api/`) remains lean.** It only manages process lifecycle (OS signals, graceful shutdown), initializes shared technical infrastructure (`*sql.DB`, `slog`, base Gin engine), and delegates construction to context modules.
+- **Context encapsulation:** Because `module.go` constructs context internals locally, persistence and interfaces can remain unexported or nested under `internal/` subdirectories without breaking the host.
 
 Create only directories needed by the slice. A small cohesive domain may use one package; larger contexts group related concepts by aggregate/subdomain, not global entities/valueobjects/events buckets. Application can grow into feature packages such as `application/confirmation/` when each has a meaningful API. Do not let a feature import a parent facade that already imports it.
 

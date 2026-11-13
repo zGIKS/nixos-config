@@ -201,3 +201,13 @@ Before considering a test suite complete, confirm:
 - tests are independent, runnable from the CLI, and separated by cadence;
 - no private implementation details, random timing, arbitrary sleeps, or undocumented disabled tests weaken the suite;
 - coverage and mutation results are interpreted as complementary evidence, not as a single quality score.
+
+## Authoritative references
+
+- Gerard Meszaros, *xUnit Test Patterns: Refactoring Test Code* — test double taxonomy (Dummy, Stub, Fake, Spy, Mock) and fixture design.
+- JUnit 5 / JUnit 6 User Guide ([junit.org/junit5](https://junit.org/junit5/docs/current/user-guide/)) — Jupiter test architecture, lifecycle extensions, and parameterized providers.
+- AssertJ Fluent Assertions Guide ([assertj.github.io/doc/](https://assertj.github.io/doc/)) — recursive comparison, soft assertions, and diagnostic diffs.
+- Testcontainers Documentation ([testcontainers.com](https://testcontainers.com/)) — disposable container lifecycle, singleton container pattern, and JDBC/Kafka integration.
+- Awaitility Documentation ([awaitility.org](http://www.awaitility.org/)) — condition evaluation and asynchronous polling.
+- Pitest / PIT Mutation Testing Documentation ([pitest.org](https://pitest.org/)) — mutation score, surviving mutants analysis, and assertion effectiveness.
+- Mockito Framework Documentation ([site.mockito.org](https://site.mockito.org/)) — strict stubbing, argument captors, and boundary verification.

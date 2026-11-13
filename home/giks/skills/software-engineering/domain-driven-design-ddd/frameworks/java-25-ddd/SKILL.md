@@ -113,7 +113,12 @@ This is the implementation timeline of the guide. Follow it in order and load ea
 - [ ] No sentinels and no exposure of internal details
 - [ ] HTTP, business, and persistence contracts preserved
 
-## Source of truth
+## Architectural references
 
-The full guide this skill is derived from (kept for traceability) lives at:
-`software-engineering/domain-driven-design-ddd/java/java25-spring.md`.
+- Eric Evans, *Domain-Driven Design: Tackling Complexity in the Heart of Software* — Bounded Context, Aggregate, and Value Object patterns.
+- Vaughn Vernon, *Implementing Domain-Driven Design* — Vernon's aggregate sizing rules, entity identity, and domain events.
+- Martin Fowler, *Bounded Context* ([martinfowler.com/bliki/BoundedContext.html](https://martinfowler.com/bliki/BoundedContext.html)) and *Anemic Domain Model* ([martinfowler.com/bliki/AnemicDomainModel.html](https://martinfowler.com/bliki/AnemicDomainModel.html)).
+- Kamil Grzybek, *Modular Monolith with DDD* ([github.com/kgrzybek/modular-monolith-with-ddd](https://github.com/kgrzybek/modular-monolith-with-ddd)) — module boundary enforcement and composition roots.
+- Al-Qora'n & Al-Said Ahmad (2025). *Modular monolith architecture in cloud environments.* Future Internet. [doi:10.3390/fi17110496](https://doi.org/10.3390/fi17110496).
+- Spring Boot Documentation — Jakarta persistence boundaries, transaction management, and conditional configuration.
+- Jakarta Persistence 3.2 Specification — entity lifecycle and repository boundaries.

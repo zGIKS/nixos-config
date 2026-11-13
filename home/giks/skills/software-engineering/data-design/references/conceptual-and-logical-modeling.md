@@ -37,7 +37,7 @@ Validate the conceptual model with domain experts before going further. A modeli
 
 ## Alignment with the domain model
 
-If the system is designed with DDD, the aggregate boundaries — not the tables — decide the transactional boundaries, and each aggregate root gets one repository. Model relationally *from* the aggregates rather than deriving the aggregates from a pre-existing schema. See [ddd-core: aggregate boundaries](../../domain-driven-design-ddd/ddd-core/references/aggregate-boundaries.md).
+If the system is designed with DDD, the aggregate boundaries — not the tables — decide the transactional boundaries, and each aggregate root gets one repository. Model relationally *from* the aggregates rather than deriving the aggregates from a pre-existing schema.
 
 ## Questions the design must answer
 

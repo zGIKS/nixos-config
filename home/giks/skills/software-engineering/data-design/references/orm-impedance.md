@@ -88,10 +88,10 @@ Mitigations:
 ## Working with an ORM without losing the domain
 
 - **The domain does not import the ORM.** If the model carries persistence annotations, the dependency points the wrong way; use external mapping or a translation layer.
-- **Map aggregates, not tables.** One repository per aggregate root. For the Java/Spring mechanics of that repository, see [frameworks/java-25-ddd/references/infrastructure-repositories.md](../../domain-driven-design-ddd/frameworks/java-25-ddd/references/infrastructure-repositories.md) rather than reinventing it here; for the identity/lifecycle rules the mapping must respect, see [ddd-core: object lifecycle](../../domain-driven-design-ddd/ddd-core/references/object-lifecycle.md).
+- **Map aggregates, not tables.** One repository per aggregate root. For the Java/Spring mechanics of that repository, see [frameworks/java-25-ddd/references/repository-ports.md](../../domain-driven-design-ddd/frameworks/java-25-ddd/references/repository-ports.md) rather than reinventing it here; map fields respecting aggregate boundaries and entity lifecycle.
 - **Decide the fetch strategy per use case**, not globally: lazy by default, with explicit eager loading (`join fetch`, `include`) in the queries that walk the graph.
 - **Read the generated SQL.** An ORM whose queries nobody ever looks at ends in performance problems nobody can explain.
-- **Drop to SQL without guilt** for reports and complex read queries — that is exactly what separates the query stack in [CQRS](../../domain-driven-design-ddd/ddd-core/references/cqrs.md).
+- **Drop to SQL without guilt** for reports and complex read queries — that is exactly what separates the query stack in CQRS.
 
 ## Anti-patterns
 

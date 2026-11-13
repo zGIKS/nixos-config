@@ -9,7 +9,7 @@ Baseline stack: HTTP/1.1 & HTTP/2/3, JSON, OpenAPI 3.1, RFC 7807 / RFC 9457 Prob
 
 Naming principle is mandatory across the whole API surface: **Noun-based Resource Modeling** with lowercase `kebab-case` URI path segments.
 
-For the underlying domain modeling rules feeding into API resources — subdomains, bounded contexts, and aggregate boundaries — see [ddd-core](../../domain-driven-design-ddd/ddd-core/SKILL.md).
+Resource naming, error schemas, pagination, and concurrency controls must express domain intent clearly. Align API boundaries with bounded context contracts and aggregate transactional limits.
 
 ## Core rules
 

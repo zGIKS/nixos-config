@@ -33,7 +33,7 @@ Relational remains the **correct default** for most business systems.
 3. Count the full cost: operations, backup, monitoring, disaster recovery, and **people who know how to run it at three in the morning**.
 4. Define the **source of truth** for every piece of data. Without that answer, duplication becomes corruption.
 5. Design the **synchronization** explicitly and accept eventual consistency between engines: there are no free distributed transactions. Use Transactional Outbox rather than dual writes.
-6. Align storage boundaries with bounded-context boundaries ([ddd-core: bounded contexts](../../domain-driven-design-ddd/ddd-core/references/bounded-contexts.md)); crossing them is what produces coupling through the database.
+6. Align storage boundaries with bounded-context boundaries; crossing them is what produces coupling through the database.
 
 ## Consistency models
 

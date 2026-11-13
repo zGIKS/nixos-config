@@ -9,7 +9,7 @@ Baseline stack: Angular 19+, standalone components, `inject()`, Signals, zoneles
 
 Naming principle is mandatory across the whole context: **Descriptive/Role-based Naming** or **Explicit Transformation Naming**.
 
-For the language-agnostic modeling rules behind this skill — subdomains, bounded contexts, context mapping, building blocks, aggregate boundaries, object lifecycle, and CQRS adoption levels — see [ddd-core](../../ddd-core/SKILL.md).
+Keep business ownership explicit, dependencies inward, and UI thin. Standalone components, signals, and functional dependency injection form the substrate; tactical DDD patterns protect real client-side invariants.
 
 ## Core rules
 
@@ -56,7 +56,9 @@ Follow this order — load each reference only when you reach that step; don't f
 
 If the context needs to talk to another bounded context, add the **ACL layer** — see [references/acl-cross-context.md](references/acl-cross-context.md). Never let contexts call each other directly.
 
-## Source of truth
+## Architectural references
 
-The original, unsplit guide (kept for traceability) lives at:
-`software-engineering/domain-driven-design-ddd/angular/angular-ddd.md`.
+- Eric Evans, *Domain-Driven Design: Tackling Complexity in the Heart of Software* — strategic design and tactical patterns.
+- Manfred Steyer, *Enterprise Angular: DDD and Microfrontends* — strategic domain slicing and context mapping in frontend architectures.
+- Angular Official Documentation (`angular.dev`) — standalone components, signal-based reactivity, zoneless change detection, and functional interceptors.
+- TypeScript Handbook — branded types, discriminated unions, and compile-time immutability contracts.

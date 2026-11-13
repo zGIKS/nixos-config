@@ -5,14 +5,95 @@ Source: guide §§14–15. `cmd/api/main.go` is the process entry. Extract `inte
 ## Construct only the required process
 
 1. Load/validate runtime settings from the project's selected source and initialize required observability.
-2. Initialize necessary clients/resources, registering cleanup as each succeeds.
-3. Construct context-owned adapters and inject the narrow ports consumed by application/domain policies.
-4. Assemble Gin middleware and `interfaces/rest/` routes, incoming event consumers, and required workers.
-5. Configure timeouts/readiness and start accepting work only after required dependencies are ready.
-6. On startup failure, unwind initialized resources and return an observable error.
-7. On termination, stop accepting work, drain in-flight work with bounded shutdown context, stop workers, and close dependencies in a dependency-safe order.
+2. Initialize necessary technical clients/resources (`*sql.DB`, `slog`, root `*gin.Engine`), registering cleanup as each succeeds.
+3. Instantiate context modules by invoking each context's composition root (`module.NewModule(...)`), passing its scoped `Config` and technical dependencies.
+4. Wire inter-context application adapters (in-process ACL) if modules collaborate in-process, using only published application contracts.
+5. Mount Gin route groups, incoming event consumers, and required workers.
+6. Configure timeouts/readiness and start accepting work only after required dependencies are ready.
+7. On startup failure, unwind initialized resources and return an observable error.
+8. On termination, stop accepting work, drain in-flight work with bounded shutdown context, stop workers, and close dependencies in a dependency-safe order.
 
 Keep startup error handling explicit; avoid hidden global registries and business dependencies fetched from bootstrap at runtime. Constructor injection is sufficient. A reflection-based DI framework, dedicated bootstrap package, or generic platform package is not a DDD requirement.
+
+### Modular composition code example
+
+```go
+// internal/[context-name]/module.go
+package enrollments
+
+import (
+	"database/sql"
+	"github.com/gin-gonic/gin"
+	"<module>/internal/[context-name]/application"
+	"<module>/internal/[context-name]/infrastructure/persistence/postgres"
+	"<module>/internal/[context-name]/interfaces/rest"
+)
+
+type Dependencies struct {
+	DB     *sql.DB
+	Router gin.IRouter
+}
+
+type Module struct {
+	EnrollmentFacade application.EnrollmentFacade
+}
+
+func NewModule(cfg Config, deps Dependencies) (*Module, error) {
+	repo := postgres.NewEnrollmentRepository(deps.DB)
+	confirmUseCase := application.NewConfirmEnrollmentHandler(repo)
+	rest.RegisterRoutes(deps.Router, confirmUseCase)
+
+	return &Module{EnrollmentFacade: confirmUseCase}, nil
+}
+```
+
+```go
+// internal/bootstrap/run.go
+package bootstrap
+
+import (
+	"context"
+	"database/sql"
+	"net/http"
+	"time"
+	"github.com/gin-gonic/gin"
+	"<module>/internal/enrollments"
+)
+
+type Config struct {
+	HTTPPort    string
+	DBConnStr   string
+	Enrollments enrollments.Config
+}
+
+func Run(ctx context.Context, cfg Config) error {
+	db, err := sql.Open("pgx", cfg.DBConnStr)
+	if err != nil {
+		return err
+	}
+	defer db.Close()
+
+	engine := gin.New()
+	engine.Use(gin.Recovery())
+
+	// Mount context module via its own composition root
+	_, err = enrollments.NewModule(cfg.Enrollments, enrollments.Dependencies{
+		DB:     db,
+		Router: engine.Group("/api/v1/enrollments"),
+	})
+	if err != nil {
+		return err
+	}
+
+	srv := &http.Server{
+		Addr: ":" + cfg.HTTPPort,
+		Handler: engine,
+		ReadTimeout: 10 * time.Second,
+		WriteTimeout: 10 * time.Second,
+	}
+	return srv.ListenAndServe()
+}
+```
 
 ## Configuration and shared capabilities
 

@@ -32,7 +32,11 @@ Before writing tests for any layer, check [references/mocking-and-test-data.md](
 
 Before shipping, check [references/coverage-ci-and-checklist.md](references/coverage-ci-and-checklist.md) for coverage expectations by layer, CI requirements, Maven test commands, common pitfalls, and the final bounded-context checklist.
 
-## Source of truth
+## Architectural and testing references
 
-The original, unsplit guide (kept for traceability) lives at:
-`software-engineering/test-driven-development-tdb/java/java-spring-unit-test.md`.
+- Kent Beck, *Test-Driven Development: By Example* — test-driven design principles.
+- Martin Fowler, *Unit Test* ([martinfowler.com/bliki/UnitTest.html](https://martinfowler.com/bliki/UnitTest.html)) and *GivenWhenThen* ([martinfowler.com/bliki/GivenWhenThen.html](https://martinfowler.com/bliki/GivenWhenThen.html)).
+- JUnit 5 User Guide ([junit.org/junit5/docs/current/user-guide/](https://junit.org/junit5/docs/current/user-guide/)) — Jupiter test lifecycle, nested tests, and parameterized testing.
+- Mockito Documentation ([site.mockito.org](https://site.mockito.org/)) — boundary isolation and verification rules.
+- AssertJ Core Documentation ([assertj.github.io/doc/](https://assertj.github.io/doc/)) — fluent and intention-revealing assertions.
+- Spring Boot Testing Reference ([docs.spring.io](https://docs.spring.io/spring-boot/reference/testing/index.html)) — slice testing (`@WebMvcTest`, `@DataJpaTest`) and test context caching.

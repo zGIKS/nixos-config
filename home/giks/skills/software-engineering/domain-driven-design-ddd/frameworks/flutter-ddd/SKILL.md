@@ -9,7 +9,7 @@ Baseline stack: Dart 3.x (sound null safety, sealed classes, pattern matching), 
 
 Naming principle is mandatory across the whole context: **Descriptive/Role-based Naming** or **Explicit Transformation Naming**.
 
-For the language-agnostic modeling rules behind this skill — subdomains, bounded contexts, context mapping, building blocks, aggregate boundaries, object lifecycle, and CQRS adoption levels — see [ddd-core](../../ddd-core/SKILL.md).
+Keep business ownership explicit, dependencies inward, and UI thin. Tactical patterns are applied only when they protect real invariants or clear boundaries.
 
 ## Core rules
 
@@ -44,7 +44,10 @@ Follow this order — load each reference only when you reach that step; don't f
 
 If the context needs to talk to another bounded context, add the **ACL layer** — see [references/acl-cross-context.md](references/acl-cross-context.md). Never let contexts call each other directly.
 
-## Source of truth
+## Architectural references
 
-The original, unsplit guide (kept for traceability) lives at:
-`software-engineering/domain-driven-design-ddd/flutter/flutter3-ddd.md`.
+- Eric Evans, *Domain-Driven Design: Tackling Complexity in the Heart of Software* — tactical building blocks in client architectures.
+- Flutter Documentation — declarative UI state management and route orchestration.
+- Dart 3 Language Specification — sealed classes, pattern matching, exhaustiveness checking, and sound null-safety.
+- Remi Rousselet, *Riverpod Architecture Guide* (`riverpod.dev`) — functional dependency injection and reactive state caching.
+- Freezed Code Generation Documentation (`pub.dev/packages/freezed`) — immutable unions and data modeling.

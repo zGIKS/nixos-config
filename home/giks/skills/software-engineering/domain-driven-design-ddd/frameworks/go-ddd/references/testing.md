@@ -38,6 +38,7 @@ Tag integration files with `//go:build integration` and E2E files with `//go:bui
 ```bash
 # Fast unit checks; extend paths for other production packages if present
 go test ./internal/... ./cmd/...
+go test ./test/architecture/...
 go test -race ./internal/... ./cmd/...
 go vet ./...
 
@@ -53,6 +54,36 @@ Adapt package paths to the actual repository; do not present nonexistent package
 Inspect targeted coverage; external suites may need `-coverpkg` for production packages. Add native fuzz tests for suitable parsers/invariants and project-adopted static checks where available. Do not invent a universal coverage percentage or claim the race detector proves absence of all races.
 
 For failures, report the command, relevant output, and infrastructure/tooling prerequisites. For tagged suites, confirm actual execution rather than merely compiling their helpers. Real-engine tests should cover commit/rollback, optimistic or lock-based concurrency, cancellation, and state/outbox atomicity when applicable.
+
+## Architecture boundary verification (ArchTest)
+
+To prevent architectural drift and maintain modular monolith scalability, import boundaries must be verified automatically in build/test (Carvalho et al., 2025). Include a zero-dependency architecture test under `test/architecture/boundaries_test.go` using standard Go tooling (`go list -deps`):
+
+```go
+// test/architecture/boundaries_test.go
+package architecture_test
+
+import (
+	"os/exec"
+	"strings"
+	"testing"
+)
+
+func TestBoundedContextBoundaries(t *testing.T) {
+	cmd := exec.Command("go", "list", "-f", "{{.ImportPath}} -> {{join .Imports \" \"}}", "./internal/enrollments/...")
+	out, err := cmd.Output()
+	if err != nil {
+		t.Fatalf("go list failed: %v", err)
+	}
+
+	lines := strings.Split(string(out), "\n")
+	for _, line := range lines {
+		if strings.Contains(line, "internal/courses") && !strings.Contains(line, "internal/courses/application") {
+			t.Errorf("Forbidden cross-context import detected: %s", line)
+		}
+	}
+}
+```
 
 ## Compatibility with the separate testing skill
 
