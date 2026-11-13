@@ -22,6 +22,32 @@ policy whenever possible.
 Do not place general applications, user preferences, or unrelated networking
 rules in this layer.
 
+### Hardware Fact Management
+
+1. **Keep `hardware-configuration.nix` Generated and Unedited**:
+   - Generated automatically by `nixos-generate-config`.
+   - Contains discovered machine facts: kernel modules (`boot.initrd.availableKernelModules`), microcode updates, and platform quirks.
+   - **Rule**: Never manually modify `hardware-configuration.nix`. Place all custom hardware policies (e.g. graphics drivers, CPU frequency governors, undervolting, custom kernel options) in separate, tracked modules (e.g., `modules/hosts/shared/hardware/nvidia.nix`).
+
+2. **Official Hardware Profiles: `nixos-hardware`**:
+   For laptops, standard workstations, and SBCs with known hardware quirks, import official vendor/model profiles from the `nixos-hardware` organization rather than maintaining complex hand-written hardware workarounds:
+   ```nix
+   # flake.nix
+   inputs.nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+
+   # hosts/laptop-01/default.nix
+   imports = [
+     ./hardware-configuration.nix
+     inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t14-amd-gen3
+   ];
+   ```
+
+3. **Declarative Hardware Facts: `nixos-facter`**:
+   Modern reproducible fleets can utilize `nixos-facter` to record immutable, JSON-serialized hardware facts without relying on legacy Perl generator scripts:
+   ```nix
+   hardware.facter.reportPath = ./facter.json;
+   ```
+
 ## 4. Boot and kernel layer
 
 Location: `modules/hosts/<scope>/boot/`.
@@ -40,3 +66,27 @@ Typical responsibilities:
 
 Filesystem declarations belong in the filesystem layer unless they are
 unavoidably coupled to initrd or bootloader behavior.
+
+### Declarative Bootloader Standards
+
+1. **Modern UEFI Systems (`systemd-boot`)**:
+   Standard choice for modern UEFI x86_64 and AArch64 hardware:
+   ```nix
+   boot.loader.systemd-boot = {
+     enable = true;
+     configurationLimit = 15; # Limit generations in boot menu
+     editor = false;          # Prevent arbitrary kernel parameter injection at console
+   };
+   boot.loader.efi.canTouchEfiVariables = true;
+   ```
+
+2. **Legacy BIOS or Complex Partitioning (`GRUB`)**:
+   For dual-booting, legacy MBR disks, or ZFS-on-root:
+   ```nix
+   boot.loader.grub = {
+     enable = true;
+     device = "/dev/sda"; # Or "nodev" for UEFI GRUB
+     efiSupport = true;
+     canTouchEfiVariables = true;
+   };
+   ```
